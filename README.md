@@ -1,14 +1,17 @@
-# Dukang Latex Template
-Dukang Latex 模板项目
+# LateX Dukang Template
+LaTeX Dukang 模板项目
 
-修改自[Awesome-CV](https://github.com/posquit0/Awesome-CV) 2022-04-28 Master版本。
+## 项目说明
 
-## 主要修改内容
+## 版权引用声明
+修改自[Awesome-CV](https://github.com/posquit0/Awesome-CV) 2022-04-28 Master版本
+
+## 项目主要内容
 -   修改整个项目目录结构，适应`make`自动构建
 -   修改`Makefile`生成选项，并添加清理命令
 -   使用`ctex`宏包添加中文支持
 
-## Changelog
+## 提交变更信息
 ### 2022-04-28
 -   初始化项目基础文件以及`git`相关文件
 -   完成修改目录结构
