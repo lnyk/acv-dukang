@@ -76,8 +76,12 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{roboto}
 \RequirePackage[default,opentype]{sourcesanspro}
+% Modified
+% 在utils.tex中引用tcolorbox宏包，这里注释掉，否则会引起重复引用的错误
+%
 % Needed for the photo ID
 \RequirePackage[skins]{tcolorbox}
+%
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink

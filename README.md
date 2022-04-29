@@ -15,3 +15,9 @@ Dukang Latex 模板项目
 -   完成修改`Makefile`适应新的目录结构
 -   添加`ctex`引用，支撑中文环境，默认字体使用`adobe`
 -   为`cover`环境添加`dukangParIndent`全局变量，用于控制部分内容的首行缩进
+### 2022-04-29
+-   完成项目目录结构调整，`dukang.tex`用于生成说明文档，`main.tex`用于`starter-kit`
+-   对应调整`Makefile`，`make doc`编译`dukang.tex`，`make`或`make main`生成`main.tex`
+-   增加`make clean`和`make cleanall`，用于自动清理目录
+-   引入`utils.tex`自定义部分，完善备注信息，解决重复引用的问题
+-   调整`profile`位置到`resource`文件夹

@@ -7,12 +7,8 @@
 % 默认为A4纸张，12pt字号
 \documentclass[12pt, a4paper]{awesome-cv}
 
-% 加载中文环境支持，字体使用adobe套装
-% 可选配置为
-% fontset = <adobe|fandol|founder|mac|macnew|macold|ubuntu|windows|none|xxx>
-% 或者自定义字体配置，配合ctex-fontset-xxx.def使用
-% ctex-fontset-custom.def为自定义示例文件
-\usepackage[fontset=custom]{ctex}
+% 引入自定义的一些功能
+\input{utils.tex}
 
 % 使用geometry定义纸张边距
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -51,7 +47,7 @@
 %-------------------------------------------------------------------------------
 % 首页的图片Logo，默认为./src/profile<.png>
 % 可用选项为circle|rectangle,edge/noedge,left/right
-\photo[circle,noedge,left]{./src/profile}
+\photo[circle,noedge,left]{./src/resource/profile}
 \name{\LaTeX{} Dukang}{项目手册}
 \position{%
   Kubenetes{\enskip\faAdn\enskip}Rook-Ceph{\enskip\cdotp\enskip}Kubesphere{\enskip\cdotp\enskip}开源{\enskip\cdotp\enskip}容器云
@@ -112,7 +108,7 @@
 % 各部分都可留空，但不能删掉{}
 \makecvfooter
   {\today}
-  {Claud D. Park~~~·~~~Cover Letter}
+  {Claud D. Park~~~\faTree~~~Cover Letter}
   {\thepage}
 
 

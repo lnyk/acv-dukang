@@ -1,5 +1,5 @@
-CC = xelatex
-# CC = latexmk -xelatex -shell-escape
+# Ennable -shell-escape for minted package
+CC = latexmk -xelatex -shell-escape
 BASE_DIR = src
 
 DOC_SRC = $(BASE_DIR)/dukang.tex
@@ -29,6 +29,8 @@ all: main doc
 
 clean:
 	-@$(RM) $(CLEANFILES)
+	-@$(RM) -r dist _minted*
 
 cleanall:
 	-@$(RM) $(CLEANFILES) $(BASE_DIR)/*.pdf
+	-@$(RM) -r $(BASE_DIR)/dist $(BASE_DIR)/_minted*
