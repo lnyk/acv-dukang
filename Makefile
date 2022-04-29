@@ -1,11 +1,14 @@
 CC = xelatex
 # CC = latexmk -xelatex -shell-escape
-SRC_DIR = src
-RESUME_DIR = src/resume
-CV_DIR = src/cv
-RESUME_SRCS = $(shell find $(RESUME_DIR) -name '*.tex')
-CV_SRCS = $(shell find $(CV_DIR) -name '*.tex')
-ALLCLEANFILES = $(foreach x, *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk $(RESUME_DIR)/*.aux $(CV_DIR)/*.aux *.pdf, $(SRC_DIR)/$(x))
+BASE_DIR = src
+
+DOC_SRC = $(BASE_DIR)/dukang.tex
+DOC_DIR = $(BASE_DIR)/dukang
+
+MAIN_DIR = $(BASE_DIR)/tex
+MAIN_SRC = $(shell find $(MAIN_DIR) -name '*.tex')
+
+CLEANFILES = $(foreach x, *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk $(DOC_DIR)/*.aux $(MAIN_DIR)/*.aux, $(BASE_DIR)/$(x))
 
 # make deletion work on Windows
 ifdef SystemRoot
@@ -14,18 +17,18 @@ else
 	RM = rm -f
 endif
 
-.PHONY: all cover cv resume clean
+.PHONY: main doc all clean cleanall
 
-all: cover cv resume
+main: $(BASE_DIR)/main.tex
+	$(CC) -output-directory=$(BASE_DIR) $<
 
-resume: $(SRC_DIR)/resume.tex $(RESUME_SRCS)
-	$(CC) -output-directory=$(SRC_DIR) $<
+doc: $(BASE_DIR)/dukang.tex
+	$(CC) -output-directory=$(BASE_DIR) $<
 
-cv: $(SRC_DIR)/cv.tex $(CV_SRCS)
-	$(CC) -output-directory=$(SRC_DIR) $<
-
-cover: $(SRC_DIR)/cover.tex
-	$(CC) -output-directory=$(SRC_DIR) $<
+all: main doc
 
 clean:
-	-@$(RM) $(ALLCLEANFILES)
+	-@$(RM) $(CLEANFILES)
+
+cleanall:
+	-@$(RM) $(CLEANFILES) $(BASE_DIR)/*.pdf

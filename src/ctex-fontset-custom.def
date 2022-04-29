@@ -1,0 +1,38 @@
+% 本文件用于配置自定义字体
+% 适用于TexLive 2022
+%
+% 文件名ctex-fontset-<custom>.def对应documentclass中fontset=custom
+
+\setCJKmainfont[BoldFont=Adobe 黑体 Std, ItalicFont=Adobe 楷体 Std]{Adobe 仿宋 Std}
+
+% 以下两项设置中文环境下的sans和mono字体
+% \setCJKsansfont{YaHei Consolas Hybrid}
+% \setCJKmonofont{Inconsolata}
+
+\setCJKfamilyfont{zhsong}{Adobe 宋体 Std}
+\setCJKfamilyfont{zhhei}{Adobe 黑体 Std}
+
+% 微软Windows下的仿宋字体
+% \setCJKfamilyfont{zhfs}{simfang.otf}
+% 因为质量不够高，推荐使用Adobe的仿宋字体
+\setCJKfamilyfont{zhfs}{Adobe 仿宋 Std}
+
+\setCJKfamilyfont{zhkai}{Adobe 楷体 Std}
+
+% 微软幼圆字体
+\setCJKfamilyfont{zhyy}{幼圆}
+
+% 微软隶属字体
+\setCJKfamilyfont{zhls}{隶书}
+
+% 方正小标宋简体
+\setCJKfamilyfont{fzxbs}{方正小标宋简体}
+
+% 生成字体引用命令
+\NewDocumentCommand\songti{}{\CJKfamily{zhsong}}
+\NewDocumentCommand\heiti{}{\CJKfamily{zhhei}}
+\NewDocumentCommand\fangsong{}{\CJKfamily{zhfs}}
+\NewDocumentCommand\kaishu{}{\CJKfamily{zhkai}}
+\NewDocumentCommand\youyuan{}{\CJKfamily{zhyy}}
+\NewDocumentCommand\lishu{}{\CJKfamily{zhls}}
+\NewDocumentCommand\fzxbs{}{\CJKfamily{fzxbs}}

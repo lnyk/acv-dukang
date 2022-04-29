@@ -1,0 +1,151 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+%-------------------------------------------------------------------------------
+% 基本配置
+%-------------------------------------------------------------------------------
+% 默认为A4纸张，12pt字号
+\documentclass[12pt, a4paper]{awesome-cv}
+
+% 加载中文环境支持，字体使用adobe套装
+% 可选配置为
+% fontset = <adobe|fandol|founder|mac|macnew|macold|ubuntu|windows|none|xxx>
+% 或者自定义字体配置，配合ctex-fontset-xxx.def使用
+% ctex-fontset-custom.def为自定义示例文件
+\usepackage[fontset=custom]{ctex}
+
+% 使用geometry定义纸张边距
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+% 高亮颜色配置
+% Awesome Colors:
+%   awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%   awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% 下面部分可启用自定义颜色
+% \definecolor{awesome}{HTML}{CA63A8}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+% \definecolor{graytext}{HTML}{5D5D5D}
+% \definecolor{lighttext}{HTML}{999999}
+% \definecolor{sectiondivider}{HTML}{5D5D5D}
+
+% 全局开关变量定义
+% 是否使用高亮颜色配置来突出section标题
+\setbool{acvSectionColorHighlight}{true}
+
+% 打开该开关会启用某些正文内容的首行缩进
+\setbool{dukangParIndent}{true}
+
+% Header中社交媒体行的分隔符
+% 目前指定为管道符 |
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+%-------------------------------------------------------------------------------
+%	个人信息
+%	不需要的部分可以注释掉
+%-------------------------------------------------------------------------------
+% 首页的图片Logo，默认为./src/profile<.png>
+% 可用选项为circle|rectangle,edge/noedge,left/right
+\photo[circle,noedge,left]{./src/profile}
+\name{\LaTeX{} Dukang}{项目手册}
+\position{%
+  Kubenetes{\enskip\faAdn\enskip}Rook-Ceph{\enskip\cdotp\enskip}Kubesphere{\enskip\cdotp\enskip}开源{\enskip\cdotp\enskip}容器云
+}
+\address{42-8, Bangbae-ro 15-gil, Seocho-gu, Seoul, 00681, Rep. of KOREA}
+
+\mobile{(+82) 10-9030-1843}
+\email{posquit0.bj@gmail.com}
+%\dateofbirth{January 1st, 1970}
+\homepage{www.posquit0.com}
+\github{posquit0}
+\linkedin{posquit0}
+% \gitlab{gitlab-id}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{@twit}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \medium{madium-id}
+% \kaggle{kaggle-id}
+% \googlescholar{googlescholar-id}{name-to-display}
+%% \firstname and \lastname will be used
+% \googlescholar{googlescholar-id}{}
+% \extrainfo{extra information}
+
+\quote{``Be the change that you want to see in the world."}
+
+
+%-------------------------------------------------------------------------------
+%	信件环境基本信息
+%	所有内容必须不能缺少
+%-------------------------------------------------------------------------------
+% 公司信息
+\recipient
+  {Company Recruitment Team}
+  {Google Inc.\\1600 Amphitheatre Parkway\\Mountain View, CA 94043}
+% 信件日期
+\letterdate{\today}
+% 信件标题
+\lettertitle{Job Application for Software Engineer}
+% 信件称谓
+\letteropening{Dear Mr./Ms./Dr. LastName,}
+% 信件结尾词
+\letterclosing{Sincerely,}
+% 信件结尾词附言
+\letterenclosure[Attached]{Curriculum Vitae}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% 首页的抬头
+% 可用对齐选项为
+% C: 居中，L: 左对齐，R: 右对齐
+\makecvheader[R]
+
+% 每页的页脚定义
+% 分为左中右三个部分，分别对应每对{}
+% 各部分都可留空，但不能删掉{}
+\makecvfooter
+  {\today}
+  {Claud D. Park~~~·~~~Cover Letter}
+  {\thepage}
+
+
+%-------------------------------------------------------------------------------
+% 正文内容部分
+% 独立引用每个文件
+% 也可不引用，直接在这里构建
+%-------------------------------------------------------------------------------
+% 首页内容
+\input{dukang/01-cover.tex}
+
+\input{cv/education.tex}
+\input{cv/skills.tex}
+\input{cv/experience.tex}
+\input{cv/extracurricular.tex}
+\input{cv/honors.tex}
+\input{cv/presentation.tex}
+\input{cv/writing.tex}
+\input{cv/committees.tex}
+
+
+%-------------------------------------------------------------------------------
+%	CV/RESUME CONTENT
+%	Each section is imported separately, open each file in turn to modify content
+%-------------------------------------------------------------------------------
+\input{resume/summary.tex}
+\input{resume/experience.tex}
+\input{resume/honors.tex}
+\input{resume/presentation.tex}
+\input{resume/writing.tex}
+\input{resume/committees.tex}
+\input{resume/education.tex}
+\input{resume/extracurricular.tex}
+
+
+\end{document}
