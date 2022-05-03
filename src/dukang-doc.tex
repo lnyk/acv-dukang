@@ -42,7 +42,7 @@
 % 首页的图片Logo，默认为./src/resource/profile<.png>
 % 可用选项为circle|rectangle,edge/noedge,left/right
 \photo[circle,noedge,left]{./src/resource/profile}
-\name{\LaTeX{} Dukang}{中文模板手册}
+\name{\LaTeX{} Dukang}{模板手册}
 \position{%
   Kubenetes{\enskip\faDharmachakra\enskip}Rook-Ceph{\enskip\faHdd\enskip}Kubesphere{\enskip\faWrench\enskip}DevOps{\enskip\faDocker\enskip}CRI
 }
@@ -100,6 +100,15 @@
 % 打开该开关会启用某些正文内容的首行缩进
 \setbool{dukangParIndent}{true}
 %-------------------------------------------------------------------------------
+% 定义编译之后的PDF相关属性
+\hypersetup{%
+  pdftitle={\LaTeX{} Dukang模板手册},
+  pdfauthor={William Yao},
+  pdfcreator={William Yao},
+  pdfsubject={引用Awesome-CV模板，继承并加强},
+  pdfkeywords={tex,latex,pdf,awesome,cv,resume,book,article,william,yao,dukang}
+}
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
@@ -109,6 +118,7 @@
 %-------------------------------------------------------------------------------
 % 由于添加了生成书签的功能，需要在文档区调用下面的命令生成首页的书签
 % 默认使用导言区的\name自动生成
+% 如果缺少该项，PDF书签将没有顶层（0级）标题
 \dukangSetTitleRef
 %-------------------------------------------------------------------------------
 % 首页的抬头
