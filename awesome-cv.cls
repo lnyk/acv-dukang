@@ -76,12 +76,8 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{roboto}
 \RequirePackage[default,opentype]{sourcesanspro}
-% Modified
-% 在utils.tex中引用tcolorbox宏包，这里注释掉，否则会引起重复引用的错误
-%
 % Needed for the photo ID
 \RequirePackage[skins]{tcolorbox}
-%
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink
@@ -118,10 +114,6 @@
 \fancyhf{}
 % Enable if you want to make header or footer using fancyhdr
 \pagestyle{fancy}
-
-% Set to true to indent the letter content
-\newbool{dukangParIndent}
-\setbool{dukangParIndent}{true}
 
 
 %-------------------------------------------------------------------------------
@@ -747,20 +739,12 @@
 % Define a section for the cover letter
 % Usage: \lettersection{<section-title>}
 \newcommand{\lettersection}[1]{%
-  \ifbool{dukangParIndent}{%
-    % Reset indent to 0em
-    \setlength{\parindent}{0em}
-  }
   \par\addvspace{2.5ex}
   \phantomsection{}
   \lettersectionstyle{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
   \par\nobreak\addvspace{0.4ex}
   \lettertextstyle
-  \ifbool{dukangParIndent}{%
-    % Set indent to 2em
-    \setlength{\parindent}{2em}
-  }
 }
 
 % Define a title of the cover letter

@@ -2,20 +2,23 @@
 %!TEX encoding = UTF-8 Unicode
 
 %-------------------------------------------------------------------------------
-% CONFIGURATIONS
+% 基本配置
 %-------------------------------------------------------------------------------
-% A4 paper size by default, use 'letterpaper' for US letter
-\documentclass[11pt, a4paper]{awesome-cv}
-\usepackage[fontset=adobe]{ctex}
+% 默认为A4纸张，12pt字号
+\documentclass[12pt, a4paper]{awesome-cv}
 
-% Configure page margins with geometry
+% 引入自定义的一些功能
+\input{utils.tex}
+
+% 使用geometry定义纸张边距
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 
-% Color for highlights
-% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
-%                 awesome-nephritis, awesome-concrete, awesome-darknight
+% 高亮颜色配置
+% Awesome Colors:
+%   awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%   awesome-nephritis, awesome-concrete, awesome-darknight
 \colorlet{awesome}{awesome-red}
-% Uncomment if you would like to specify your own color
+% 下面部分可启用自定义颜色
 % \definecolor{awesome}{HTML}{CA63A8}
 
 % Colors for text
@@ -26,34 +29,39 @@
 % \definecolor{lighttext}{HTML}{999999}
 % \definecolor{sectiondivider}{HTML}{5D5D5D}
 
-% Set false if you don't want to highlight section with awesome color
+% 全局开关变量定义
+% 是否使用高亮颜色配置来突出section标题
 \setbool{acvSectionColorHighlight}{true}
 
-% Set false if you don't want to indent the content
+% 打开该开关会启用某些正文内容的首行缩进
 \setbool{dukangParIndent}{true}
 
-% If you would like to change the social information separator from a pipe (|) to something else
+% Header中社交媒体行的分隔符
+% 目前指定为管道符 |
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 
 
 %-------------------------------------------------------------------------------
-%	PERSONAL INFORMATION
-%	Comment any of the lines below if they are not required
+%	个人信息
+%	不需要的部分可以注释掉
 %-------------------------------------------------------------------------------
-% Available options: circle|rectangle,edge/noedge,left/right
-\photo[circle,noedge,left]{./src/profile}
-\name{Dukang}{项目手册}
+% 首页的图片Logo，默认为./src/resource/profile<.png>
+% 可用选项为circle|rectangle,edge/noedge,left/right
+\photo[circle,noedge,left]{./src/resource/profile}
+\name{\LaTeX{} Dukang}{项目手册}
 \position{%
-  Kubenetes{\enskip\faAdn\enskip}Rook-Ceph{\enskip\cdotp\enskip}Kubesphere{\enskip\cdotp\enskip}开源{\enskip\cdotp\enskip}容器云
+  Kubenetes{\enskip\faDharmachakra\enskip}Rook-Ceph{\enskip\faHdd\enskip}Kubesphere{\enskip\faWrench\enskip}DevOps{\enskip\faDocker\enskip}CRI
 }
-\address{42-8, Bangbae-ro 15-gil, Seocho-gu, Seoul, 00681, Rep. of KOREA}
+\address{基于开源项目及云原生相关技术，综合集成构建的开源容器云环境}
 
-\mobile{(+82) 10-9030-1843}
-\email{posquit0.bj@gmail.com}
-%\dateofbirth{January 1st, 1970}
-\homepage{www.posquit0.com}
-\github{posquit0}
-\linkedin{posquit0}
+%-------------------------------------------------------------------------------
+% 以下部分至少有一条要保留
+% \mobile{(+82) 10-9030-1843}
+% \email{posquit0.bj@gmail.com}
+% \dateofbirth{January 1st, 1970}
+\homepage{EPBCC团队倾情巨献}
+% \github{posquit0}
+% \linkedin{posquit0}
 % \gitlab{gitlab-id}
 % \stackoverflow{SO-id}{SO-name}
 % \twitter{@twit}
@@ -64,74 +72,56 @@
 % \googlescholar{googlescholar-id}{name-to-display}
 %% \firstname and \lastname will be used
 % \googlescholar{googlescholar-id}{}
-% \extrainfo{extra information}
+\extrainfo{{\faWineBottle}何以解忧\hspace{1em}唯有杜康}
 
-\quote{``Be the change that you want to see in the world."}
+\quote{“我们不生产云，我们只是某{\faGithub}的搬运工”}
 
 
 %-------------------------------------------------------------------------------
-%	LETTER INFORMATION
-%	All of the below lines must be filled out
+%	信件环境基本信息
+%	所有内容必须不能缺少
 %-------------------------------------------------------------------------------
-% The company being applied to
+% 公司信息
 \recipient
   {Company Recruitment Team}
   {Google Inc.\\1600 Amphitheatre Parkway\\Mountain View, CA 94043}
-% The date on the letter, default is the date of compilation
+% 信件日期
 \letterdate{\today}
-% The title of the letter
+% 信件标题
 \lettertitle{Job Application for Software Engineer}
-% How the letter is opened
+% 信件称谓
 \letteropening{Dear Mr./Ms./Dr. LastName,}
-% How the letter is closed
+% 信件结尾词
 \letterclosing{Sincerely,}
-% Any enclosures with the letter
+% 信件结尾词附言
 \letterenclosure[Attached]{Curriculum Vitae}
 
 
 %-------------------------------------------------------------------------------
 \begin{document}
 
-% Print the header with above personal information
-% Give optional argument to change alignment(C: center, L: left, R: right)
+% 首页的抬头
+% 可用对齐选项为
+% C: 居中，L: 左对齐，R: 右对齐
 \makecvheader[R]
 
-% Print the footer with 3 arguments(<left>, <center>, <right>)
-% Leave any of these blank if they are not needed
+% 每页的页脚定义
+% 分为左中右三个部分，分别对应每对{}
+% 各部分都可留空，但不能删掉{}
 \makecvfooter
   {\today}
-  {Claud D. Park~~~·~~~Cover Letter}
+  {Claud D. Park~~~\faTree~~~Cover Letter}
   {\thepage}
 
-% Print the title with above letter information
-\makelettertitle
 
 %-------------------------------------------------------------------------------
-%	LETTER CONTENT
+% 正文内容部分
+% 独立引用每个文件
+% 也可不引用，直接在这里构建
 %-------------------------------------------------------------------------------
-\begin{cvletter}
+% 首页内容
+\input{dukang/01-cover.tex}
 
-\lettersection{测试中文}
-这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛这里怎么说也是一堆中文嘛
-
-\lettersection{Why Google?}
-Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse vulputate sem vehicula ipsum varius nec tempus dui dapibus. Phasellus et est urna, ut auctor erat. Sed tincidunt odio id odio aliquam mattis. Donec sapien nulla, feugiat eget adipiscing sit amet, lacinia ut dolor. Phasellus tincidunt, leo a fringilla consectetur, felis diam aliquam urna, vitae aliquet lectus orci nec velit. Vivamus dapibus varius blandit.
-
-\lettersection{Why Me?}
-Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim varius pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante. Vivamus odio leo, tincidunt eu luctus ut, sollicitudin sit amet metus. Nunc sed orci lectus. Ut sodales magna sed velit volutpat sit amet pulvinar diam venenatis.
-
-\end{cvletter}
-
-
-%-------------------------------------------------------------------------------
-% Print the signature and enclosures with above letter information
-\makeletterclosing
-
-
-%-------------------------------------------------------------------------------
-%	CV/RESUME CONTENT
-%	Each section is imported separately, open each file in turn to modify content
-%-------------------------------------------------------------------------------
 \input{cv/education.tex}
 \input{cv/skills.tex}
 \input{cv/experience.tex}

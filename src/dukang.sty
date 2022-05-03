@@ -1,7 +1,7 @@
 %!TEX encoding = UTF-8 Unicode
 
 %-------------------------------------------------------------------------------
-% 为Awesome-CV引入部分额外功能
+% 为Awesome-CV引入功能修改以及额外定义部分
 % Author: William Yao
 % Create: 2022-04-29
 %-------------------------------------------------------------------------------
@@ -9,6 +9,7 @@
 %-------------------------------------------------------------------------------
 % 定义开始
 %-------------------------------------------------------------------------------
+\ProvidesPackage{dukang}
 
 
 %-------------------------------------------------------------------------------
@@ -31,7 +32,7 @@
 %     Adobe 黑体 Std, Adobe 楷体 Std, Adobe 仿宋 Std, Adobe 宋体 Std,
 %     幼圆, 隶书, 方正小标宋, YaHei Consolas Hybrid, Inconsolata
 %   上述字体如果系统未安装，请自行下载安装，或根据需要自行变更
-\usepackage[fontset=custom]{ctex}
+\RequirePackage[fontset=custom, hyperref, UTF8]{ctex}
 %-------------------------------------------------------------------------------
 % minted
 % 使用minted实现代码高亮
@@ -42,7 +43,7 @@
 %     如果开启缓存，有可能会出现undefined control sequence错误
 %     解决办法，要么在重新编译前，删除_minted-*缓存目录，要么关闭缓存
 %     自动删除已添加到Makefile的make clean以及make cleanall命令中，无需手动删除
-\usepackage[cache=false]{minted}
+\RequirePackage[cache=false]{minted}
 %-------------------------------------------------------------------------------
 % tcolorbox
 % 引入tcolorbox的库
@@ -53,7 +54,7 @@
 %-------------------------------------------------------------------------------
 % minted的全局样式设定
 % 以下设定即可以放在导言区，也可以在文档区随用随定义
-
+%
 % 指定所有语言的全局高亮样式
 %   \usemintedstyle{minted_style}
 %
@@ -73,7 +74,7 @@
 %-------------------------------------------------------------------------------
 % tabular
 % 用于支撑tcblisting环境
-\usepackage{tabularx}
+\RequirePackage{tabularx}
 \newcolumntype{\CeX}{>{\centering\let\newline\\\arraybackslash}X}%
 \newcommand{\TwoSymbolsAndText}[3]{%
   \begin{tabularx}{\textwidth}{c\CeX c}%
@@ -83,7 +84,63 @@
 %-------------------------------------------------------------------------------
 % dirtree
 % 用于在文档中以漂亮的方式显示文件目录树
-\usepackage{dirtree}
+\RequirePackage{dirtree}
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+% Awesome-CV 定义修改部分
+%
+% 包含所有对Awesome-CV<.cls>非侵入的修改内容
+%-------------------------------------------------------------------------------
+% 自定义开关
+%-------------------------------------------------------------------------------
+% dukangParIndent
+% 添加某些正文部分的首行缩进开关
+\newbool{dukangParIndent}
+\setbool{dukangParIndent}{true}
+%-------------------------------------------------------------------------------
+% 自定义命令
+%-------------------------------------------------------------------------------
+% dukangPreSet
+
+\bookmark[page=1]{\@firstname\@lastname}
+% % 用于支持主标题的书签
+% \newcommand*{\dukangPreSet}{%
+%   \bookmark[page=1]{\@firstname\@lastname}
+% }
+%-------------------------------------------------------------------------------
+% 重定义命令
+%-------------------------------------------------------------------------------
+% lettersectionstyle
+% 重定义该部分，用于增加pdf书签（大纲）和锚点
+% \renewcommand*{\lettersectionstyle}[1]{%
+%   \label{#1}
+%   \bookmark[dest=#1]{#1}
+%   \fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1
+% }
+%-------------------------------------------------------------------------------
+% lettersection
+% 重定义该部分，用于支持dukangParIndent等开关
+\renewcommand{\lettersection}[1]{%
+  \ifbool{dukangParIndent}{%
+    % 首先重置缩进为0em，否则会影响其他部分的缩进设定
+    \setlength{\parindent}{0em}
+  }
+  \par\addvspace{2.5ex}
+  \phantomsection{}
+  % \hypertarget{#1}{}
+  \hypertarget{#1}{\lettersectionstyle{#1}}
+  \bookmark[dest=#1, level=2]{#1}
+  % \lettersectionstyle{#1}
+  \color{sectiondivider}\vhrulefill{0.9pt}
+  \par\nobreak\addvspace{0.4ex}
+  \ifbool{dukangParIndent}{%
+    % 设定首行缩进为2em
+    \setlength{\parindent}{2em}
+  }
+  \lettertextstyle
+}
 %-------------------------------------------------------------------------------
 
 

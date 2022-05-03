@@ -5,10 +5,7 @@
 % 基本配置
 %-------------------------------------------------------------------------------
 % 默认为A4纸张，12pt字号
-\documentclass[12pt, a4paper]{awesome-cv}
-
-% 引入自定义的一些功能
-\input{utils.tex}
+\documentclass[12pt, a4paper, final]{awesome-cv}
 
 % 使用geometry定义纸张边距
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
@@ -33,9 +30,6 @@
 % 是否使用高亮颜色配置来突出section标题
 \setbool{acvSectionColorHighlight}{true}
 
-% 打开该开关会启用某些正文内容的首行缩进
-\setbool{dukangParIndent}{true}
-
 % Header中社交媒体行的分隔符
 % 目前指定为管道符 |
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
@@ -45,7 +39,7 @@
 %	个人信息
 %	不需要的部分可以注释掉
 %-------------------------------------------------------------------------------
-% 首页的图片Logo，默认为./src/profile<.png>
+% 首页的图片Logo，默认为./src/resource/profile<.png>
 % 可用选项为circle|rectangle,edge/noedge,left/right
 \photo[circle,noedge,left]{./src/resource/profile}
 \name{\LaTeX{} Dukang}{项目手册}
@@ -98,13 +92,23 @@
 
 
 %-------------------------------------------------------------------------------
+% DuKang 导言区环境设定
+%-------------------------------------------------------------------------------
+% 引入dukang宏包
+\usepackage{dukang}
+%-------------------------------------------------------------------------------
+% 打开该开关会启用某些正文内容的首行缩进
+\setbool{dukangParIndent}{true}
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
 \begin{document}
 
 % 首页的抬头
 % 可用对齐选项为
 % C: 居中，L: 左对齐，R: 右对齐
 \makecvheader[R]
-
 % 每页的页脚定义
 % 分为左中右三个部分，分别对应每对{}
 % 各部分都可留空，但不能删掉{}
@@ -120,7 +124,7 @@
 % 也可不引用，直接在这里构建
 %-------------------------------------------------------------------------------
 % 首页内容
-\input{dukang/01-cover.tex}
+\input{dukang-doc/01-cover.tex}
 
 \input{cv/education.tex}
 \input{cv/skills.tex}

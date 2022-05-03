@@ -2,8 +2,8 @@
 CC = latexmk -xelatex -shell-escape
 BASE_DIR = src
 
-DOC_SRC = $(BASE_DIR)/dukang.tex
-DOC_DIR = $(BASE_DIR)/dukang
+DOC_SRC = $(BASE_DIR)/dukang-doc.tex
+DOC_DIR = $(BASE_DIR)/dukang-doc
 
 MAIN_DIR = $(BASE_DIR)/tex
 MAIN_SRC = $(shell find $(MAIN_DIR) -name '*.tex')
@@ -22,7 +22,7 @@ endif
 main: $(BASE_DIR)/main.tex
 	$(CC) -output-directory=$(BASE_DIR) $<
 
-doc: $(BASE_DIR)/dukang.tex
+doc: $(BASE_DIR)/dukang-doc.tex
 	$(CC) -output-directory=$(BASE_DIR) $<
 
 all: main doc
