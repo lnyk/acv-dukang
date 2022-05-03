@@ -86,8 +86,20 @@
 % 用于在文档中以漂亮的方式显示文件目录树
 \RequirePackage{dirtree}
 %-------------------------------------------------------------------------------
-
-
+% lcg
+% 该包会生成随机数，主要用于文档各部分书签标签的随机生成
+% 用法：
+%   \usepackage[first=-100, last=100]{lcg}
+%   如果不指定边界，则默认会生成[1, 2^31-1]区间内的随机数
+% 这里定义了\random命令，可以简化\arabic{}的调用
+% 否则，\rand生成的是数值类型，只有调用\arabic才能转换成字符串输出到文档
+%
+% 需要手动创建dukangRandom计数器，否则会存储不成功
+\newcounter{dukangRandom}
+% 指定存储计数器为dukangRandom，lcg宏包的默认计数器为rand
+\RequirePackage[counter=dukangRandom]{lcg}
+% 创建\random命令，方便直接将随机数输出至文档字符串
+\newcommand{\random}{\rand\arabic{dukangRandom}}
 %-------------------------------------------------------------------------------
 % Awesome-CV 定义修改部分
 %
@@ -100,28 +112,30 @@
 \newbool{dukangParIndent}
 \setbool{dukangParIndent}{true}
 %-------------------------------------------------------------------------------
-% 自定义命令
+% 自定义配置
 %-------------------------------------------------------------------------------
-% dukangPreSet
-
-\bookmark[page=1]{\@firstname\@lastname}
-% % 用于支持主标题的书签
-% \newcommand*{\dukangPreSet}{%
-%   \bookmark[page=1]{\@firstname\@lastname}
-% }
+% 定义首页主标题的书签
+\newcommand*{\dukangSetTitleRef}{%
+  \hypertarget{dukangMainTitle}{}
+  \bookmark[dest=dukangMainTitle, level=0, view=FitH]{\@firstname\@lastname}
+}
 %-------------------------------------------------------------------------------
-% 重定义命令
+% 定义编译之后的PDF属性
+\hypersetup{%
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={},
+  pdfcreator={}
+}
 %-------------------------------------------------------------------------------
-% lettersectionstyle
-% 重定义该部分，用于增加pdf书签（大纲）和锚点
-% \renewcommand*{\lettersectionstyle}[1]{%
-%   \label{#1}
-%   \bookmark[dest=#1]{#1}
-%   \fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1
-% }
+% % 以下计数器用于支持创建书签标签的方案二
+% \newcounter{dukangCounterLetterSection}
+% \setcounter{dukangCounterLetterSection}{0}
+%-------------------------------------------------------------------------------
+% 重定义Awesome-CV的部分命令
 %-------------------------------------------------------------------------------
 % lettersection
-% 重定义该部分，用于支持dukangParIndent等开关
 \renewcommand{\lettersection}[1]{%
   \ifbool{dukangParIndent}{%
     % 首先重置缩进为0em，否则会影响其他部分的缩进设定
@@ -129,10 +143,58 @@
   }
   \par\addvspace{2.5ex}
   \phantomsection{}
-  % \hypertarget{#1}{}
-  \hypertarget{#1}{\lettersectionstyle{#1}}
-  \bookmark[dest=#1, level=2]{#1}
-  % \lettersectionstyle{#1}
+  %
+  % 手动生成书签标签
+  %
+  % 由于引入了中文环境，并且Awesome-CV的原始结构为CV-Resume-Cover分别独立呈现，
+  % 在把所有部分合并成一个文件之后，需要做一些适应性调整，其中就包括原始文件不具备的
+  % PDF书签设定部分。
+  % 原始英文环境已经预备了hyperref和bookmark宏包，但是由于引入了ctex中文环境，
+  % 直接调用bookmark生成书签会存在若干问题，各种尝试ctex[hyperref, UTF8]和
+  % hyperref[unicode, CJKbookmarks]均不行，看来和宏包本身的环境有关。于是，
+  % 在这里提供三种解决方案，供使用者自行选择。考虑到本项目不太适合创建目录结构太过复杂的大型
+  % 书籍类作品，此处默认执行方案三（随机数）：
+  %
+  % 方案一
+  %
+  % 使用默认bookmark生成pdf书签
+  % 优点：无需作出任何改动，且编译可以顺利通过
+  % 缺点：中文书签可以生成，但无对应标签生成
+  %
+  % \hypertarget{#1}{\lettersectionstyle{#1}}
+  % \bookmark[dest=#1, level=1, view=FitH]{#1}
+  %
+  % 方案二
+  %
+  % 使用计数器形式生成书签标签，则相当于绕过了bookmark的标签发现机制
+  % 手动指定标签，并继续使用bookmark生成书签
+  % 优点：可以指定书签开头的标号，与中英文环境无关
+  % 缺点：需要创建并调用命令外部的计数器
+  %
+  % % 这里需要在环境外创建对应的计数器
+  % % 参考本文件前面“以下计数器用于支持创建书签标签的方案二”的注释部分
+  % \stepcounter{dukangCounterLetterSection}
+  % % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
+  % % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+  % \hypertarget{\arabic{dukangCounterLetterSection}}{\lettersectionstyle{#1}}
+  % % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+  % \bookmark[dest=\arabic{dukangCounterLetterSection}, level=1, view=FitH]{#1}
+  %
+  % 方案三
+  %
+  % 默认执行此方案，如需选择前面方案，请注释掉该部分
+  % 通过调用lcg宏包生成随机数来定义标签
+  % 优点：保证每个标签都不重复，与中英文环境无关
+  % 缺点：无法指定书签开头的标号，适合不带标号或者目录结构层级不多的文章（书籍）
+  %
+  % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中（这里是dukangRandom）
+  \rand
+  % 使用\hypertarget生成标签，正文中的显示样式在这里定义
+  \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#1}}
+  % 使用\bookmark创建对应标签的书签，PDF阅读器中书签的样式在这里定义
+  \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#1}
+  % 手动生成书签标签结束
+  %
   \color{sectiondivider}\vhrulefill{0.9pt}
   \par\nobreak\addvspace{0.4ex}
   \ifbool{dukangParIndent}{%
