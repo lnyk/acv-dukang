@@ -49,6 +49,7 @@
 % 引入tcolorbox的库
 % 由于Awesome-CV宏包已经引入了tcolorbox，因此这里如果想要启用minted库的话，
 % 不能使用\usepackage命令，可以使用tcolorbox内置的\tcbuselibrary命令
+% 或者\PassOptionsToPackage{option1,option2}{package}
 % 调用对应的库
 \tcbuselibrary{skins, listings, xparse, breakable, minted}
 %-------------------------------------------------------------------------------
@@ -459,13 +460,13 @@
   fonttitle=\bfseries,
 }
 %-------------------------------------------------------------------------------
-% dkcomment
+% dkcommentc
 % 可指定框架主色的备注框
 %
 % 用法：
-%   \begin{dkcomment}{title}{fontawesome_name}{frame_color}{bg_color}
+%   \begin{dkcommentc}{title}{\fontawesome_name}{frame_color}{bg_color}
 %     ...
-%   \end{dkcomment}
+%   \end{dkcommentc}
 %
 % 说明：
 %   title
@@ -478,16 +479,16 @@
 %     代码部分的底色
 %
 % 例如：
-%   \begin{dkcomment}{特别说明}{\faCheck}{green!35!black}{green!5}
+%   \begin{dkcommentc}{特别说明}{\faCheck}{green!35!black}{green!5}
 %     ...
-%   \end{dkcomment}
+%   \end{dkcommentc}
 %
 % 推荐样式：
 %   浅绿样式 {green!35!black}{green!5}
 %   黑白样式 {black}{white}
 %   黑灰样式 {black!75}{black!5}
 %-------------------------------------------------------------------------------
-\newtcolorbox{dkcomment}[4]{
+\newtcolorbox{dkcommentc}[4]{
   before skip=18bp,
   drop shadow,
   size=title,
@@ -503,6 +504,44 @@
   boxrule=0.5mm,
   colback=#4,
   coltext=black,
+  title=\TwoSymbolsAndText{#2}{#1}{#2}
+}
+%-------------------------------------------------------------------------------
+% dkcomment
+% 可根据Awesome-CV主色调进行颜色自适应的备注框
+%
+% 用法：
+%   \begin{dkcomment}{title}{\fontawesome_name}
+%     ...
+%   \end{dkcomment}
+%
+% 说明：
+%   title
+%     代码块标题栏文字
+%   fontawesome_name
+%     FontAwesome字体的代码或名称
+%
+% 例如：
+%   \begin{dkcomment}{特别说明}{\faCheck}
+%     ...
+%   \end{dkcomment}
+%-------------------------------------------------------------------------------
+\newtcolorbox{dkcomment}[2]{
+  before skip=18bp,
+  drop shadow,
+  size=title,
+  top=3mm,
+  bottom=3mm,
+  left=6mm,
+  right=6mm,
+  arc=1.5mm,
+  breakable,
+  enhanced jigsaw,
+  colframe=awesome,% 这里可以直接使用定义好的颜色名称
+  coltitle=white,
+  boxrule=0.5mm,
+  colback=awesome!5,
+  coltext=text,
   title=\TwoSymbolsAndText{#2}{#1}{#2}
 }
 %-------------------------------------------------------------------------------
