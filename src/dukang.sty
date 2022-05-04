@@ -111,6 +111,9 @@
 % 添加某些正文部分的首行缩进开关
 \newbool{dukangParIndent}
 \setbool{dukangParIndent}{true}
+% 是否为PDF书签添加标题前的标号
+\newbool{dukangBookmarkLeadingNumber}
+\setbool{dukangBookmarkLeadingNumber}{true}
 %-------------------------------------------------------------------------------
 % 自定义配置
 %-------------------------------------------------------------------------------
@@ -120,10 +123,11 @@
   \bookmark[dest=dukangMainTitle, level=0, view=FitH]{\@firstname\@lastname}
 }
 %-------------------------------------------------------------------------------
-% % 以下计数器用于支持创建书签标签的方案二
-% % 如果需要方案二的支持，请将本段注释解除
-% \newcounter{dukangCounterLetterSection}
-% \setcounter{dukangCounterLetterSection}{0}
+% 以下计数器用于支持PDF书签标题开头的编号
+\ifbool{dukangBookmarkLeadingNumber}{%
+  \newcounter{dukangCounterLetterSection}
+  \setcounter{dukangCounterLetterSection}{0}
+}{}
 %-------------------------------------------------------------------------------
 % 重定义Awesome-CV的部分命令
 %-------------------------------------------------------------------------------
@@ -143,48 +147,26 @@
   % PDF书签设定部分。
   % 原始英文环境已经预备了hyperref和bookmark宏包，但是由于引入了ctex中文环境，
   % 直接调用bookmark生成书签会存在若干问题，各种尝试ctex[hyperref, UTF8]和
-  % hyperref[unicode, CJKbookmarks]均不行，看来和宏包本身的环境有关。于是，
-  % 在这里提供三种解决方案，供使用者自行选择。考虑到本项目不太适合创建目录结构太过复杂的大型
-  % 书籍类作品，此处默认执行方案三（随机数）：
+  % hyperref[unicode, CJKbookmarks]均不行，看来和宏包本身的环境有关。
+  \ifbool{dukangBookmarkLeadingNumber}{%
+    % 如果指定需要编号，则调用自定义计数器来进行手动编号
+    % 对应的计数器在命令外定义
+    \stepcounter{dukangCounterLetterSection}
+    % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dukangCounterLetterSection}}{\lettersectionstyle{#1}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dukangCounterLetterSection}, level=1, view=FitH]{\arabic{dukangCounterLetterSection}~~~~#1}%
+  }{%
+    % 如果不用编号，则使用随机数生成器直接对应标签和书签
+    % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
+    \rand
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#1}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#1}
+  }
   %
-  % 方案一
-  %
-  % 使用默认bookmark生成pdf书签
-  % 优点：无需作出任何改动，且编译可以顺利通过
-  % 缺点：中文书签可以生成，但无对应标签生成
-  %
-  % \hypertarget{#1}{\lettersectionstyle{#1}}
-  % \bookmark[dest=#1, level=1, view=FitH]{#1}
-  %
-  % 方案二
-  %
-  % 使用计数器形式生成书签标签，则相当于绕过了bookmark的标签发现机制
-  % 手动指定标签，并继续使用bookmark生成书签
-  % 优点：可以指定书签开头的标号，与中英文环境无关
-  % 缺点：需要创建并调用命令外部的计数器
-  %
-  % % 这里需要在环境外创建对应的计数器
-  % % 参考本文件前面“以下计数器用于支持创建书签标签的方案二”的注释部分
-  % \stepcounter{dukangCounterLetterSection}
-  % % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
-  % % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-  % \hypertarget{\arabic{dukangCounterLetterSection}}{\lettersectionstyle{#1}}
-  % % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-  % \bookmark[dest=\arabic{dukangCounterLetterSection}, level=1, view=FitH]{#1}
-  %
-  % 方案三
-  %
-  % 默认执行此方案，如需选择前面方案，请注释掉该部分
-  % 通过调用lcg宏包生成随机数来定义标签
-  % 优点：保证每个标签都不重复，与中英文环境无关
-  % 缺点：无法指定书签开头的标号，适合不带标号或者目录结构层级不多的文章（书籍）
-  %
-  % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中（这里是dukangRandom）
-  \rand
-  % 使用\hypertarget生成标签，正文中的显示样式在这里定义
-  \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#1}}
-  % 使用\bookmark创建对应标签的书签，PDF阅读器中书签的样式在这里定义
-  \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#1}
   % 手动生成书签标签结束
   %
   \color{sectiondivider}\vhrulefill{0.9pt}
