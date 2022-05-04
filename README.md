@@ -14,6 +14,14 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022-05-04
+-   增加`Makefile`对`minted`生成的临时文件进行清理
+-   增加`outputdir`选项到`\RequirePackage{minted}`解决编译时`.listing`文件找不到的问题
+-   修改`dukang.sty`宏包的自定义环境
+-   更新`dukang-doc`对应的示例部分
+-   解决所有自定义命令针对Awesome-CV的颜色自适应
+-   todo: 所有`tcblisting`仍然没有解决中英文混乱环境下由于`CTeX`环境引入的中文前的空格问题
+
 ### 2022-05-03
 -   重新修改结构，将原本文档相关的`dukang`文件更改为`dukang-doc`相关文件
 -   重新封装为`dukang`宏包

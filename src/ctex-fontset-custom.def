@@ -7,7 +7,7 @@
 
 % 以下两项设置中文环境下的sans和mono字体
 % \setCJKsansfont{YaHei Consolas Hybrid}
-% \setCJKmonofont{Inconsolata}
+\setCJKmonofont{Adobe 楷体 Std}
 
 \setCJKfamilyfont{zhsong}{Adobe 宋体 Std}
 \setCJKfamilyfont{zhhei}{Adobe 黑体 Std}
