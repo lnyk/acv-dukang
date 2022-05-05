@@ -9,7 +9,9 @@
 \setCJKsansfont{Adobe 楷体 Std}
 \setCJKmonofont{Adobe 楷体 Std}
 
-% 设置mono情况下英文字符所使用的字体
+% 设置sans英文字符所使用的字体
+\setsansfont{Inconsolata}
+% 设置mono英文字符所使用的字体
 \setmonofont{Inconsolata}
 
 \setCJKfamilyfont{zhsong}{Adobe 宋体 Std}

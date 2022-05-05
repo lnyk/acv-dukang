@@ -17,6 +17,10 @@ LaTeX Dukang 模板项目
 ### 2022-05-05
 -   增加对`resource`中`.tex`等文件的编译支持
 -   增加`resource/Makefile`的功能
+-   增加`dkresource`命令，联动编译`resource/r-*.tex`
+-   增加`resource/r-arch.tex`文档的`tikz`中文化支持以及美化
+-   增加`ctex-fontset-custom.def`字体自定义文件到`resource`的相对位置符号软连接
+-   完成`Page 1`
 
 ### 2022-05-04
 -   增加`Makefile`对`minted`生成的临时文件进行清理
