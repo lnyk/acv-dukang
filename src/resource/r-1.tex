@@ -1,0 +1,19 @@
+\documentclass{ctexart}
+\usepackage{smartdiagram}
+\usepackage[top=0mm,bottom=0mm,right=0mm,left=0mm]{geometry}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}%
+\usetikzlibrary{shapes,intersections,patterns}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+%\input{ctex-fontset-custom.def}
+
+\begin{document}
+\begin{center}
+\smartdiagram[bubble diagram]{
+Build a program,Set up,Run,Analyze,Modify~/\\ Add,Check
+}
+\end{center}
+\end{document}

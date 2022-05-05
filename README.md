@@ -14,6 +14,10 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022-05-05
+-   增加对`resource`中`.tex`等文件的编译支持
+-   增加`resource/Makefile`的功能
+
 ### 2022-05-04
 -   增加`Makefile`对`minted`生成的临时文件进行清理
 -   增加`outputdir`选项到`\RequirePackage{minted}`解决编译时`.listing`文件找不到的问题

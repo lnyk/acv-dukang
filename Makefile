@@ -19,18 +19,27 @@ endif
 
 .PHONY: main doc all clean cleanall
 
+make: main
+
 main: $(BASE_DIR)/main.tex
+	make -C $(BASE_DIR)/resource/ -f Makefile all
 	$(CC) -output-directory=$(BASE_DIR) $<
 
 doc: $(BASE_DIR)/dukang-doc.tex
+	make -C $(BASE_DIR)/resource/ -f Makefile all
 	$(CC) -output-directory=$(BASE_DIR) $<
+
+resource:
+	make -C $(BASE_DIR)/resource/ -f Makefile all
 
 all: main doc
 
 clean:
 	-@$(RM) $(CLEANFILES)
 	-@$(RM) -r dist _minted*
+	make -C $(BASE_DIR)/resource/ -f Makefile clean
 
 cleanall:
 	-@$(RM) $(CLEANFILES) $(BASE_DIR)/*.pdf
 	-@$(RM) -r $(BASE_DIR)/dist $(BASE_DIR)/_minted*
+	make -C $(BASE_DIR)/resource/ -f Makefile cleanall

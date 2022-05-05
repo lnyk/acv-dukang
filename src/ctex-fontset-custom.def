@@ -5,9 +5,12 @@
 
 \setCJKmainfont[BoldFont=Adobe 黑体 Std, ItalicFont=Adobe 楷体 Std]{Adobe 仿宋 Std}
 
-% 以下两项设置中文环境下的sans和mono字体
-% \setCJKsansfont{YaHei Consolas Hybrid}
+% 设置sans和mono情况下中文字符所使用的字体
+\setCJKsansfont{Adobe 楷体 Std}
 \setCJKmonofont{Adobe 楷体 Std}
+
+% 设置mono情况下英文字符所使用的字体
+\setmonofont{Inconsolata}
 
 \setCJKfamilyfont{zhsong}{Adobe 宋体 Std}
 \setCJKfamilyfont{zhhei}{Adobe 黑体 Std}
