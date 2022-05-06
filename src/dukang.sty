@@ -139,7 +139,23 @@
 %-------------------------------------------------------------------------------
 % 重定义Awesome-CV的部分命令
 %-------------------------------------------------------------------------------
+% Awesome section color
+%
+% 重新定义section标题的高亮显示部分
+% 原始定义为#1#2#3，即为将前三个字符进行高亮处理
+% 这里修改为#1#2#3#4，即前四个字符，更符合中文习惯
+% 可以为#1，表示有第一个字符高亮，而不是整个字符串
+%
+% 注意：
+%   由于原版默认为前三个英文字母，对于后续空格没有进行处理，所以如果在高亮范围内有空格，
+%   需要显式声明该空格，比如使用~符号。
+%-------------------------------------------------------------------------------
+\def\@sectioncolor#1#2#3#4{%
+  \ifbool{acvSectionColorHighlight}{{\color{awesome}#1#2#3#4}}{#1#2#3#4}%
+}
+%-------------------------------------------------------------------------------
 % lettersection
+%-------------------------------------------------------------------------------
 \renewcommand{\lettersection}[1]{%
   \ifbool{dukangParIndent}{%
     % 首先重置缩进为0em，否则会影响其他部分的缩进设定
@@ -206,23 +222,23 @@
 % 所有自定义环境的具体实现都放在该部分
 % 自定义环境统一以dk开头，用于区分其他宏包的自定义环境
 %-------------------------------------------------------------------------------
-% dkbox
-% inline风格的配色自适应的小盒子
+% dkbutton
+% inline风格，既可以指定主色调，也可以配色自适应的小盒子
 %
 % 用法：
-%   \dkbox<[color]>{text}
+%   \dkbutton<[color]>{text}
 %
 % 说明：
 %   color
-%     小盒子的主色调，可选，如果为空，则自适应Awesome-CV的awesome颜色
+%     可选，指定主色调或省略进行自适应
 %   text
 %     需要显示的内容
 %
 % 例如：
-%   \dkbox[Hello Dukang]
-%   \dkbox[red]{Hello Dukang}
+%   \dkbutton[Hello Dukang]
+%   \dkbutton[red]{Hello Dukang}
 %-------------------------------------------------------------------------------
-\newtcbox{\dkbox}[1][awesome]{%
+\newtcbox{\dkbutton}[1][awesome]{%
   fontupper=\sffamily,
   on line,
   arc=0pt,
@@ -239,23 +255,23 @@
   toprule=1pt,
 }
 %-------------------------------------------------------------------------------
-% dkboxr
-% inline风格圆角描边的配色自适应的小盒子
+% dkbuttonr
+% inline风格，圆角描边，既可以指定主色调，也可以配色自适应的小盒子
 %
 % 用法：
-%   \dkboxr<[color]>{text}
+%   \dkbuttonr<[color]>{text}
 %
 % 说明：
 %   color
-%     小盒子的主色调，可选，如果为空，则自适应Awesome-CV的awesome颜色
+%     可选，指定主色调或省略进行自适应
 %   text
 %     需要显示的内容
 %
 % 例如：
-%   \dkboxr[Hello Dukang]
-%   \dkboxr[red]{Hello Dukang}
+%   \dkbuttonr[Hello Dukang]
+%   \dkbuttonr[red]{Hello Dukang}
 %-------------------------------------------------------------------------------
-\newtcbox{\dkboxr}[1][awesome]{%
+\newtcbox{\dkbuttonr}[1][awesome]{%
   fontupper=\sffamily,
   on line,
   arc=7pt,
@@ -313,15 +329,17 @@
 }
 %-------------------------------------------------------------------------------
 % dkcodeh
-% 带有标题特效的代码高亮块，颜色基于Awesome-CV的配色进行自适应
+% 带有标题特效的代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 % 名称中h的意思是heading
 %
 % 用法：
-%   \begin{dkcodeh}{lang}{minted_style}{title}
+%   \begin{dkcodeh}<[color]>{lang}{minted_style}{title}
 %     ...
 %   \end{dkcodeh}
 %
 % 说明：
+%   color
+%     可选，指定主色调或省略进行自适应
 %   lang
 %     语言名称，例如bash, python3, java, c, go等
 %   minted_style
@@ -332,17 +350,17 @@
 %     代码块标题栏文字
 %
 % 例如：
-%   \begin{dkcodeh}{python3}{tango}{代码示例}
+%   \begin{dkcodeh}{python3}{tango}{这里是标题}
 %     import os
 %     pass
 %   \end{dkcodeh}
 %-------------------------------------------------------------------------------
-\newtcblisting{dkcodeh}[3]{
+\newtcblisting{dkcodeh}[4][awesome]{
   breakable,
   drop shadow,
   listing engine=minted,
-  minted language=#1,
-  minted style=#2,
+  minted language=#2,
+  minted style=#3,
   minted options={
     breaklines,
     linenos,
@@ -351,10 +369,10 @@
   listing only,
   left=6mm,
   enhanced,
-  title={#3},
-  colframe=awesome,
-  colback=awesome!5,
-  colbacktitle=awesome!85,
+  title={#4},
+  colframe=#1,
+  colback=#1!5,
+  colbacktitle=#1!85,
   % fonttitle=\bfseries,
   coltitle=white,
   attach boxed title to top center={
@@ -395,13 +413,15 @@
 }
 %-------------------------------------------------------------------------------
 % dkcodefileh
-% 带有标题特效的代码高亮块，颜色基于Awesome-CV的配色进行自适应
+% 带有标题特效的代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 % 该命令从指定文件中读取内容进行高亮显示
 %
 % 用法：
-%   \dkcodefileh{lang}{minted_style}{title}{file}
+%   \dkcodefileh<[color]>{lang}{minted_style}{title}{file}
 %
 % 说明：
+%   color
+%     可选，指定主色调或省略进行自适应
 %   lang
 %     语言名称，例如bash, python3, java, c, go等
 %   minted_style
@@ -416,12 +436,12 @@
 % 例如：
 %   \dkcodefileh{python3}{tango}{代码示例}{resource/code.py}
 %-------------------------------------------------------------------------------
-\newtcbinputlisting{dkcodefileh}[4]{
+\newtcbinputlisting{dkcodefileh}[5][awesome]{
   breakable,
   drop shadow,
   listing engine=minted,
-  minted language=#1,
-  minted style=#2,
+  minted language=#2,
+  minted style=#3,
   minted options={
     breaklines,
     linenos,
@@ -430,13 +450,13 @@
   listing only,
   left=6mm,
   enhanced,
-  title={#3},
-  colframe=awesome,
-  colback=awesome!5,
-  colbacktitle=awesome!85,
+  title={#4},
+  colframe=#1,
+  colback=#1!5,
+  colbacktitle=#1!85,
   % fonttitle=\bfseries,
   coltitle=white,
-  listing file={#4},
+  listing file={#5},
   attach boxed title to top center={
     yshift=-0.25mm-\tcboxedtitleheight/2,
     yshifttext=2mm-\tcboxedtitleheight/2
@@ -475,14 +495,16 @@
 }
 %-------------------------------------------------------------------------------
 % dkcode
-% 可根据Awesome-CV主色调进行颜色自适应的代码高亮块
+% 代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcode}{lang}{minted_style}{title}
+%   \begin{dkcode}<[color]>{lang}{minted_style}{title}
 %     ...
 %   \end{dkcode}
 %
 % 说明：
+%   color
+%     可选，指定主色调或省略进行自适应
 %   lang
 %     语言名称，例如bash, python3, java, c, go等
 %   minted_style
@@ -497,12 +519,12 @@
 %     ...
 %   \end{dkcode}
 %-------------------------------------------------------------------------------
-\newtcblisting{dkcode}[3]{
+\newtcblisting{dkcode}[4][awesome]{
   breakable,
   drop shadow,
   listing engine=minted,
-  minted language=#1,
-  minted style=#2,
+  minted language=#2,
+  minted style=#3,
   minted options={
     breaklines,
     linenos,
@@ -512,75 +534,23 @@
   left=6mm,
   right=6mm,
   enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#3}{\faCode},
-  colframe=awesome,
-  colback=awesome!5,
-  coltitle=white
-  % fonttitle=\bfseries,
-}
-%-------------------------------------------------------------------------------
-% dkcodec
-% 可指定框架主色的代码高亮块
-%
-% 用法：
-%   \begin{dkcodec}{lang}{minted_style}{title}{frame_color}{bg_color}
-%     ...
-%   \end{dkcodec}
-%
-% 说明：
-%   lang
-%     语言名称，例如bash, python3, java, c, go等
-%   minted_style
-%     minted预定义的高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
-%   frame_color
-%     标题及边框的颜色
-%   bg_color
-%     代码部分的底色
-%
-% 例如：
-%   \begin{dkcodec}{python3}{tango}{代码示例}{green!35!black}{green!5}
-%     ...
-%   \end{dkcodec}
-%
-% 推荐样式：
-%   浅绿样式 {green!35!black}{green!5}
-%   黑白样式 {black}{white}
-%   黑灰样式 {black!75}{black!5}
-%-------------------------------------------------------------------------------
-\newtcblisting{dkcodec}[5]{
-  breakable,
-  drop shadow,
-  listing engine=minted,
-  minted language=#1,
-  minted style=#2,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm
-  },
-  listing only,
-  left=6mm,
-  right=6mm,
-  enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#3}{\faCode},
-  colframe=#4,
-  colback=#5,
+  title=\TwoSymbolsAndText{\faCode}{#4}{\faCode},
+  colframe=#1,
+  colback=#1!5,
   coltitle=white
   % fonttitle=\bfseries,
 }
 %-------------------------------------------------------------------------------
 % dkcodefile
-% 可根据Awesome-CV主色调进行颜色自适应的代码高亮块
+% 代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 % 该命令从指定文件中读取内容进行高亮显示
 %
 % 用法：
-%   \dkcodefile{lang}{minted_style}{title}{file}
+%   \dkcodefile<[color]>{lang}{minted_style}{title}{file}
 %
 % 说明：
+%   color
+%     可选，指定主色调或省略进行自适应
 %   lang
 %     语言名称，例如bash, python3, java, c, go等
 %   minted_style
@@ -595,13 +565,13 @@
 % 例如：
 %   \dkcodefile{python3}{tango}{代码示例}{resource/code.py}
 %-------------------------------------------------------------------------------
-\newtcbinputlisting{dkcodefile}[4]{
+\newtcbinputlisting{dkcodefile}[5][awesome]{
   before skip=18bp,
   breakable,
   drop shadow,
   listing engine=minted,
-  minted language=#1,
-  minted style=#2,
+  minted language=#2,
+  minted style=#3,
   minted options={
     breaklines,
     linenos,
@@ -611,78 +581,25 @@
   left=6mm,
   right=6mm,
   enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#3}{\faCode},
-  colframe=awesome,
-  colback=awesome!5,
-  listing file={#4},
-  coltitle=white
-  % fonttitle=\bfseries,
-}
-%-------------------------------------------------------------------------------
-% dkcodefilec
-% 可指定框架主色的代码高亮块
-% 该命令从指定文件中读取内容进行高亮显示
-%
-% 用法：
-%   \dkcodefilec{lang}{minted_style}{title}{frame_color}{bg_color}{file}
-%
-% 说明：
-%   lang
-%     语言名称，例如bash, python3, java, c, go等
-%   minted_style
-%     minted预定义的高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
-%   frame_color
-%     标题及边框的颜色
-%   bg_color
-%     代码部分的底色
-%   file
-%     代码块内容的来源文件，必须为内容可读的文本文件
-%
-% 例如：
-%   \dkcodefilec{python3}{tango}{代码示例}{green!35!black}{green!5}{resource/code.py}
-%
-% 推荐样式：
-%   浅绿样式 {green!35!black}{green!5}
-%   黑白样式 {black}{white}
-%   黑灰样式 {black!75}{black!5}
-%-------------------------------------------------------------------------------
-\newtcbinputlisting{dkcodefilec}[6]{
-  before skip=18bp,
-  breakable,
-  drop shadow,
-  listing engine=minted,
-  minted language=#1,
-  minted style=#2,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm
-  },
-  listing only,
-  left=6mm,
-  right=6mm,
-  enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#3}{\faCode},
-  listing file={#6},
-  colframe=#4,
-  colback=#5,
+  title=\TwoSymbolsAndText{\faCode}{#4}{\faCode},
+  colframe=#1,
+  colback=#1!5,
+  listing file={#5},
   coltitle=white
   % fonttitle=\bfseries,
 }
 %-------------------------------------------------------------------------------
 % dkcomment
-% 可根据Awesome-CV主色调进行颜色自适应的备注框
+% 备注框，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcomment}{title}{\fontawesome_name}
+%   \begin{dkcomment}<[color]>{title}{\fontawesome_name}
 %     ...
 %   \end{dkcomment}
 %
 % 说明：
+%   color
+%     可选，指定主色调或省略进行自适应
 %   title
 %     代码块标题栏文字
 %   fontawesome_name
@@ -693,7 +610,7 @@
 %     ...
 %   \end{dkcomment}
 %-------------------------------------------------------------------------------
-\newtcolorbox{dkcomment}[2]{
+\newtcolorbox{dkcomment}[3][awesome]{
   before skip=18bp,
   drop shadow,
   size=title,
@@ -704,59 +621,12 @@
   arc=1.5mm,
   breakable,
   enhanced jigsaw,
-  colframe=awesome,% 这里可以直接使用定义好的颜色名称
+  colframe=#1,
   coltitle=white,
   boxrule=0.5mm,
-  colback=awesome!5,
+  colback=#1!5,
   coltext=text,
-  title=\TwoSymbolsAndText{#2}{#1}{#2}
-}
-%-------------------------------------------------------------------------------
-% dkcommentc
-% 可指定框架主色的备注框
-%
-% 用法：
-%   \begin{dkcommentc}{title}{\fontawesome_name}{frame_color}{bg_color}
-%     ...
-%   \end{dkcommentc}
-%
-% 说明：
-%   title
-%     代码块标题栏文字
-%   fontawesome_name
-%     FontAwesome字体的代码或名称
-%   frame_color
-%     标题及边框的颜色
-%   bg_color
-%     代码部分的底色
-%
-% 例如：
-%   \begin{dkcommentc}{特别说明}{\faCheck}{green!35!black}{green!5}
-%     ...
-%   \end{dkcommentc}
-%
-% 推荐样式：
-%   浅绿样式 {green!35!black}{green!5}
-%   黑白样式 {black}{white}
-%   黑灰样式 {black!75}{black!5}
-%-------------------------------------------------------------------------------
-\newtcolorbox{dkcommentc}[4]{
-  before skip=18bp,
-  drop shadow,
-  size=title,
-  top=3mm,
-  bottom=3mm,
-  left=6mm,
-  right=6mm,
-  arc=1.5mm,
-  breakable,
-  enhanced jigsaw,
-  colframe=#3,
-  coltitle=white,
-  boxrule=0.5mm,
-  colback=#4,
-  coltext=text,
-  title=\TwoSymbolsAndText{#2}{#1}{#2}
+  title=\TwoSymbolsAndText{#3}{#2}{#3}
 }
 %-------------------------------------------------------------------------------
 

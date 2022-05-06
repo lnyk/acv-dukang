@@ -14,6 +14,14 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022-05-06
+-   增加`dkbutton`和`dkbuttonr`两个`in-line`风格的显示按钮
+-   修改所有`dkcode*`和`dkcomment`环境为主色调自适应并可选手动指定主色调，字体为\sffamily
+-   删除之前用于手动指定主色调的所有`dkcode*c`环境
+-   重新定义`section`标题的高亮显示部分，调整高亮显示到前4个字符，用于适应中文习惯
+-   完成使用`cvletter`环境定义的`01-cover.tex`
+-   开启使用`cvsection`环境定义的`02-intro.tex`，重点参考`summary.tex`和`skills.tex`
+
 ### 2022-05-05
 -   增加对`resource`中`.tex`等文件的编译支持
 -   增加`resource/Makefile`的功能
