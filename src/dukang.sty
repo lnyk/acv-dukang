@@ -55,7 +55,7 @@
 % 不能使用\usepackage命令，可以使用tcolorbox内置的\tcbuselibrary命令
 % 或者\PassOptionsToPackage{option1,option2}{package}
 % 调用对应的库
-\tcbuselibrary{skins, listings, xparse, breakable, minted}
+\tcbuselibrary{skins, listingsutf8, xparse, breakable, minted}
 %-------------------------------------------------------------------------------
 % minted的全局样式设定
 % 以下设定即可以放在导言区，也可以在文档区随用随定义
@@ -205,6 +205,70 @@
 %
 % 所有自定义环境的具体实现都放在该部分
 % 自定义环境统一以dk开头，用于区分其他宏包的自定义环境
+%-------------------------------------------------------------------------------
+% dkbox
+% inline风格的配色自适应的小盒子
+%
+% 用法：
+%   \dkbox<[color]>{text}
+%
+% 说明：
+%   color
+%     小盒子的主色调，可选，如果为空，则自适应Awesome-CV的awesome颜色
+%   text
+%     需要显示的内容
+%
+% 例如：
+%   \dkbox[Hello Dukang]
+%   \dkbox[red]{Hello Dukang}
+%-------------------------------------------------------------------------------
+\newtcbox{\dkbox}[1][awesome]{%
+  fontupper=\sffamily,
+  on line,
+  arc=0pt,
+  outer arc=0pt,
+  colframe=awesome,
+  colback=awesome!5,
+  boxsep=0pt,
+  left=1pt,
+  right=1pt,
+  top=2pt,
+  bottom=2pt,
+  boxrule=0pt,
+  bottomrule=1pt,
+  toprule=1pt,
+}
+%-------------------------------------------------------------------------------
+% dkboxr
+% inline风格圆角描边的配色自适应的小盒子
+%
+% 用法：
+%   \dkboxr<[color]>{text}
+%
+% 说明：
+%   color
+%     小盒子的主色调，可选，如果为空，则自适应Awesome-CV的awesome颜色
+%   text
+%     需要显示的内容
+%
+% 例如：
+%   \dkboxr[Hello Dukang]
+%   \dkboxr[red]{Hello Dukang}
+%-------------------------------------------------------------------------------
+\newtcbox{\dkboxr}[1][awesome]{%
+  fontupper=\sffamily,
+  on line,
+  arc=7pt,
+  colframe=awesome,
+  colback=awesome!5,
+  before upper={\rule[-3pt]{0pt}{10pt}},
+  boxrule=1pt,
+  boxsep=0pt,
+  left=6pt,
+  right=6pt,
+  top=3pt,
+  bottom=1pt,
+}
 %-------------------------------------------------------------------------------
 % dkresource
 % 引入外部pdf或图片的命令
