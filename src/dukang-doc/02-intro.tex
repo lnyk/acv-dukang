@@ -1,8 +1,37 @@
 \cvsection{结构设计总体介绍}
+\begin{cvparagraph}
+  沿用了Awesome-CV简洁方便的结构设计，除了控\dkbutton{Makefile}制总体编译的文件、说明文件、项目图标以及文档类本体以外，与文档写作有关的所有其他文档都放在文件夹中。其中，文件本体以相对软链接的形式链接到。沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的文件、说明文件、项目图标以及文档类本体以外，与文档写作有关的所有其他文档都放在文件夹中。其中，文件本体以相对软链接的形式链接到。沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的文件、说明文件、项目图标以及文档类本体以外，与文档写作有关的所有其他文档都放在文件夹中。其中，文件本体以相对软链接的形式链接到。沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的文件、说明文件、项目图标以及文档类本体以外，与文档写作有关的所有其他文档都放在文件夹中。其中，文件本体以相对软链接的形式链接到。
+\end{cvparagraph}
 
 \begin{cvparagraph}
-\dk 沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，与文档写作有关的所有其他文档都放在\dkbutton{src/}文件夹中。其中，\dkbutton{awesome-cv.cls}文件本体以相对软链接\dkbutton{ln -rs}的形式链接到\dkbutton{src/awesome-cv.cls}。
+  \dk 沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，与文档写作有关的所有其他文档都放在\dkbutton{src/}文件夹中。其中，\dkbutton{awesome-cv.cls}文件本体以相对软链接\dkbutton{ln -rs}的形式链接到\dkbutton{src/awesome-cv.cls}。
 \end{cvparagraph}
+
+\dk 沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及文档类本体以外，与文档写作有关的所有其他文档都放在\dkbutton{src/}文件夹中。其中，\dkbutton{awesome-cv.cls}文件本体以相对软链接\dkbutton{ln -rs}的形式链接到\dkbutton{src/awesome-cv.cls}。
+
+\begin{dkcomment}{目录结构}{\faFolder}
+这里是测试
+\dirtree{%
+  .1 TRT/.
+  .2 \faFile\space main.tex\DTcomment{主文档的定义文件}.
+  .2 ctex-fontset-custom.def\DTcomment{字体定义文件}.
+  .2 customize.tex\DTcomment{自定义命令及环境}.
+  .2 data/\DTcomment{存放所有主文档内容}.
+  .3 cover.tex\DTcomment{封面、摘要及关键字}.
+  .3 denotation.tex\DTcomment{主要符号对照表}.
+  .3 ack.tex\DTcomment{致谢内容}.
+  .3 resume.tex\DTcomment{个人简历}.
+  .3 chap[*].tex\DTcomment{章节内容}.
+  .3 appendix[*].tex\DTcomment{附录}.
+  .2 docs/\DTcomment{TRT的相关文档}.
+  .3 trt.pdf\DTcomment{TRT使用说明（本文档）}.
+  .3 dirtree.pdf\DTcomment{dirtree命令官方文档}.
+  .3 fontawesome.pdf\DTcomment{FontAwesome官方文档}.
+  .2 fonts/\DTcomment{TRT用到的字体文件}.
+  .2 figures/\DTcomment{存放所有图表文件}.
+  .2 ref/refs.bib\DTcomment{参考文献}.
+}
+\end{dkcomment}
 
 \begin{cvskills}
 

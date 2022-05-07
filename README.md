@@ -14,6 +14,11 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022-05-07
+-   完成`cvsection`的重定义，修正cvparagraph格式问题
+-   增加`dukangBookmarkSection`命令，为`section`类型的环境自动生成书签提供支撑
+-   修改`lettersection`和`cvsection`用书签命令生成书签
+
 ### 2022-05-06
 -   增加`dkbutton`和`dkbuttonr`两个`in-line`风格的显示按钮
 -   修改所有`dkcode*`和`dkcomment`环境为主色调自适应并可选手动指定主色调，字体为\sffamily
