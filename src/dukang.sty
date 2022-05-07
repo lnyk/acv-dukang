@@ -126,18 +126,29 @@
 % 自定义配置
 %-------------------------------------------------------------------------------
 % 定义首页主标题的书签
+%-------------------------------------------------------------------------------
 \newcommand*{\dukangSetTitleRef}{%
   \hypertarget{dukangMainTitle}{}
   \bookmark[dest=dukangMainTitle, level=0, view=FitH]{\@firstname\@lastname}
 }
 %-------------------------------------------------------------------------------
 % 以下计数器用于支持PDF书签标题开头的编号
+%-------------------------------------------------------------------------------
 \ifbool{dukangBookmarkLeadingNumber}{%
   \newcounter{dukangCounterSection}
   \setcounter{dukangCounterSection}{0}
 }{}
 %-------------------------------------------------------------------------------
-% 手动生成书签标签
+% 利用随机数生成器指定书签标签
+%-------------------------------------------------------------------------------
+% 用法：
+%   \dukangBookmarkSection<[level]>{section_title}
+%
+% 说明：
+%   level
+%     可选，表示书签列表的层级，默认为1，（因为文档主标题为0）
+%   section_title
+%     section的标题，同时也是书签的文字内容
 %
 % 由于引入了中文环境，并且Awesome-CV的原始结构为CV-Resume-Cover分别独立呈现，
 % 在把所有部分合并成一个文件之后，需要做一些适应性调整，其中就包括原始文件不具备的
@@ -145,6 +156,7 @@
 % 原始英文环境已经预备了hyperref和bookmark宏包，但是由于引入了ctex中文环境，
 % 直接调用bookmark生成书签会存在若干问题，各种尝试ctex[hyperref, UTF8]和
 % hyperref[unicode, CJKbookmarks]均不行，看来和宏包本身的环境有关。
+%-------------------------------------------------------------------------------
 \newcommand*{\dukangBookmarkSection}[2][1]{%
   % 使用随机数生成器直接对应标签和书签
   % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
@@ -190,18 +202,20 @@
 % lettersection
 %-------------------------------------------------------------------------------
 \renewcommand{\lettersection}[1]{%
-  \ifbool{dukangParIndent}{%
-    % 首先重置缩进为0em，否则会影响其他部分的缩进设定
-    \setlength{\parindent}{0em}
-  }
+  % 重置首行缩进为0，适应单独设置\noindent的情况
+  \setlength{\parindent}{0em}
   \par\addvspace{2.5ex}
   \phantomsection{}
   \dukangBookmarkSection{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
   \par\nobreak\addvspace{0.4ex}
-  \ifbool{dukangParIndent}{%
+  \ifbool{dukangParIndent}{% if
     % 设定首行缩进为2em
     \setlength{\parindent}{2em}
+  }{% else
+    % 用于解决cvparagraph紧接着cvsection
+    % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
+    \setlength{\parindent}{0em}
   }
   \lettertextstyle
 }
@@ -211,16 +225,16 @@
 %-------------------------------------------------------------------------------
 % 重新定义paragraphstyle，不指定字体大小，使用默认设置
 \renewcommand*{\paragraphstyle}{\bodyfont\upshape\color{text}}
-
+% 重新定义cvparagraph环境，调整\par的位置，解决与分割线同行的问题
 \renewenvironment{cvparagraph}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-3mm}
   % 增加\par，解决cvparagraph紧接着cvsection，内容会出现在分割线同一行的情况
   \par\paragraphstyle
-}
-
+}{} % 这里的结尾{}不能省略，否则编译报错
 % 重新定义cvsection，沿用lettersection的设定
 \renewcommand{\cvsection}[1]{%
+  % 重置首行缩进为0，适应单独设置\noindent的情况
   \setlength{\parindent}{0em}
   \phantomsection{}
   \dukangBookmarkSection{#1}
@@ -232,7 +246,7 @@
   }{% else
     % 用于解决cvparagraph紧接着cvsection
     % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
-    \setlength{\parindent}{0em}
+    \setlength{\parindent}{0em}%
   }
 }
 %-------------------------------------------------------------------------------
