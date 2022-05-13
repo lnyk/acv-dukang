@@ -1,35 +1,26 @@
 \cvsection{结构设计总体介绍}
 \begin{cvparagraph}
-由于\dk~尽量使用非侵入式的方式与Awesome-CV进行集成，自然也沿用了其简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，其他项目相关文件都放在\dkbutton{src/}中。其中为了更方便的操作，还使用了软链接\footnote{使用make以及软链接，对Windows平台和使用IDE的用户来说可能需要做一些适应性调整，这部分问题目前不在\dk~的代码设计范围之内，也许未来版本会考虑加入跨平台的设计要素。}，比如：
+由于\dk~尽量使用非侵入式的方式与Awesome-CV进行集成，自然也沿用了其简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，其他的内容相关文件都放在\dkbutton{src/}中。其中为了更方便的操作，还使用了软链接\footnote{使用make以及软链接，对Windows平台和使用IDE的用户来说可能需要做一些适应性调整，这部分问题目前不在\dk~的代码设计范围之内，也许未来版本会考虑加入跨平台的设计要素。}，比如：
 
-\begin{dkcode}{bash}{tango}{使用软链接}
-ln -rs ./awesome-cv.cls ./src/awesome-cv.cls
-\end{dkcode}
+\dkbutton{ln -rs ./awesome-cv.cls ./src/awesome-cv.cls}
 
-\dkcodefile{bash}{tango}{使用软链接形式}{resource/test.py}
 \end{cvparagraph}
 
-\begin{dkcomment}{目录结构}{\faFolder}
-这里是测试
+\begin{dkcomment}{文件结构说明}{\faFolder}
 \dirtree{%
-  .1 TRT/.
-  .2 \faFile\space main.tex\DTcomment{主文档的定义文件}.
-  .2 ctex-fontset-custom.def\DTcomment{字体定义文件}.
-  .2 customize.tex\DTcomment{自定义命令及环境}.
-  .2 data/\DTcomment{存放所有主文档内容}.
-  .3 cover.tex\DTcomment{封面、摘要及关键字}.
-  .3 denotation.tex\DTcomment{主要符号对照表}.
-  .3 ack.tex\DTcomment{致谢内容}.
-  .3 resume.tex\DTcomment{个人简历}.
-  .3 chap[*].tex\DTcomment{章节内容}.
-  .3 appendix[*].tex\DTcomment{附录}.
-  .2 docs/\DTcomment{TRT的相关文档}.
-  .3 trt.pdf\DTcomment{TRT使用说明（本文档）}.
-  .3 dirtree.pdf\DTcomment{dirtree命令官方文档}.
-  .3 fontawesome.pdf\DTcomment{FontAwesome官方文档}.
-  .2 fonts/\DTcomment{TRT用到的字体文件}.
-  .2 figures/\DTcomment{存放所有图表文件}.
-  .2 ref/refs.bib\DTcomment{参考文献}.
+.1 \dk/.
+.2 \faFileCode~awesome-cv.cls\DTcomment{Awesome-CV的类文件}.
+.2 \faFileImage~icon.png\DTcomment{项目图标}.
+.2 \faFileCode~Makefile\DTcomment{控制编译命令的make文件}.
+.2 \faMarkdown~README.md\DTcomment{项目说明文件}.
+.2 \faFolder~src\DTcomment{内容相关文件}.
+.3 \faLink~awesome-cv.cls\DTcomment{Awesome-CV类文件的软链接}.
+.3 \faFileCode~ctex-fontset-custom.def\DTcomment{ctex的自定义字体文件}.
+.3 \faFileCode~dukang.sty\DTcomment{\dk~的主文件}.
+.3 \faFileCode~dukang-doc.tex\DTcomment{本文档的主文件}.
+.3 \faFileCode~main.tex\DTcomment{最简化的起始文件}.
+.2 \faFolder~dukang-doc\DTcomment{存放本文档的章节内容文件}.
+.2 \faFolder~resource\DTcomment{存放图形、表格、外部pdf或tex等资源文件}.
 }
 \end{dkcomment}
 
