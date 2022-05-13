@@ -32,7 +32,7 @@
 %     Adobe 黑体 Std, Adobe 楷体 Std, Adobe 仿宋 Std, Adobe 宋体 Std,
 %     幼圆, 隶书, 方正小标宋, YaHei Consolas Hybrid, Inconsolata
 %   上述字体如果系统未安装，请自行下载安装，或根据需要自行变更
-\RequirePackage[fontset=custom, hyperref, UTF8]{ctex}
+\RequirePackage[scheme=chinese, fontset=custom, hyperref, UTF8]{ctex}
 \ctexset{
   today=big,
   space=false,
@@ -56,6 +56,24 @@
 % 或者\PassOptionsToPackage{option1,option2}{package}
 % 调用对应的库
 \tcbuselibrary{skins, listingsutf8, xparse, breakable, minted}
+%-------------------------------------------------------------------------------
+% tcolorbox的全局设定
+\tcbset{
+  % \baselineskip是根据默认字号对应的默认行距
+  % 由于ctex的中文行距是1.56（1.3）倍字体高度，所以英文单倍行距需要0.641\baselineskip
+  % \singlespacing是默认单倍行距的命令
+  % code={...}是tcolorbox的选项之一，可以指定要执行的命令
+  % code的作用域是tcolorbox的整体，包括标题行、upper和lower
+  % 所以经过测试之后，效果最好的是使用before upper和\fontsize来直接指定字号和行距
+  % 否则标题行也会被影响
+  % 指定字号和行距
+  before upper=\fontsize{10pt}{10pt}\selectfont,
+  % 指定字体
+  fontupper=\sffamily,
+  minted options={
+    tabsize=2,
+  },
+}
 %-------------------------------------------------------------------------------
 % minted的全局样式设定
 % 以下设定即可以放在导言区，也可以在文档区随用随定义
@@ -106,6 +124,14 @@
 % 创建\random命令，方便直接将随机数输出至文档字符串
 \newcommand{\random}{\rand\arabic{dukangRandom}}
 %-------------------------------------------------------------------------------
+% 脚注
+\usepackage[perpage,para,symbol*]{footmisc}
+% 修改脚注数字为圆圈数字
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+% 修改脚注字体
+\renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
@@ -127,10 +153,7 @@
 %-------------------------------------------------------------------------------
 % 定义首页主标题的书签
 %-------------------------------------------------------------------------------
-\newcommand*{\dukangSetTitleRef}{%
-  \hypertarget{dukangMainTitle}{}
-  \bookmark[dest=dukangMainTitle, level=0, view=FitH]{\@firstname\@lastname}
-}
+\bookmark[named=FirstPage, level=0, view=FitH]{\@firstname\@lastname}
 %-------------------------------------------------------------------------------
 % 以下计数器用于支持PDF书签标题开头的编号
 %-------------------------------------------------------------------------------
@@ -290,7 +313,6 @@
 %   \dkbutton[red]{Hello Dukang}
 %-------------------------------------------------------------------------------
 \newtcbox{\dkbutton}[1][awesome]{%
-  fontupper=\sffamily,
   on line,
   arc=0pt,
   outer arc=0pt,
@@ -326,7 +348,6 @@
 %   \dkbuttonr[red]{Hello Dukang}
 %-------------------------------------------------------------------------------
 \newtcbox{\dkbuttonr}[1][awesome]{%
-  fontupper=\sffamily,
   on line,
   arc=7pt,
   colframe=awesome,

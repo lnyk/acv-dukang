@@ -1,6 +1,12 @@
 \cvsection{结构设计总体介绍}
 \begin{cvparagraph}
-  \dk 沿用了Awesome-CV简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，与文档写作有关的所有其他文档都放在\dkbutton{src/}文件夹中。其中，\dkbutton{awesome-cv.cls}文件本体以相对软链接\dkbutton{ln -rs}的形式链接到\dkbutton{src/awesome-cv.cls}。
+由于\dk~尽量使用非侵入式的方式与Awesome-CV进行集成，自然也沿用了其简洁方便的结构设计，除了控制总体编译的\dkbutton{Makefile}文件、\dkbutton{README.md}说明文件、\dkbutton{icon.png}项目图标以及\dkbutton{awesome-cv.cls}文档类本体以外，其他项目相关文件都放在\dkbutton{src/}中。其中为了更方便的操作，还使用了软链接\footnote{使用make以及软链接，对Windows平台和使用IDE的用户来说可能需要做一些适应性调整，这部分问题目前不在\dk~的代码设计范围之内，也许未来版本会考虑加入跨平台的设计要素。}，比如：
+
+\begin{dkcode}{bash}{tango}{使用软链接}
+ln -rs ./awesome-cv.cls ./src/awesome-cv.cls
+\end{dkcode}
+
+\dkcodefile{bash}{tango}{使用软链接形式}{resource/test.py}
 \end{cvparagraph}
 
 \begin{dkcomment}{目录结构}{\faFolder}

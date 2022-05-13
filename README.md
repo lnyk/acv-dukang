@@ -14,6 +14,11 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022-05-13
+-   添加自定义脚注设置
+-   使用`makeatletter`组合修正了原先需要插入命令来生成首页PDF书签的过程
+-   增加`tcbset`全局配置项，统一部分`tcolorbox`环境和命令的字体行距等格式输出
+
 ### 2022-05-07
 -   完成`cvsection`的重定义，修正cvparagraph格式问题
 -   增加`dukangBookmarkSection`命令，为`section`类型的环境自动生成书签提供支撑
