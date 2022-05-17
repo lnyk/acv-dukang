@@ -3,12 +3,11 @@ CC = latexmk -xelatex -shell-escape
 BASE_DIR = src
 
 DOC_SRC = $(BASE_DIR)/dukang-doc.tex
-DOC_DIR = $(BASE_DIR)/dukang-doc
 
 MAIN_DIR = $(BASE_DIR)/tex
 MAIN_SRC = $(shell find $(MAIN_DIR) -name '*.tex')
 
-CLEANFILES = $(foreach x, *.pyg *.listing *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk $(DOC_DIR)/*.aux $(MAIN_DIR)/*.aux, $(BASE_DIR)/$(x))
+CLEANFILES = $(foreach x, *.pyg *.listing *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk $(MAIN_DIR)/*.aux, $(BASE_DIR)/$(x))
 
 # make deletion work on Windows
 ifdef SystemRoot
