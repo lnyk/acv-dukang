@@ -246,8 +246,7 @@
   \lettertextstyle
 }
 %-------------------------------------------------------------------------------
-% cvsection
-% 沿用lettersection的设定
+% cvparagraph
 %-------------------------------------------------------------------------------
 % 重新定义paragraphstyle，不指定字体大小，使用默认设置
 \renewcommand*{\paragraphstyle}{\bodyfont\upshape\color{text}}
@@ -258,7 +257,9 @@
   % 增加\par，解决cvparagraph紧接着cvsection，内容会出现在分割线同一行的情况
   \par\paragraphstyle
 }{} % 这里的结尾{}不能省略，否则编译报错
-% 重新定义cvsection，沿用lettersection的设定
+%-------------------------------------------------------------------------------
+% cvsection
+%-------------------------------------------------------------------------------
 \renewcommand{\cvsection}[1]{%
   % 重置首行缩进为0，适应单独设置\noindent的情况
   \setlength{\parindent}{0em}
@@ -274,6 +275,7 @@
     % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
     \setlength{\parindent}{0em}%
   }
+  \par\paragraphstyle
 }
 %-------------------------------------------------------------------------------
 
