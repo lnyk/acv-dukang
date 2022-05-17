@@ -42,19 +42,19 @@
 % 首页的图片Logo，默认为./src/resource/profile<.png>
 % 可用选项为circle|rectangle,edge/noedge,left/right
 \photo[circle,noedge,left]{./src/resource/profile}
-\name{\LaTeX{} Dukang}{项目手册}
+\name{\LaTeX~Dukang}{手册}
 \position{%
-  Kubenetes{\enskip\faDharmachakra\enskip}Rook-Ceph{\enskip\faHdd\enskip}Kubesphere{\enskip\faWrench\enskip}DevOps{\enskip\faDocker\enskip}CRI
+  \hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}{\enskip\faWineBottle\enskip}\dk
 }
-\address{基于开源项目及云原生相关技术，综合集成构建的开源容器云环境}
+\address{基于\hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}进行中文化适应及无侵入增强的面向\LaTeX{}新人的快速开始项目}
 
 %-------------------------------------------------------------------------------
 % 以下部分至少有一条要保留
 % \mobile{(+82) 10-9030-1843}
-% \email{posquit0.bj@gmail.com}
+\email{me@williamyao.com}
 % \dateofbirth{January 1st, 1970}
-\homepage{EPBCC团队倾情巨献}
-% \github{posquit0}
+\homepage{WilliamYao.com}
+\github{lnyk}
 % \linkedin{posquit0}
 % \gitlab{gitlab-id}
 % \stackoverflow{SO-id}{SO-name}
@@ -66,29 +66,29 @@
 % \googlescholar{googlescholar-id}{name-to-display}
 %% \firstname and \lastname will be used
 % \googlescholar{googlescholar-id}{}
-\extrainfo{{\faWineBottle}何以解忧\hspace{1em}唯有杜康}
+\extrainfo{{\faWineBottle}~衷心感谢\hyperref{https://github.com/posquit0}{}{}{Byungjin Park}等童鞋的开源奉献}
 
-\quote{“我们不生产云，我们只是某{\faGithub}的搬运工”}
+\quote{“执着而不计成本，不为索取只为陶醉”——~Carl Zeiss}
 
 
 %-------------------------------------------------------------------------------
 %	信件环境基本信息
 %	所有内容必须不能缺少
 %-------------------------------------------------------------------------------
-% 公司信息
+% 收件方
 \recipient
-  {Company Recruitment Team}
-  {Google Inc.\\1600 Amphitheatre Parkway\\Mountain View, CA 94043}
+  {亲爱的\dk 使用者}
+  {\hskip2em 本文档旨在用具体的示例全面介绍和展示\dk 宏包的使用、配置和附加功能，包括针对Awesome-CV模板进行的所有中文化处理和修改，并尽力以入门者的角度进行详细说明，希望通过阅读本文，能与诸君分享更多知识和收获。}
 % 信件日期
 \letterdate{\today}
 % 信件标题
-\lettertitle{Job Application for Software Engineer}
+\lettertitle{关于快速开始}
 % 信件称谓
-\letteropening{Dear Mr./Ms./Dr. LastName,}
+\letteropening{如果迫不及待的想要使用\dk 进行创作，请直接按照下图查找并阅读项目文件吧\faKissWinkHeart}
 % 信件结尾词
-\letterclosing{Sincerely,}
+\letterclosing{怎么样，难道还意犹未尽吗？}
 % 信件结尾词附言
-\letterenclosure[Attached]{Curriculum Vitae}
+\letterenclosure[亲爱的使用者]{继续发挥想像吧！}
 
 
 %-------------------------------------------------------------------------------
@@ -99,6 +99,17 @@
 %-------------------------------------------------------------------------------
 % 打开该开关会启用某些正文内容的首行缩进
 \setbool{dukangParIndent}{true}
+% 是否为PDF书签添加标题前的标号
+\setbool{dukangBookmarkLeadingNumber}{true}
+%-------------------------------------------------------------------------------
+% 定义编译之后的PDF相关属性
+\hypersetup{%
+  pdftitle={\LaTeX~Dukang~手册},
+  pdfauthor={William Yao},
+  pdfcreator={William Yao},
+  pdfsubject={引用Awesome-CV模板，继承并加强},
+  pdfkeywords={tex,latex,pdf,awesome,cv,resume,book,article,william,yao,dukang}
+}
 %-------------------------------------------------------------------------------
 
 
@@ -106,10 +117,6 @@
 \begin{document}
 %-------------------------------------------------------------------------------
 % dukang文档区设定
-%-------------------------------------------------------------------------------
-% 由于添加了生成书签的功能，需要在文档区调用下面的命令生成首页的书签
-% 默认使用导言区的\name自动生成
-\dukangSetTitleRef
 %-------------------------------------------------------------------------------
 % 首页的抬头
 % 可选
@@ -119,8 +126,8 @@
 % 每页的页脚定义，分为左中右三个部分，分别对应每个{}
 % 各部分都可留空，但不能删掉{}
 \makecvfooter
-  {\today}% 左边部分
-  {Claud D. Park~~~\faTree~~~Cover Letter}% 中间部分
+  {\hyperref{http://williamyao.com}{}{}{\LaTeX Dukang}}% 左边部分
+  {\faWineBottle}% 中间部分
   {\thepage}% 右边部分
 
 
@@ -128,31 +135,7 @@
 % 正文内容部分
 % 独立引用每个文件，或者直接书写正文
 %-------------------------------------------------------------------------------
-% doc的首页
-\input{dukang-doc/01-cover.tex}
-
-\input{cv/education.tex}
-\input{cv/skills.tex}
-\input{cv/experience.tex}
-\input{cv/extracurricular.tex}
-\input{cv/honors.tex}
-\input{cv/presentation.tex}
-\input{cv/writing.tex}
-\input{cv/committees.tex}
-
-
-%-------------------------------------------------------------------------------
-%	CV/RESUME CONTENT
-%	Each section is imported separately, open each file in turn to modify content
-%-------------------------------------------------------------------------------
-\input{resume/summary.tex}
-\input{resume/experience.tex}
-\input{resume/honors.tex}
-\input{resume/presentation.tex}
-\input{resume/writing.tex}
-\input{resume/committees.tex}
-\input{resume/education.tex}
-\input{resume/extracurricular.tex}
-
+\input{tex/01-cover.tex}
+\input{tex/02-intro.tex}
 
 \end{document}
