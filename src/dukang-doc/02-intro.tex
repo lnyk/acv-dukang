@@ -13,45 +13,94 @@
 .3 \faFileCode~ctex-fontset-custom.def\DTcomment{ctex的自定义字体文件}.
 .3 \faFileCode~dukang.sty\DTcomment{\dk~的主文件}.
 .3 \faFileCode~dukang-doc.tex\DTcomment{本文档的主文件}.
-.3 \faFileCode~main.tex\DTcomment{最简化的起始文件}.
-.2 \faFolder~dukang-doc\DTcomment{存放本文档的章节内容文件}.
-.2 \faFolder~resource\DTcomment{存放图形、表格、外部pdf或tex等资源文件}.
-.3 \faLink~ctex-fontset-custom.def\DTcomment{ctex自定义字体文件的软链接}.
-.3 \faFileCode~Makefile\DTcomment{对应resource文件夹的make文件}.
-.3 \faFileImage~profile.png\DTcomment{文档首页头信息中引用的图片文件}.
-.3 \faFileCode~r-*.png\DTcomment{所有以\dkbutton{r-*.tex}形式命名的文件都会支持自动编译和清理}.
-.2 \faFolder~tex\DTcomment{存放被\dkbutton{main.tex}引用的内容}.
+.3 \faFileCode~main.tex\DTcomment{从此文件入手开始创作}.
+.3 \faFolder~dukang-doc\DTcomment{存放本文档的章节内容文件}.
+.3 \faFolder~resource\DTcomment{存放图形、表格、外部pdf或tex等资源文件}.
+.4 \faLink~ctex-fontset-custom.def\DTcomment{ctex自定义字体文件的软链接}.
+.4 \faFileCode~Makefile\DTcomment{对应resource文件夹的make文件}.
+.4 \faFileImage~profile.png\DTcomment{文档首页头信息中引用的图片文件}.
+.4 \faFileCode~r-*.png\DTcomment{所有以\dkbutton{r-*.tex}形式命名的文件都会支持自动编译和清理}.
+.3 \faFolder~tex\DTcomment{存放被\dkbutton{main.tex}引用的内容}.
 }
 \end{dkcomment}
 
+先快速简要的说明一下部分文件和位置的注意事项，详细内容会在后续章节中进行详细说明。
+
+\begin{cventries}
+
+%---------------------------------------------------------
+  \cventry
+    {ctex-fontset-custom.def}
+    {字体定义}
+    {}
+    {}
+    {
+      \begin{cvitems} % Description(s) of tasks/responsibilities
+        \item {配合ctex的\dkbutton{fontset=custom}设定来使用，可以根据需要自行调整字体文件。}
+        \item {Built fully automated CI/CD pipelines on CircleCI for containerized applications using Docker, AWS ECR and Rancher.}
+        \item {Designed an overall service architecture and pipelines of the Machine Learning based Fashion Tagging API SaaS product with the micro-services architecture.}
+        \item {Implemented several API microservices in Node.js Koa and in the serverless AWS Lambda functions.}
+        \item {Deployed a centralized logging environment(ELK, Filebeat, CloudWatch, S3) which gather log data from docker containers and AWS resources.}
+        \item {Deployed a centralized monitoring environment(Grafana, InfluxDB, CollectD) which gather system metrics as well as docker run-time metrics.}
+      \end{cvitems}
+    }
+
+%---------------------------------------------------------
+  \cventry
+    {Freelance Penetration Tester} % Job title
+    {SAMSUNG Electronics} % Organization
+    {S.Korea} % Location
+    {Sep. 2013, Mar. 2011 - Oct. 2011} % Date(s)
+    {
+      % \begin{cvitems} % Description(s) of tasks/responsibilities
+      %   \item {Conducted penetration testing on SAMSUNG KNOX, which is solution for enterprise mobile security.}
+      %   \item {Conducted penetration testing on SAMSUNG Smart TV.}
+      % \end{cvitems}
+      \begin{cvsubentries}
+       \cvsubentry{}{KNOX(Solution for Enterprise Mobile Security) Penetration Testing}{Sep. 2013}{}
+       \cvsubentry{}{Smart TV Penetration Testing}{Mar. 2011 - Oct. 2011}{}
+      \end{cvsubentries}
+    }
+
+%---------------------------------------------------------
+\end{cventries}
+
 \begin{cvskills}
+\cvskill
+{ctex-fontset-custom.def}
+{配合ctex的\dkbutton{fontset=custom}设定来使用，可以根据需要自行调整字体文件。}
 
-%---------------------------------------------------------
-  \cvskill
-    {DevOps} % Category
-    {AWS, Docker, Kubernetes, Rancher, Vagrant, Packer, Terraform, Jenkins, CircleCI} % Skills
+\cvskill
+{Back-end} % Category
+{Koa, Express, Django, REST API} % Skills
 
-%---------------------------------------------------------
-  \cvskill
-    {Back-end} % Category
-    {Koa, Express, Django, REST API} % Skills
+\cvskill
+{Front-end} % Category
+{Hugo, Redux, React, HTML5, LESS, SASS} % Skills
 
-%---------------------------------------------------------
-  \cvskill
-    {Front-end} % Category
-    {Hugo, Redux, React, HTML5, LESS, SASS} % Skills
+\cvskill
+{Programming} % Category
+{Node.js, Python, JAVA, OCaml, LaTeX} % Skills
 
-%---------------------------------------------------------
-  \cvskill
-    {Programming} % Category
-    {Node.js, Python, JAVA, OCaml, LaTeX} % Skills
+\cvskill
+{Languages} % Category
+{Korean, English, Japanese} % Skills
 
-%---------------------------------------------------------
-  \cvskill
-    {Languages} % Category
-    {Korean, English, Japanese} % Skills
+\cvskill
+{Back-end} % Category
+{Koa, Express, Django, REST API} % Skills
 
-%---------------------------------------------------------
+\cvskill
+{Front-end} % Category
+{Hugo, Redux, React, HTML5, LESS, SASS} % Skills
+
+\cvskill
+{Programming} % Category
+{Node.js, Python, JAVA, OCaml, LaTeX} % Skills
+
+\cvskill
+{Languages} % Category
+{Korean, English, Japanese} % Skills
 \end{cvskills}
 
 \clearpage

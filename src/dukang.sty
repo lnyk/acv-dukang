@@ -128,7 +128,7 @@
 \newcommand{\random}{\rand\arabic{dukangRandom}}
 %-------------------------------------------------------------------------------
 % 脚注
-\usepackage[perpage,para,symbol*]{footmisc}
+\usepackage[perpage,symbol*]{footmisc}
 % 修改脚注数字为圆圈数字
 \usepackage{pifont}
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
@@ -276,6 +276,29 @@
     \setlength{\parindent}{0em}%
   }
   \par\paragraphstyle
+}
+%-------------------------------------------------------------------------------
+% cvskills
+%-------------------------------------------------------------------------------
+\renewcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\renewcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+%-------------------------------------------------------------------------------
+% cventries
+%-------------------------------------------------------------------------------
+% 重新定义字体颜色和风格
+\renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+% 重新定义cventry的表示顺序，更符合使用习惯
+\renewcommand*{\cventry}[5]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \ifempty{#3#4}
+      {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\}
+      {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\
+      \entrypositionstyle{#3} & \entrydatestyle{#4} \\}
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+  \end{tabular*}%
 }
 %-------------------------------------------------------------------------------
 
