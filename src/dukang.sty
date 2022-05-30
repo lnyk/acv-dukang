@@ -286,7 +286,8 @@
 % cventries
 %-------------------------------------------------------------------------------
 % 重新定义字体颜色和风格
-\renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+% 1.56em为中文环境的标准行距，或者设置为1.3em也较为合适
+\renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.56em}\bodyfontlight\color{text} #1}}
 % 重新定义cventry的表示顺序，更符合使用习惯
 \renewcommand*{\cventry}[5]{%
   \vspace{-2.0mm}
