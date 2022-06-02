@@ -305,7 +305,8 @@
 % cvsubsection
 %-------------------------------------------------------------------------------
 \renewcommand{\cvsubsection}[1]{%
-  \vspace{\acvSectionTopSkip}
+  % \vspace{0.641\baselineskip}
+  \vspace{\baselineskip}
   \setlength{\parskip}{0em}
   \setlength{\parindent}{0em}
   \dukangBookmarkSubSection{#1}
@@ -343,6 +344,35 @@
       \entrypositionstyle{#3} & \entrydatestyle{#4} \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
+}
+% -------------------------------------------------------------------------------
+% cvhonors & cvhonor
+% -------------------------------------------------------------------------------
+% 使用xparse重定义cvhonor环境，支持可选默认值参数用来指定3个部分的对齐方式
+\DeclareDocumentEnvironment{cvhonors}{O{L} O{L} O{R}}
+{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  % 使用spacing包控制单元格内的line之间的距离
+  \begin{spacing}{1}
+    \begin{center}
+      \setlength\tabcolsep{0pt}
+      \setlength{\extrarowheight}{0pt}
+      % 控制表格的row之间的距离
+      % \renewcommand{\arraystretch}{1.5}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 6.0cm} #3{3cm}}
+}{%
+      \end{tabular*}
+    \end{center}
+  \end{spacing}
+}
+% 重新定义3个风格
+\renewcommand*{\honorpositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{text} #1}}
+\renewcommand*{\honortitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+\renewcommand*{\honorlocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+% 重新定义cvhonor三个部分的显示顺序
+\renewcommand*{\cvhonor}[3]{%
+  \honorpositionstyle{#1} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
 %-------------------------------------------------------------------------------
 

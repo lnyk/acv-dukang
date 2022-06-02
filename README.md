@@ -7,16 +7,13 @@ LaTeX Dukang 模板项目
 修改自[Awesome-CV](https://github.com/posquit0/Awesome-CV) 2022-04-28 Master版本
 
 ## 项目主要内容
--   修改整个项目目录结构，适应`make`自动构建
--   修改`Makefile`生成选项，并添加清理命令
--   使用`ctex`宏包添加中文支持
--   完成`letter`环境的自定义PDF书签支持中文
--   添加PDF属性定义
 
 ## 提交变更信息
 ### 2022.06.02
 -   新增`cvsubsection`部分
 -   调整`cvsection`和`cvsubsection`标题前后以及正文段落的间距
+-   新增`cvhonors`和`cvhonor`并调整格式
+-   修改`cvhonors`为使用`xparse`设置三栏对齐方式
 -   完善`Makefile`备注信息
 -   开启第三章节
 
