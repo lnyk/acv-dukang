@@ -14,6 +14,12 @@ LaTeX Dukang 模板项目
 -   添加PDF属性定义
 
 ## 提交变更信息
+### 2022.06.02
+-   新增`cvsubsection`部分
+-   调整`cvsection`和`cvsubsection`标题前后以及正文段落的间距
+-   完善`Makefile`备注信息
+-   开启第三章节
+
 ### 2022-05-30
 -   重新调整`cventry`的行间距为1.56em
 -   完成`02-intro`章节

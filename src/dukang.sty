@@ -70,9 +70,6 @@
   before upper=\fontsize{10pt}{10pt}\selectfont,
   % 指定字体
   fontupper=\sffamily,
-  minted options={
-    tabsize=2,
-  },
 }
 %-------------------------------------------------------------------------------
 % minted的全局样式设定
@@ -163,6 +160,8 @@
 \ifbool{dukangBookmarkLeadingNumber}{%
   \newcounter{dukangCounterSection}
   \setcounter{dukangCounterSection}{0}
+  \newcounter{dukangCounterSubSection}
+  \setcounter{dukangCounterSubSection}{0}
 }{}
 %-------------------------------------------------------------------------------
 % 利用随机数生成器指定书签标签
@@ -196,6 +195,28 @@
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSection}~~~~#2}%
+  }{%
+    % 如果不用编号
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#2}
+  }
+}
+%-------------------------------------------------------------------------------
+\newcommand*{\dukangBookmarkSubSection}[2][2]{%
+  % 使用随机数生成器直接对应标签和书签
+  % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
+  \rand
+  \ifbool{dukangBookmarkLeadingNumber}{%
+    % 如果指定需要编号，则调用自定义计数器来进行手动编号
+    % 对应的计数器在命令外定义
+    \stepcounter{dukangCounterSubSection}
+    % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSubSection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
@@ -261,6 +282,8 @@
 % cvsection
 %-------------------------------------------------------------------------------
 \renewcommand{\cvsection}[1]{%
+  \vspace{\acvSectionTopSkip}
+  \setlength{\parskip}{0em}
   % 重置首行缩进为0，适应单独设置\noindent的情况
   \setlength{\parindent}{0em}
   \phantomsection{}
@@ -271,13 +294,33 @@
     % 设定首行缩进为2em
     \setlength{\parindent}{2em}
   }{% else
-    % 用于解决cvparagraph紧接着cvsection
-    % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
     \setlength{\parindent}{0em}%
   }
+  % 用于解决cvparagraph紧接着cvsection
+  % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
+  \vspace{\acvSectionContentTopSkip}
   \par\paragraphstyle
 }
 %-------------------------------------------------------------------------------
+% cvsubsection
+%-------------------------------------------------------------------------------
+\renewcommand{\cvsubsection}[1]{%
+  \vspace{\acvSectionTopSkip}
+  \setlength{\parskip}{0em}
+  \setlength{\parindent}{0em}
+  \dukangBookmarkSubSection{#1}
+  \ifbool{dukangParIndent}{% if
+    % 设定首行缩进为2em
+    \setlength{\parindent}{2em}
+  }{% else
+    \setlength{\parindent}{0em}%
+  }
+  \phantomsection
+  % 用于解决cvparagraph紧接着cvsection
+  % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
+  \par
+}
+% -------------------------------------------------------------------------------
 % cvskills
 %-------------------------------------------------------------------------------
 \renewcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
@@ -468,7 +511,8 @@
   minted options={
     breaklines,
     linenos,
-    numbersep=3mm
+    numbersep=3mm,
+    tabsize=2,
   },
   listing only,
   left=6mm,
@@ -549,7 +593,8 @@
   minted options={
     breaklines,
     linenos,
-    numbersep=3mm
+    numbersep=3mm,
+    tabsize=2,
   },
   listing only,
   left=6mm,
@@ -632,7 +677,8 @@
   minted options={
     breaklines,
     linenos,
-    numbersep=3mm
+    numbersep=3mm,
+    tabsize=2,
   },
   listing only,
   left=6mm,
@@ -679,7 +725,8 @@
   minted options={
     breaklines,
     linenos,
-    numbersep=3mm
+    numbersep=3mm,
+    tabsize=2,
   },
   listing only,
   left=6mm,
