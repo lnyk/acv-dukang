@@ -347,12 +347,28 @@
 }
 % -------------------------------------------------------------------------------
 % cvhonors & cvhonor
+%
+% cvhonors支持3个列对齐方式的可选调整参数
+%
+% 参数说明：
+% L 左对齐，C 居中对齐，R 右对齐
+%
+% 例如：
+%   \begin{cvhonors} % 使用默认参数，LLR
+%   \begin{cvhonors}[LLR] % 同上
+%   \begin{cvhonors}[CLC] % 1列居中，2列左对齐，3列居中
+%
+% 注意：
+%   参数要么不写，要么3列都需要指定
 % -------------------------------------------------------------------------------
+% 定义宏用于解析3个参数到正文
+\def\dk@parse@cvhonoralignment#1#2#3{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 6.0cm} #3{3cm}}
+}
 % 使用xparse重定义cvhonor环境，支持可选默认值参数用来指定3个部分的对齐方式
-\DeclareDocumentEnvironment{cvhonors}{O{L} O{L} O{R}}
+\DeclareDocumentEnvironment{cvhonors}{O{LLR}}
 {%
-  \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
+  \vspace{0.5\baselineskip}
   % 使用spacing包控制单元格内的line之间的距离
   \begin{spacing}{1}
     \begin{center}
@@ -360,7 +376,7 @@
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       % \renewcommand{\arraystretch}{1.5}
-      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 6.0cm} #3{3cm}}
+      \dk@parse@cvhonoralignment #1
 }{%
       \end{tabular*}
     \end{center}
@@ -374,9 +390,6 @@
 \renewcommand*{\cvhonor}[3]{%
   \honorpositionstyle{#1} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
-%-------------------------------------------------------------------------------
-
-
 %-------------------------------------------------------------------------------
 % 自定义命令
 %
