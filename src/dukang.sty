@@ -348,36 +348,38 @@
 % -------------------------------------------------------------------------------
 % cvhonors & cvhonor
 %
-% cvhonors支持3个列对齐方式的可选调整参数
+% cvhonors支持3个列对齐方式的可选调整参数及行色开关
 %
 % 参数说明：
-% L 左对齐，C 居中对齐，R 右对齐
+%   * 打开颜色支持
+%   L 左对齐，C 居中对齐，R 右对齐
 %
 % 例如：
-%   \begin{cvhonors} % 使用默认参数，LLR
+%   \begin{cvhonors} % 使用默认参数，无底色，LLR对齐
 %   \begin{cvhonors}[LLR] % 同上
-%   \begin{cvhonors}[CLC] % 1列居中，2列左对齐，3列居中
+%   \begin{cvhonors}* % 打开底色开关
+%   \begin{cvhonors}*[CLC] % 打开底色开关，并且1列居中，2列左对齐，3列居右
 %
 % 注意：
 %   参数要么不写，要么3列都需要指定
 %   -------------------------------------------------------------------------------
 % 定义宏用于解析3个参数到正文
 \def\dk@parse@cvhonoralignment#1#2#3{%
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 6.0cm} #3{3cm}}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 7.0cm} #3{3cm}}
 }
 % 使用xparse重定义cvhonor环境，支持可选默认值参数用来指定3个部分的对齐方式
-\DeclareDocumentEnvironment{cvhonors}{O{LLR}}
+\DeclareDocumentEnvironment{cvhonors}{s O{LLR}}
 {%
   \vspace{0.5\baselineskip}
   % 使用spacing包控制单元格内的line之间的距离
   \begin{spacing}{1}
     \begin{center}
-      \setlength\tabcolsep{0pt}
+      \setlength\tabcolsep{0.2cm}
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       \renewcommand{\arraystretch}{1.5}
-      \rowcolors{1}{awesome!10}{awesome!5}
-      \dk@parse@cvhonoralignment #1
+      \IfBooleanTF {#1}{\rowcolors{1}{awesome!10}{awesome!5}}{}
+      \dk@parse@cvhonoralignment #2
 }{%
       \end{tabular*}
     \end{center}
