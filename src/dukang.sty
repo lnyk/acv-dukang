@@ -363,7 +363,7 @@
 % 注意：
 %   参数要么不写，要么3列都需要指定
 %   -------------------------------------------------------------------------------
-% 定义宏用于解析3个参数到正文
+% 定义宏，解析4个参数，使用IfBoolenTF解析*
 \def\dk@parse@cvhonoralignment#1#2#3#4{%
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #2{3cm} #3{\textwidth - \IfBooleanTF{#1}{7.0cm}{6.0cm}} #4{3cm}}
 }
@@ -374,15 +374,18 @@
   % 使用spacing包控制单元格内的line之间的距离
   \begin{spacing}{1}
     \begin{center}
-      \IfBooleanTF{#1}{%
+      % 判断第一个可选参数是否带*，设置底色和表格内边距
+      \IfBooleanTF{#1}{% 如果带*
+        % 从第1行开始，奇数行颜色，偶数行颜色
         \rowcolors{1}{awesome!10}{awesome!5}
         \setlength\tabcolsep{0.2cm}%
-      }{%
+      }{% 否则
         \setlength\tabcolsep{0cm}
       }
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       \renewcommand{\arraystretch}{1.5}
+      % 调用自定义宏，#1和#2全部传递过去
       \dk@parse@cvhonoralignment #1#2
 }{%
       \end{tabular*}
