@@ -9,6 +9,9 @@ LaTeX Dukang 模板项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.03
+-   增加`cvhonors`的颜色可选开关，调整带底色时的表格边距自适应
+
 ### 2022.06.02
 -   新增`cvsubsection`部分
 -   调整`cvsection`和`cvsubsection`标题前后以及正文段落的间距
