@@ -5,14 +5,26 @@
 
 \dkcodefile{makefile}{tango}{Makefile}{../Makefile}
 
-\begin{cvhonors}
+\begin{cvhonors}[LLR]
   \cvhonor
   {make}
-  {自动编译输出\dkbutton{main.tex}，等同于\dkbutton{make main}}
+  {自动编译输出main.tex，等同于make main}
   {编译输出}
   \cvhonor
   {make main}
   {同上}
+  {编译输出}
+  \cvhonor
+  {make doc}
+  {自动编译输出\dk~文档，也就是本文档的输出命令}
+  {编译输出}
+  \cvhonor
+  {make resource}
+  {使用resource文件夹下的Makefile编译输出所有支持的资源文件，等同于进入resource文件夹下进行\dkbutton{make}或\dkbutton{make all}}
+  {关联编译}
+  \cvhonor
+  {make all}
+  {一次性编译main.tex和\dk~文档，等同于\dkbutton{make main \&\& make doc}}
   {编译输出}
 \end{cvhonors}
 

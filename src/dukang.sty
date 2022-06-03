@@ -360,7 +360,7 @@
 %
 % 注意：
 %   参数要么不写，要么3列都需要指定
-% -------------------------------------------------------------------------------
+%   -------------------------------------------------------------------------------
 % 定义宏用于解析3个参数到正文
 \def\dk@parse@cvhonoralignment#1#2#3{%
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #1{3cm} #2{\textwidth - 6.0cm} #3{3cm}}
@@ -375,7 +375,8 @@
       \setlength\tabcolsep{0pt}
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
-      % \renewcommand{\arraystretch}{1.5}
+      \renewcommand{\arraystretch}{1.5}
+      \rowcolors{1}{awesome!10}{awesome!5}
       \dk@parse@cvhonoralignment #1
 }{%
       \end{tabular*}
