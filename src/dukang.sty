@@ -713,11 +713,13 @@
 % 备注框，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcomment}<[title]><[fontawesome_name]><[color]>
+%   \begin{dkcomment}<*><[title]><[fontawesome_name]><[color]>
 %     ...
 %   \end{dkcomment}
 %
 % 说明：
+%   *
+%     不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
 %   fontawesome_name
@@ -727,14 +729,15 @@
 %
 % 例如：
 %   \begin{dkcomment}
-%   \begin{dkcomment}[这里是标题]
+%   \begin{dkcomment}*[这里是标题]
 %   \begin{dkcomment}[这里是标题][\faTree]
-%   \begin{dkcomment}[这里是标题][\faTree][blue]
+%   \begin{dkcomment}*[这里是标题][\faTree][blue]
 %
 % 注意：
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTColorBox{dkcomment}{ o O{\faTheaterMasks} O{awesome} }{
+\DeclareTColorBox{dkcomment}{ s o O{\faTheaterMasks} O{awesome} }{
+  breakable,
   drop shadow,
   size=title,
   top=3mm,
@@ -742,14 +745,45 @@
   left=6mm,
   right=6mm,
   arc=1.5mm,
-  breakable,
   enhanced jigsaw,
-  colframe=#3,
-  coltitle=white,
   boxrule=0.5mm,
-  colback=#3!5,
+  colframe=#4,
+  colback=#4!5,
+  coltitle=white,
   coltext=text,
-  IfValueT={#1}{title=\TwoSymbolsAndText{#2}{#1}{#2}}
+  IfBooleanTF={#1}{%
+    IfValueT={#2}{title={#2}},
+    colbacktitle=#4!85,
+    attach boxed title to top center={
+      yshift=-0.25mm-\tcboxedtitleheight/2,
+      yshifttext=2mm-\tcboxedtitleheight/2
+    },
+    boxed title style={
+      enhanced,boxrule=0.5mm,
+      frame code={
+        \path[tcb fill frame]
+        ([xshift=-4mm]frame.west)
+        -- (frame.north west)
+        -- (frame.north east)
+        -- ([xshift=4mm]frame.east)
+        -- (frame.south east)
+        -- (frame.south west)
+        -- cycle;
+      },
+      interior code={
+        \path[tcb fill interior]
+        ([xshift=-2mm]interior.west)
+        -- (interior.north west)
+        -- (interior.north east)
+        -- ([xshift=2mm]interior.east)
+        -- (interior.south east)
+        -- (interior.south west)
+        -- cycle;
+      }
+    },
+  }{%
+    IfValueT={#2}{title=\TwoSymbolsAndText{#3}{#2}{#3}},
+  }
 }
 %-------------------------------------------------------------------------------
 % dkcodebox
