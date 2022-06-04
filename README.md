@@ -14,6 +14,7 @@ LaTeX Dukang 模板项目
 -   重构`dkcomment`支持xparse可选项
 -   重构`dkcodefile`支持xparse可选项
 -   增加`dkcodebox`支持短代码高亮，尚有bug，不能用在环境或命令参数中，否则提示`Verbatim-Like`错误
+-   重构`dkcode`和`dkcodefile`，使用`*`配合xparse代替`dkcodeh`和`dkcodefileh`，同时提供两种标题风格的自由切换
 
 ### 2022.06.03
 -   增加`cvhonors`的颜色可选开关，调整带底色时的表格边距自适应

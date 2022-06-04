@@ -68,6 +68,7 @@
   % 否则标题行也会被影响
   % 指定字号和行距
   before upper=\fontsize{10pt}{10pt}\selectfont,
+  before={\vspace{0.641\baselineskip}},
   % 指定字体
   fontupper=\sffamily,
   default minted options={tabsize=2,breaklines,linenos,numbersep=3mm},
@@ -307,7 +308,7 @@
 %-------------------------------------------------------------------------------
 \renewcommand{\cvsubsection}[1]{%
   % \vspace{0.641\baselineskip}
-  \vspace{\baselineskip}
+  % \vspace{\baselineskip}
   \setlength{\parskip}{0em}
   \setlength{\parindent}{0em}
   \dukangBookmarkSubSection{#1}
@@ -371,7 +372,7 @@
 % 使用xparse重定义cvhonor环境，支持可选默认值参数用来指定3个部分的对齐方式
 \DeclareDocumentEnvironment{cvhonors}{s O{LLR}}
 {%
-  \vspace{0.5\baselineskip}
+  \vspace{0.641\baselineskip}
   % 使用spacing包控制单元格内的line之间的距离
   \begin{spacing}{1}
     \begin{center}
@@ -530,212 +531,105 @@
   \end{figure}
 }
 %-------------------------------------------------------------------------------
-% dkcodeh
-% 带有标题特效的代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
-% 名称中h的意思是heading
-%
-% 用法：
-%   \begin{dkcodeh}<[color]>{lang}{minted_style}{title}
-%     ...
-%   \end{dkcodeh}
-%
-% 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
-%   lang
-%     语言名称，例如bash, python3, java, c, go等
-%   minted_style
-%     minted预定义的高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
-%
-% 例如：
-%   \begin{dkcodeh}{python3}{tango}{这里是标题}
-%     import os
-%     pass
-%   \end{dkcodeh}
-%-------------------------------------------------------------------------------
-\newtcblisting{dkcodeh}[4][awesome]{
-  breakable,
-  drop shadow,
-  listing engine=minted,
-  minted language=#2,
-  minted style=#3,
-  listing only,
-  left=6mm,
-  enhanced,
-  title={#4},
-  colframe=#1,
-  colback=#1!5,
-  colbacktitle=#1!85,
-  % fonttitle=\bfseries,
-  coltitle=white,
-  attach boxed title to top center={
-    yshift=-0.25mm-\tcboxedtitleheight/2,
-    yshifttext=2mm-\tcboxedtitleheight/2
-  },
-  boxed title style={
-    enhanced,boxrule=0.5mm,
-    frame code={
-      \path[tcb fill frame]
-      ([xshift=-4mm]frame.west)
-      -- (frame.north west)
-      -- (frame.north east)
-      -- ([xshift=4mm]frame.east)
-      -- (frame.south east)
-      -- (frame.south west)
-      -- cycle;
-    },
-    interior code={
-      \path[tcb fill interior]
-      ([xshift=-2mm]interior.west)
-      -- (interior.north west)
-      -- (interior.north east)
-      -- ([xshift=2mm]interior.east)
-      -- (interior.south east)
-      -- (interior.south west)
-      -- cycle;
-    }
-  },
-  overlay={
-    \begin{tcbclipinterior}
-      \fill[awesome!20]
-      (frame.south west)
-      rectangle
-      ([xshift=5mm]frame.north west);
-    \end{tcbclipinterior}
-  }
-}
-%-------------------------------------------------------------------------------
-% dkcodefileh
-% 带有标题特效的代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
-% 该命令从指定文件中读取内容进行高亮显示
-%
-% 用法：
-%   \dkcodefileh<[color]>{lang}{minted_style}{title}{file}
-%
-% 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
-%   lang
-%     语言名称，例如bash, python3, java, c, go等
-%   minted_style
-%     minted预定义的高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
-%   file
-%     代码块内容的来源文件，必须为内容可读的文本文件
-%
-% 例如：
-%   \dkcodefileh{python3}{tango}{代码示例}{resource/code.py}
-%-------------------------------------------------------------------------------
-\newtcbinputlisting{dkcodefileh}[5][awesome]{
-  breakable,
-  drop shadow,
-  listing engine=minted,
-  minted language=#2,
-  minted style=#3,
-  listing only,
-  left=6mm,
-  enhanced,
-  title={#4},
-  colframe=#1,
-  colback=#1!5,
-  colbacktitle=#1!85,
-  % fonttitle=\bfseries,
-  coltitle=white,
-  listing file={#5},
-  attach boxed title to top center={
-    yshift=-0.25mm-\tcboxedtitleheight/2,
-    yshifttext=2mm-\tcboxedtitleheight/2
-  },
-  boxed title style={
-    enhanced,boxrule=0.5mm,
-    frame code={
-      \path[tcb fill frame]
-      ([xshift=-4mm]frame.west)
-      -- (frame.north west)
-      -- (frame.north east)
-      -- ([xshift=4mm]frame.east)
-      -- (frame.south east)
-      -- (frame.south west)
-      -- cycle;
-    },
-    interior code={
-      \path[tcb fill interior]
-      ([xshift=-2mm]interior.west)
-      -- (interior.north west)
-      -- (interior.north east)
-      -- ([xshift=2mm]interior.east)
-      -- (interior.south east)
-      -- (interior.south west)
-      -- cycle;
-    }
-  },
-  overlay={
-    \begin{tcbclipinterior}
-      \fill[awesome!20]
-      (frame.south west)
-      rectangle
-      ([xshift=5mm]frame.north west);
-    \end{tcbclipinterior}
-  }
-}
-%-------------------------------------------------------------------------------
 % dkcode
 % 代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcode}<[color]>{lang}{minted_style}{title}
+%   \begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>
 %     ...
 %   \end{dkcode}
 %
 % 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
+%   *
+%     不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同
 %   lang
 %     语言名称，例如bash, python3, java, c, go等
+%   title
+%     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
 %   minted_style
-%     minted预定义的高亮样式，可选项为：
+%     可选，minted预定义的高亮样式，默认为tango，可选项为
 %       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
 %       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
+%   color
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 例如：
-%   \begin{dkcode}{python3}{tango}{代码示例}
+%   \begin{dkcode}{python3}
+%   \begin{dkcode}*{python3}[代码示例]
+%   \begin{dkcode}{python3}[代码示例][tango]
+%   \begin{dkcode}*{python3}[代码示例][tango][blue]
 %     ...
 %   \end{dkcode}
+%
+% 注意：
+%   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\newtcblisting{dkcode}[4][awesome]{
+\DeclareTCBListing{dkcode}{ s m o O{tango} O{awesome}}{
   breakable,
   drop shadow,
   listing engine=minted,
   minted language=#2,
-  minted style=#3,
+  minted style=#4,
   listing only,
   left=6mm,
   right=6mm,
   enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#4}{\faCode},
-  colframe=#1,
-  colback=#1!5,
-  coltitle=white
-  % fonttitle=\bfseries,
+  colframe=#5,
+  colback=#5!5,
+  coltitle=white,
+  IfBooleanTF={#1}{%
+    IfValueT={#3}{title={#3}},
+    colbacktitle=#5!85,
+    attach boxed title to top center={
+      yshift=-0.25mm-\tcboxedtitleheight/2,
+      yshifttext=2mm-\tcboxedtitleheight/2
+    },
+    boxed title style={
+      enhanced,boxrule=0.5mm,
+      frame code={
+        \path[tcb fill frame]
+        ([xshift=-4mm]frame.west)
+        -- (frame.north west)
+        -- (frame.north east)
+        -- ([xshift=4mm]frame.east)
+        -- (frame.south east)
+        -- (frame.south west)
+        -- cycle;
+      },
+      interior code={
+        \path[tcb fill interior]
+        ([xshift=-2mm]interior.west)
+        -- (interior.north west)
+        -- (interior.north east)
+        -- ([xshift=2mm]interior.east)
+        -- (interior.south east)
+        -- (interior.south west)
+        -- cycle;
+      }
+    },
+    overlay={
+      \begin{tcbclipinterior}
+        \fill[#5!20]
+        (frame.south west)
+        rectangle
+        ([xshift=5mm]frame.north west);
+      \end{tcbclipinterior}
+    }
+  }{%
+    IfValueT={#3}{title=\TwoSymbolsAndText{\faCode}{#3}{\faCode}},
+  }
 }
 %-------------------------------------------------------------------------------
 % dkcodefile
 % 代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
-% 该命令从指定文件中读取内容进行高亮显示
+% 该命令从指定文件中读取内容进行高亮显示，同时提供2种标题风格
 %
 % 用法：
-%   \dkcodefile{file}{lang}<[title]><[minted_style]><[color]>
+%   \dkcodefile<*>{file}{lang}<[title]><[minted_style]><[color]>
 %
 % 说明：
+%   *
+%     不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同
 %   file
 %     代码块内容的来源文件，必须为内容可读的文本文件
 %   lang
@@ -751,26 +645,68 @@
 %
 % 例如：
 %   \dkcodefile{src/code.go}{golang}
-%   \dkcodefile{src/code.go}{golang}[主文件代码]
+%   \dkcodefile*{src/code.go}{golang}[主文件代码]
 %   \dkcodefile{src/code.go}{golang}[主文件代码][tango]
-%   \dkcodefile{src/code.go}{golang}[主文件代码][tango][blue]
+%   \dkcodefile*{src/code.go}{golang}[主文件代码][tango][blue]
+%
+% 注意：
+%   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTCBInputListing{dkcodefile}{ m m o O{tango} O{awesome}}{
-  before skip=18bp,
+\DeclareTCBInputListing{dkcodefile}{ s m m o O{tango} O{awesome}}{
   breakable,
   drop shadow,
   listing engine=minted,
-  minted language=#2,
-  minted style=#4,
+  minted language=#3,
+  minted style=#5,
   listing only,
   left=6mm,
   right=6mm,
   enhanced,
-  IfValueT={#3}{title=\TwoSymbolsAndText{\faCode}{#3}{\faCode}},
-  colframe=#5,
-  colback=#5!5,
-  listing file=#1,
-  coltitle=white
+  colframe=#6,
+  colback=#6!5,
+  coltitle=white,
+  listing file={#2},
+  IfBooleanTF={#1}{%
+    IfValueT={#4}{title={#4}},
+    colbacktitle=#6!85,
+    attach boxed title to top center={
+      yshift=-0.25mm-\tcboxedtitleheight/2,
+      yshifttext=2mm-\tcboxedtitleheight/2
+    },
+    boxed title style={
+      enhanced,boxrule=0.5mm,
+      frame code={
+        \path[tcb fill frame]
+        ([xshift=-4mm]frame.west)
+        -- (frame.north west)
+        -- (frame.north east)
+        -- ([xshift=4mm]frame.east)
+        -- (frame.south east)
+        -- (frame.south west)
+        -- cycle;
+      },
+      interior code={
+        \path[tcb fill interior]
+        ([xshift=-2mm]interior.west)
+        -- (interior.north west)
+        -- (interior.north east)
+        -- ([xshift=2mm]interior.east)
+        -- (interior.south east)
+        -- (interior.south west)
+        -- cycle;
+      }
+    },
+    overlay={
+      \begin{tcbclipinterior}
+        \fill[#6!20]
+        (frame.south west)
+        rectangle
+        ([xshift=5mm]frame.north west);
+      \end{tcbclipinterior}
+    }
+  }{%
+    IfValueT={#4}{title=\TwoSymbolsAndText{\faCode}{#4}{\faCode}},
+  }
 }
 %-------------------------------------------------------------------------------
 % dkcomment
@@ -799,7 +735,6 @@
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
 \DeclareTColorBox{dkcomment}{ o O{\faTheaterMasks} O{awesome} }{
-  before skip=18bp,
   drop shadow,
   size=title,
   top=3mm,
