@@ -733,42 +733,44 @@
 % 该命令从指定文件中读取内容进行高亮显示
 %
 % 用法：
-%   \dkcodefile<[color]>{lang}{minted_style}{title}{file}
+%   \dkcodefile{file}{lang}<[title]><[minted_style]><[color]>
 %
 % 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
-%   lang
-%     语言名称，例如bash, python3, java, c, go等
-%   minted_style
-%     minted预定义的高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   title
-%     代码块标题栏文字
 %   file
 %     代码块内容的来源文件，必须为内容可读的文本文件
+%   lang
+%     语言名称，例如bash, python3, java, c, go等
+%   title
+%     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
+%   minted_style
+%     可选，minted预定义的高亮样式，默认为tango，可选项为
+%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
+%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
+%   color
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 例如：
-%   \dkcodefile{python3}{tango}{代码示例}{resource/code.py}
+%   \dkcodefile{src/code.go}{golang}
+%   \dkcodefile{src/code.go}{golang}[主文件代码]
+%   \dkcodefile{src/code.go}{golang}[主文件代码][tango]
+%   \dkcodefile{src/code.go}{golang}[主文件代码][tango][blue]
 %-------------------------------------------------------------------------------
-\newtcbinputlisting{dkcodefile}[5][awesome]{
+\DeclareTCBInputListing{dkcodefile}{ m m o O{tango} O{awesome}}{
   before skip=18bp,
   breakable,
   drop shadow,
   listing engine=minted,
   minted language=#2,
-  minted style=#3,
+  minted style=#4,
   listing only,
   left=6mm,
   right=6mm,
   enhanced,
-  title=\TwoSymbolsAndText{\faCode}{#4}{\faCode},
-  colframe=#1,
-  colback=#1!5,
-  listing file={#5},
+  IfValueT={#3}{title=\TwoSymbolsAndText{\faCode}{#3}{\faCode}},
+  colframe=#5,
+  colback=#5!5,
+  listing file=#1,
   coltitle=white
-  % fonttitle=\bfseries,
 }
 %-------------------------------------------------------------------------------
 % dkcomment
