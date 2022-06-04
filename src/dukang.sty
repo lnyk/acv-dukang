@@ -70,6 +70,7 @@
   before upper=\fontsize{10pt}{10pt}\selectfont,
   % 指定字体
   fontupper=\sffamily,
+  default minted options={tabsize=2,breaklines,linenos,numbersep=3mm},
 }
 %-------------------------------------------------------------------------------
 % minted的全局样式设定
@@ -562,12 +563,6 @@
   listing engine=minted,
   minted language=#2,
   minted style=#3,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm,
-    tabsize=2,
-  },
   listing only,
   left=6mm,
   enhanced,
@@ -644,12 +639,6 @@
   listing engine=minted,
   minted language=#2,
   minted style=#3,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm,
-    tabsize=2,
-  },
   listing only,
   left=6mm,
   enhanced,
@@ -728,12 +717,6 @@
   listing engine=minted,
   minted language=#2,
   minted style=#3,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm,
-    tabsize=2,
-  },
   listing only,
   left=6mm,
   right=6mm,
@@ -776,12 +759,6 @@
   listing engine=minted,
   minted language=#2,
   minted style=#3,
-  minted options={
-    breaklines,
-    linenos,
-    numbersep=3mm,
-    tabsize=2,
-  },
   listing only,
   left=6mm,
   right=6mm,
@@ -798,24 +775,28 @@
 % 备注框，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcomment}<[color]>{title}{\fontawesome_name}
+%   \begin{dkcomment}<[title]><[fontawesome_name]><[color]>
 %     ...
 %   \end{dkcomment}
 %
 % 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
 %   title
-%     代码块标题栏文字
+%     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
 %   fontawesome_name
-%     FontAwesome字体的代码或名称
+%     可选，FontAwesome字体的代码或名称，默认为\faTheaterMasks
+%   color
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 例如：
-%   \begin{dkcomment}{特别说明}{\faCheck}
-%     ...
-%   \end{dkcomment}
+%   \begin{dkcomment}
+%   \begin{dkcomment}[这里是标题]
+%   \begin{dkcomment}[这里是标题][\faTree]
+%   \begin{dkcomment}[这里是标题][\faTree][blue]
+%
+% 注意：
+%   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\newtcolorbox{dkcomment}[3][awesome]{
+\DeclareTColorBox{dkcomment}{ o O{\faTheaterMasks} O{awesome} }{
   before skip=18bp,
   drop shadow,
   size=title,
@@ -826,12 +807,12 @@
   arc=1.5mm,
   breakable,
   enhanced jigsaw,
-  colframe=#1,
+  colframe=#3,
   coltitle=white,
   boxrule=0.5mm,
-  colback=#1!5,
+  colback=#3!5,
   coltext=text,
-  title=\TwoSymbolsAndText{#3}{#2}{#3}
+  IfValueT={#1}{title=\TwoSymbolsAndText{#2}{#1}{#2}}
 }
 %-------------------------------------------------------------------------------
 
