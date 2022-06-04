@@ -1,4 +1,5 @@
 \cvsection{编译使用详细说明}
+\cvsubsection{Makefile及编译命令详解}
 \dk~使用Makefile\footnote{前半部分的指令都有注释进行说明，make的用法也不在本文的讨论范围之内，感兴趣的朋友可以自行学习。}将几个最常用的{\LaTeX}编译相关操作定义成了对应的控制台命令，用以对编译、输出、清理等过程进行简化处理，以及联动resource文件夹下的Makefile文件。
 
 \dkcodefile*{../Makefile}{makefile}[Makefile]
@@ -38,7 +39,7 @@
   \dkbutton{make cleanall}只会删除符合资源文件命名规则的PDF文件，其他文件不受影响。
 \end{dkcomment}
 
-\cvsubsection{make}
-直接用于编译正文
+\cvsubsection{一般使用及编译流程}
+\dk~提供了用于立刻开始创作的初始文件，位置是src/main.tex，该文件的开头部分与本文档源码src/dukang-doc.tex完全相同，只需要根据需要修改一些初始信息，就可以为你的大作添加正文了。
 
 \clearpage

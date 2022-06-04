@@ -218,7 +218,7 @@
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSubSection}~~~~#2}%
+    \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSection}.\arabic{dukangCounterSubSection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
@@ -307,7 +307,7 @@
 % cvsubsection
 %-------------------------------------------------------------------------------
 \renewcommand{\cvsubsection}[1]{%
-  % \vspace{0.641\baselineskip}
+  \vspace{0.641\baselineskip}
   % \vspace{\baselineskip}
   \setlength{\parskip}{0em}
   \setlength{\parindent}{0em}
