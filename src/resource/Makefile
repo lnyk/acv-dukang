@@ -1,22 +1,26 @@
 # 所有需要自动编译的.tex文件必须以r-开头
-RESOURCEFILES = $(wildcard r-*.tex)
+NAMEFORMAT = r-*
+TEXFILES = $(wildcard $(NAMEFORMAT).tex)
+CLEANFILES = $(NAMEFORMAT).pdf
 
-TEMPFILES = *.class *.html *.log *.aux *.fdb_latexmk *.fls *.xdv
-ALLFILES = $(TEMPFILES) r-*.pdf
+# 定义删除时候使用的命令，用于同时支持Windows和Linux
+ifdef SystemRoot
+	RM = del /Q
+else
+	RM = rm -fr
+endif
 
-.PHONY: all clean cleanall
+.PHONY: all
 
 make: all
 
-ifeq ($(RESOURCEFILES),)
+# 如果没有任何资源文件，则跳过编译
+ifeq ($(TEXFILES),)
 all:
 else
 all:
-	latexmk -xelatex $(RESOURCEFILES)
+	latexmk -xelatex $(TEXFILES)
 endif
 
-clean:
-	rm -rf $(TEMPFILES)
-
 cleanall:
-	rm -rf $(ALLFILES)
+	-@$(RM) $(CLEANFILES)

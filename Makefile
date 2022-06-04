@@ -6,12 +6,14 @@ BASE_DIR = src
 # 项目文档的主文件
 DOC_SRC = $(BASE_DIR)/dukang-doc.tex
 # 所有需要自动清理的文件
-CLEANFILES = $(foreach x, *.pyg *.listing *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk, $(BASE_DIR)/$(x))
+CLEANDIRS = . $(BASE_DIR) $(foreach d, resource tex dukang-doc, $(BASE_DIR)/$(d))
+CLEANFILES = $(foreach x, *.pyg *.listing *.xdv *.aux *.log *.fls *.dvi *.fdb_latexmk .auctex* dist _minted*, $(x))
+
 # 定义删除时候使用的命令，用于同时支持Windows和Linux
 ifdef SystemRoot
 	RM = del /Q
 else
-	RM = rm -f
+	RM = rm -fr
 endif
 
 # 以下是定义的所有编译命令
@@ -33,11 +35,14 @@ resource:
 all: main doc
 
 clean:
-	-@$(RM) $(CLEANFILES)
-	-@$(RM) -r dist _minted*
-	make -C $(BASE_DIR)/resource/ -f Makefile clean
+	@for d in $(CLEANDIRS); \
+	do \
+		for f in $(CLEANFILES); \
+		do \
+			$(RM) $$d/$$f; \
+		done \
+	done
 
-cleanall:
-	-@$(RM) $(CLEANFILES) $(BASE_DIR)/*.pdf
-	-@$(RM) -r $(BASE_DIR)/dist $(BASE_DIR)/_minted*
+cleanall: clean
+	-@$(RM) $(BASE_DIR)/*.pdf
 	make -C $(BASE_DIR)/resource/ -f Makefile cleanall
