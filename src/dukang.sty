@@ -817,6 +817,29 @@
   IfValueT={#1}{title=\TwoSymbolsAndText{#2}{#1}{#2}}
 }
 %-------------------------------------------------------------------------------
+% dkcodebox
+% 短命令行，颜色自适应，类似于dkbutton
+% 分为带*和不带*两个版本，前者有命令提示符和关键字高亮，后者没有
+% 用法：
+%   \dkcodebox*{echo 'nice'}
+%   \dkcodebox{Some Text}
+% 注意：
+%   由于使用了动词，该命令不能用在其他环境和命令的参数中，
+%   目前尚未解决该问题，还是推荐使用dkbutton
+%-------------------------------------------------------------------------------
+\DeclareTotalTCBox{\dkcodebox}{ s v }{
+  verbatim,
+  colback=awesome!5,
+  colframe=awesome
+}{
+  \IfBooleanT{#1}{\textcolor{awesome}{\ttfamily\bfseries > }}%
+  \lstinline[%
+    language=command.com,%
+    keywordstyle=\color{awesome}\bfseries%
+  ]%
+  ^#2^%
+}
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------

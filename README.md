@@ -13,6 +13,7 @@ LaTeX Dukang 模板项目
 -   重构2个`Makefile`内容，原先清理的不干净
 -   重构`dkcomment`支持xparse可选项
 -   重构`dkcodefile`支持xparse可选项
+-   增加`dkcodebox`支持短代码高亮，尚有bug，不能用在环境或命令参数中，否则提示`Verbatim-Like`错误
 
 ### 2022.06.03
 -   增加`cvhonors`的颜色可选开关，调整带底色时的表格边距自适应
