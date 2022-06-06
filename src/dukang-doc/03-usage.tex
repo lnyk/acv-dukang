@@ -4,6 +4,10 @@
 
 \dkcodefile*{../Makefile}{makefile}[Makefile]
 
+\begin{dkcomment}
+  以下所有make命令，都必须在项目根目录（就是你能看到\dkbutton{README.md}的地方）下执行。
+\end{dkcomment}
+
 \begin{cvhonors}*
   \cvhonor
   {make}
@@ -39,7 +43,38 @@
   \dkbutton{make cleanall}只会删除符合资源文件命名规则的PDF文件，其他文件不受影响。
 \end{dkcomment}
 
-\cvsubsection{一般使用及编译流程}
-\dk~提供了用于立刻开始创作的初始文件，位置是src/main.tex，该文件的开头部分与本文档源码src/dukang-doc.tex完全相同，只需要根据需要修改一些初始信息，就可以为你的大作添加正文了。
+\cvsubsection{选项设定部分}
+\dk~提供了用于立刻开始创作的初始文件，位置是src/main.tex，该文件导言区\footnote{相信你知道什么是导言区，如果不是太清楚，还是抓紧自学一下吧，或者简单的认为，在大多数情况下，\\\textbackslash begin\{document\}前面的部分，就是导言区。}部分的设定与本文档源码src/dukang-doc.tex完全相同，只需要根据需要修改一些文档名称、作者姓名、首页需要哪些字段、是否需要首行缩进等信息和选项，就可以正式开始为你的大作添加正文了。
+
+打开main.tex之后，首先会看到导言区一堆设定和备注信息，大多数情况下，阅读这些备注信息就足够掌握如何修改了，这里就挑其中几个比较重要的选项着重说明一下。
+
+待补全
+
+假如不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把导言区的所有内容复制回来，重新简单设定一下，就又可以开始创作了。这也是为什么我推荐用\dkbutton{\textbackslash input\{...\}}把文档正文章节和main.tex主文件分开的原因。
+
+\begin{dkcomment}*[温馨提示]
+  \hspace{2em}无论何时，dukang-doc.tex都是你值得参考的示例文档，文档本身和其内容章节文件（特别是源代码）尽量涵盖到了{\dk}的全部功能，包括设定和功能模块等，随时可以回来查看。\faKissWinkHeart
+\end{dkcomment}
+
+\cvsubsection{编译使用部分}
+\dk~的编译控制文件（Makefile）提供了适合下面几种场景的编译流程，相信总有一个适合你。首先，对于一般使用来说，需要做的步骤很简单：
+
+\begin{center}
+  \dkcodebox{修改main.tex}~\faArrowCircleRight~\dkcodebox{添加内容}~\faArrowCircleRight~\dkcodebox*{make}~\faCheckCircle
+\end{center}
+
+这样在src文件夹下就得到了main.pdf，同时在resource文件夹下，如果有符合命名规则的资源文件，也会被联动编译，并生成对应的PDF文件。{\dk}当前版本资源文件的命名规则是\dkbutton{r-*.tex}，符合这个规则的.tex文件都会被自动编译和控制。
+
+如果想要保留编译之后的PDF，同时把项目目录清理干净的话：
+
+\begin{center}
+  \dkcodebox{修改main.tex}~\faArrowCircleRight~\dkcodebox{添加内容}~\faArrowCircleRight~\dkcodebox*{make}~\faArrowCircleRight~\dkcodebox*{make clean}~\faCheckCircle
+\end{center}
+
+最后，如果希望只保留源代码\footnote{比如用于提交源代码，归档，或者你就是个纯粹的代码强迫症患者{\color{awesome}\faHeart}}，把其他临时文件连同编译出来的东西一同干掉的话：
+
+\begin{center}
+  \dkcodebox{修改main.tex}~\faArrowCircleRight~\dkcodebox{添加内容}~\faArrowCircleRight~\dkcodebox*{make}~\faArrowCircleRight~\dkcodebox*{make cleanall}~\faCheckCircle
+\end{center}
 
 \clearpage
