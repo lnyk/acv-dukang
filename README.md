@@ -9,6 +9,9 @@ LaTeX Dukang 模板项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.06
+-   完善`dukang-doc.tex`备注信息
+
 ### 2022.06.04
 -   重构2个`Makefile`内容，原先清理的不干净
 -   重构`dkcomment`支持xparse可选项
