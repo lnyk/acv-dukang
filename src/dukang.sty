@@ -422,71 +422,50 @@
 % 自定义环境统一以dk开头，用于区分其他宏包的自定义环境
 %-------------------------------------------------------------------------------
 % dkbutton
-% inline风格，既可以指定主色调，也可以配色自适应的小盒子
+% inline风格的代码小盒子，两种风格可选，颜色自适应或手动指定
 %
 % 用法：
-%   \dkbutton<[color]>{text}
+%   \dkbutton<*>[color]
 %
 % 说明：
+%   *
+%     不带星号为上下边框风格，带星号为圆角按钮风格
 %   color
-%     可选，指定主色调或省略进行自适应
-%   text
-%     需要显示的内容
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 已知Bug：
 %   不要在同一个中文段落里用太多或者单个太长，否则影响中文的断行和标点压缩
 %
 % 例如：
-%   \dkbutton[Hello Dukang]
-%   \dkbutton[red]{Hello Dukang}
+%   \dkbutton{Hello Dukang}
+%   \dkbutton*{Hello Dukang}
+%   \dkbutton{Hello Dukang}[blue]
+%   \dkbutton*{Hello Dukang}[red]
 %-------------------------------------------------------------------------------
-\newtcbox{\dkbutton}[1][awesome]{%
+\DeclareTCBox{dkbutton}{ s O{awesome} }{%
   on line,
-  arc=0pt,
-  outer arc=0pt,
-  colframe=awesome,
-  colback=awesome!5,
+  colframe=#2,
+  colback=#2!5,
   boxsep=0pt,
-  left=1pt,
-  right=1pt,
-  top=2pt,
-  bottom=2pt,
-  boxrule=0pt,
-  toprule=1pt,
-  bottomrule=1pt,
-}
-%-------------------------------------------------------------------------------
-% dkbuttonr
-% inline风格，圆角描边，既可以指定主色调，也可以配色自适应的小盒子
-%
-% 用法：
-%   \dkbuttonr<[color]>{text}
-%
-% 说明：
-%   color
-%     可选，指定主色调或省略进行自适应
-%   text
-%     需要显示的内容
-%
-% 已知Bug：
-%   不要在同一个中文段落里用太多或者单个太长，否则影响中文的断行和标点压缩
-%
-% 例如：
-%   \dkbuttonr[Hello Dukang]
-%   \dkbuttonr[red]{Hello Dukang}
-%-------------------------------------------------------------------------------
-\newtcbox{\dkbuttonr}[1][awesome]{%
-  on line,
-  arc=7pt,
-  colframe=awesome,
-  colback=awesome!5,
-  before upper={\rule[-3pt]{0pt}{10pt}},
-  boxrule=1pt,
-  boxsep=0pt,
-  left=6pt,
-  right=6pt,
-  top=3pt,
-  bottom=1pt,
+  IfBooleanTF={#1}{%
+    boxrule=1pt,
+    arc=7pt,
+    before upper={\rule[-3pt]{0pt}{10pt}},
+    left=6pt,
+    right=6pt,
+    top=3pt,
+    bottom=1pt,
+  }{%
+    boxrule=0pt,
+    toprule=1pt,
+    arc=0pt,
+    outer arc=0pt,
+    left=1pt,
+    right=1pt,
+    top=2pt,
+    bottom=2pt,
+    bottomrule=1pt,
+  }
 }
 %-------------------------------------------------------------------------------
 % dkresource
