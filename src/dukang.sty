@@ -150,13 +150,12 @@
 %-------------------------------------------------------------------------------
 % 引入figure包用于支持dkresource命令
 \usepackage{caption}
-\usepackage{xhfill}
-% figure环境设定
-% \DeclareCaptionFormat{colordotcap}{\makebox[\textwidth][c]{\faHashtag~#3~\faHashtag}}
+% 定义新的标签格式，#1为标签名（图），#2为分隔符（：），#3为标签内容
 \DeclareCaptionFormat{colordotcap}{\makebox[\textwidth][c]{\#~#3~\#}}
 \captionsetup[figure]{%
-  % 不要图表标题的标签
+  % 使用上面的自定义标签格式
   format=colordotcap,
+  % 设置字体，stretch是行距的倍数
   font={normal,sf,stretch=1},
 }
 %-------------------------------------------------------------------------------
@@ -270,8 +269,8 @@
 %   由于原版默认为前三个英文字母，对于后续空格没有进行处理，所以如果在高亮范围内有空格，
 %   需要显式声明该空格，比如使用~符号。
 %-------------------------------------------------------------------------------
-\def\@sectioncolor#1#2#3#4{%
-  \ifbool{acvSectionColorHighlight}{{\color{awesome}#1#2#3#4}}{#1#2#3#4}%
+\def\@sectioncolor#1#2{%
+  \ifbool{acvSectionColorHighlight}{{\color{awesome}#1#2}}{#1#2}%
 }
 %-------------------------------------------------------------------------------
 % lettersection

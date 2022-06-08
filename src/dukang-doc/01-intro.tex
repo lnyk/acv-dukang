@@ -1,5 +1,4 @@
 \cvsection{总体介绍}
-\cvsubsection{初衷及由来}
 Awesome-CV本身设计非常优秀，但由于语言习惯等差别，其对中文环境的支持和适配需要用户自行调整很多东西，同时其原作者的初衷主要是聚焦在构建“简历”模板，如此漂亮的设计，理应延伸至文章甚至书籍创作领域，在这个层面上，需要更加宏观的调整项目中每个部件的细节，并引入适合文章或书籍创作的功能模块，而且相对于漂亮的设计和丰富的功能，{\LaTeX}过高的使用门槛却一直是追求严谨排版和高质量输出的朋友最不愿意接受的。
 
 尝试解决以上种种问题，是我的初衷，也是{\dk}项目的由来。
@@ -11,16 +10,40 @@ Awesome-CV本身设计非常优秀，但由于语言习惯等差别，其对中�
 
 \dkresource[项目结构图]{resource/r-arch}[0.9]
 
-\cvsubsection{快速开始}
+\begin{dkcomment}
+  子文件夹中的和其他辅助性的文件，比如LOGO等就不在这里列出了。
+\end{dkcomment}
 
-\begin{dkcode}*{bash}[在{\dk}项目根目录执行]
+\cvsubsection{快速体验与兼容性测试}
+
+在正式深入介绍以前，有必要先使用下面的命令体验一下编译输出的过程，同时也可以测试一下{\dk}是否兼容你的编译环境。
+
+\begin{dkcode}*{bash}[打开控制台依次执行]
 # 进入项目根目录
 cd latex-dukang
+
 # 编译生成你的大作
 make
+
 # 编译生成本文档
 make doc
 \end{dkcode}
+
+顺利的话，每一个make命令执行完毕后，都会有类似下面的内容：
+
+\begin{center}
+  \dkcodebox*{Latexmk: All targets (src/main.xdv src/main.pdf) are up-to-date}
+
+  或者
+
+  \dkcodebox*{Latexmk: All targets (src/dukang-doc.xdv src/dukang-doc.pdf) are up-to-date}
+\end{center}
+
+如果编译没有跑通，或者没有看到main.pdf和dukang-doc.pdf，请仔细检查输出日志中的错误提示，尝试着解决问题，并在\dkcodebox*{make cleanall}之后再次尝试编译。
+
+\begin{dkcomment}[关于兼容性]
+  {\hspace{2em}}{\dk}使用TexLive 2022套件在Ubuntu 20.04平台上开发、维护以及编译测试，使用其他版本套件或编译组件进行操作的话，目前还没有更加详细的测试结果，也衷心希望能够得到你的使用情况反馈，请随时邮件我。
+\end{dkcomment}
 
 
 \clearpage

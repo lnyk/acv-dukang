@@ -10,7 +10,9 @@ LaTeX Dukang 模板项目
 
 ## 提交变更信息
 ### 2022.06.08
+-   增加`LICENSE`文件
 -   替换`icon.png`
+-   增加`caption`宏包引用，调整`dkresource`的`caption`格式
 -   解决`dkcode`和`dkcodefile`在使用可选参数`O{}`时与`xparse`新版本不兼容的问题，需要在可选参数`o`或`O{}`前加`!`，否则可选参数必须全部给出，不然会出错，详情参考`tcolorbox`文档471页的特别说明
 -   编写`01-intro`
 -   编写`03-usage`
