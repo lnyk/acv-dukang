@@ -1,10 +1,21 @@
 %!TEX encoding = UTF-8 Unicode
+%% Start of file `dukang.sty'.
+
 
 %-------------------------------------------------------------------------------
-% 为Awesome-CV引入功能修改以及额外定义部分
-% Author: William Yao
-% Create: 2022-04-29
+% LaTeX Dukang Package File
+%
+% This class has been downloaded from:
+% https://github.com/lnyk/latex-dukang
+%
+% Author:
+% William Yao <me@williamyao.com>
+% https://www.williamyao.com
+%
+% Class license:
+% LPPL v1.3c (http://www.latex-project.org/lppl)
 %-------------------------------------------------------------------------------
+
 
 %-------------------------------------------------------------------------------
 % 定义开始
@@ -55,7 +66,8 @@
 % 不能使用\usepackage命令，可以使用tcolorbox内置的\tcbuselibrary命令
 % 或者\PassOptionsToPackage{option1,option2}{package}
 % 调用对应的库
-\tcbuselibrary{skins, listingsutf8, xparse, breakable, minted}
+% \RequirePackage{listings}
+\tcbuselibrary{skins, listings, xparse, breakable, minted}
 %-------------------------------------------------------------------------------
 % tcolorbox的全局设定
 \tcbset{
@@ -133,6 +145,20 @@
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 % 修改脚注字体
 \renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
+%-------------------------------------------------------------------------------
+% figure设置
+%-------------------------------------------------------------------------------
+% 引入figure包用于支持dkresource命令
+\usepackage{caption}
+\usepackage{xhfill}
+% figure环境设定
+% \DeclareCaptionFormat{colordotcap}{\makebox[\textwidth][c]{\faHashtag~#3~\faHashtag}}
+\DeclareCaptionFormat{colordotcap}{\makebox[\textwidth][c]{\#~#3~\#}}
+\captionsetup[figure]{%
+  % 不要图表标题的标签
+  format=colordotcap,
+  font={normal,sf,stretch=1},
+}
 %-------------------------------------------------------------------------------
 
 
@@ -472,7 +498,7 @@
 % 引入外部pdf或图片的命令
 %
 % 用法：
-%   \dkresource<[htbp!]>{file}{width_factor}{<caption>}
+%   \dkresource<[caption]>{file}<[width_factor]><[htbp!]>
 %
 % 说明：
 %   <htbp!>
@@ -501,11 +527,14 @@
 %   不带说明，使用默认参数（htbp），可单独成页：
 %     \dkresource{resource/r-2}{1.0}{}
 %-------------------------------------------------------------------------------
-\newcommand{\dkresource}[4][htbp]{%
-  \begin{figure}[#1]
+\DeclareDocumentCommand \dkresource { o m O{0.9} O{htb} }{%
+  \begin{figure}[#4]
     \centering
     \includegraphics[width=#3\textwidth]{#2}
-    \ifthenelse{\isempty{#4}}{}{\caption{#4}}
+    \IfValueT{#1}{%
+      \caption{#1}
+    }
+    % \ifthenelse{\isempty{#4}}{}{\caption{#4}}
     % \label{#5}
   \end{figure}
 }
@@ -543,7 +572,7 @@
 % 注意：
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTCBListing{dkcode}{ s m o O{tango} O{awesome}}{
+\DeclareTCBListing{dkcode}{ s m !o !O{tango} !O{awesome} }{
   breakable,
   drop shadow,
   listing engine=minted,
@@ -631,7 +660,7 @@
 % 注意：
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTCBInputListing{dkcodefile}{ s m m o O{tango} O{awesome}}{
+\DeclareTCBInputListing{dkcodefile}{ s m m !o !O{tango} !O{awesome} }{
   breakable,
   drop shadow,
   listing engine=minted,
