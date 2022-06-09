@@ -43,7 +43,7 @@
 %     Adobe 黑体 Std, Adobe 楷体 Std, Adobe 仿宋 Std, Adobe 宋体 Std,
 %     幼圆, 隶书, 方正小标宋, YaHei Consolas Hybrid, Inconsolata
 %   上述字体如果系统未安装，请自行下载安装，或根据需要自行变更
-\RequirePackage[scheme=chinese, fontset=custom, hyperref, UTF8]{ctex}
+\RequirePackage[scheme=chinese, fontset=custom, UTF8]{ctex}
 \ctexset{
   today=big,
   space=false,
@@ -180,7 +180,7 @@
 %-------------------------------------------------------------------------------
 % 定义首页主标题的书签
 %-------------------------------------------------------------------------------
-\bookmark[named=FirstPage, level=0, view=FitH]{\@firstname\@lastname}
+\bookmark[named=FirstPage, level=0, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\@firstname\@lastname}
 %-------------------------------------------------------------------------------
 % 以下计数器用于支持PDF书签标题开头的编号
 %-------------------------------------------------------------------------------
@@ -201,13 +201,6 @@
 %     可选，表示书签列表的层级，默认为1，（因为文档主标题为0）
 %   section_title
 %     section的标题，同时也是书签的文字内容
-%
-% 由于引入了中文环境，并且Awesome-CV的原始结构为CV-Resume-Cover分别独立呈现，
-% 在把所有部分合并成一个文件之后，需要做一些适应性调整，其中就包括原始文件不具备的
-% PDF书签设定部分。
-% 原始英文环境已经预备了hyperref和bookmark宏包，但是由于引入了ctex中文环境，
-% 直接调用bookmark生成书签会存在若干问题，各种尝试ctex[hyperref, UTF8]和
-% hyperref[unicode, CJKbookmarks]均不行，看来和宏包本身的环境有关。
 %-------------------------------------------------------------------------------
 \newcommand*{\dukangBookmarkSection}[2][1]{%
   % 使用随机数生成器直接对应标签和书签
@@ -221,13 +214,13 @@
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSection}~~~~#2}%
+    \bookmark[dest=\arabic{dukangRandom}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dukangCounterSection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#2}
+    \bookmark[dest=\arabic{dukangRandom}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
 }
 %-------------------------------------------------------------------------------
@@ -243,13 +236,13 @@
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=#1, view=FitH]{\arabic{dukangCounterSection}.\arabic{dukangCounterSubSection}~~~~#2}%
+    \bookmark[dest=\arabic{dukangRandom}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dukangCounterSection}.\arabic{dukangCounterSubSection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
     \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=1, view=FitH]{#2}
+    \bookmark[dest=\arabic{dukangRandom}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
 }
 %-------------------------------------------------------------------------------
@@ -364,7 +357,8 @@
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+  % R设置为4.49cm来解决编译时overfull hbox警告
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.49cm}}
     \ifempty{#3#4}
       {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\}
       {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\

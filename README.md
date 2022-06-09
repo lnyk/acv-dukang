@@ -9,6 +9,9 @@ LaTeX Dukang 模板项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.09
+-   解决图片`ICC` Color Profile Embedded问题
+
 ### 2022.06.08
 -   增加`LICENSE`文件
 -   替换`icon.png`
