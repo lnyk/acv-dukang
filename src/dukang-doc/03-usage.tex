@@ -43,26 +43,104 @@
   \dkbutton{make cleanall}只会删除符合资源文件命名规则的PDF文件，其他文件不受影响。
 \end{dkcomment}
 
-\cvsubsection{选项设定部分}
+\cvsubsection{选项设定}
 \dk~提供了用于立刻开始创作的初始文件，位置是src/main.tex，该文件导言区\footnote{相信你知道什么是导言区，如果不是太清楚，还是抓紧自学一下吧，或者简单的认为，在大多数情况下，\\\textbackslash begin\{document\}前面的部分，就是导言区。}部分的设定与本文档源码src/dukang-doc.tex完全相同，只需要根据需要修改一些文档名称、作者姓名、首页需要哪些字段、是否需要首行缩进等信息和选项，就可以正式开始为你的大作添加正文了。
 
-打开main.tex之后，首先会看到导言区一堆设定和备注信息，大多数情况下，阅读这些备注信息就足够掌握如何修改了，这里就挑其中几个比较重要的选项着重说明一下。
+打开main.tex之后，首先会看到导言区一堆设定和备注信息，大多数情况下，阅读这些备注信息就足够掌握如何修改了，这里对所有选项进行深入说明。
 
 \begin{cventries}
-\cventry[\Verb{\PassOptionsToPackage{table}{xcolor}}][置顶配置]{
+\cventry
+[\Verb{\PassOptionsToPackage{table}{xcolor}}]
+[置顶配置]
+[激活xcolor宏包的table选项，用于支持tabular环境的颜色配置]
+[必选]
+{
   \item 激活xcolor宏包的table选项，用于支持tabular环境的颜色配置。
   \item 由于Awesome-CV也引入了xcolor宏包，为了在无侵入的情况下避免配置冲突，需要在documentclass之前传递参数。
   \item 所有{\color{awesome}置顶配置}都必须出现在documentclass之前！
 }
+\cventry
+[\Verb{\documentclass[12pt, a4paper, final]{awesome-cv}}]
+[基本配置]
+{
+  \item 正式引入Awesome-CV文档类。
+  \item 这里的字号设定（12pt）基本没什么卵用，因为几乎每个文档部件都定义了自己的字体风格。
+}
+\cventry
+[\Verb{\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}}]
+[基本配置]
+{
+  \item 使用geometry宏包定义纸张的页边距以及页脚距离
+}
+\cventry
+[\Verb{\colorlet{awesome}{awesome-red}}]
+[Awesome-CV]
+[Awesome-CV的颜色设定]
+[必选]
+{
+  \item 可以指定Awesome-CV预制好的几个配色集，包括awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange, awesome-nephritis, awesome-concrete, awesome-darknight
+  \item 也可以使用\Verb{\definecolor}指定自己喜欢的颜色，总共有awesome, darktext, text, graytext, lighttext, sectiondivider这几个颜色名称可供定义。
+  \item {\color{awesome}{\dk}提供的所有增强部件都可以根据颜色设定进行风格自适应哦\faKissWinkHeart}
+}
+\cventry
+[\Verb{\setbool{acvSectionColorHighlight}{true}}]
+[Awesome-CV]
+[指定是否使用配色凸显章节标题后紧跟的分割线]
+[必选]
+{
+  \item 如果设定为true，责章节名称后面的长分割线会有颜色，否则为黑色。
+}
+\cventry
+[\Verb{\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}}]
+[Awesome-CV]
+[封面头部Logo右侧社交媒体帐号之间的分隔符定义]
+[可选]
+{
+  \item 默认为管道符：\dkbutton{<空格>|<空格>}
+}
+\cventry[个人信息部分][Awesome-CV][该部分用来定义一些个人信息或文档信息][部分可选]
+{
+  \item \Verb{\photo[rectangle,noedge,left]{./src/resource/dukang-logo}}用于定义首页的Logo图片，文件扩展名默认为.png，可用的裁剪选项为circle（圆形）和rectangle（正方形），可用的边框选项为edge（有边框）和noedge（无边框），可用的位置选项为left（靠左）和right（靠右）。
+  \item 该部分除了\Verb{\name}是必选的以外，其他设定不需要的均可以注释掉，首页中相应的部分会进行自适应。
+  \item {\color{awesome}由于\Verb{\name}在Awesome-CV文档类中有多处引用，所以必须指定，不能删掉。}
+}
+\cventry[社交媒体信息部分][Awesome-CV][该部分用来定义社交媒体帐号或联系方式][部分可选]
+{
+  \item 该部分有若干社交媒体选项，可以根据需要进行定义，不需要的可以注释掉。
+  \item 上面定义的分隔符\Verb{\acvHeaderSocialSep}就是用来分割这些帐号的。
+  \item {\color{awesome}至少要保留一条，否则编译出错！}
+}
+\cventry[cvletter环境基本信息][Awesome-CV][cvletter环境一般用于定义首页的内容][必选]
+{
+  \item 由于使用了ctex宏包，\Verb{\today}默认为大写中文日期格式。
+  \item {\color{awesome}该部分的定义一个都不能少！}
+}
+\cventry[dukang导言区设定部分][\dk][此部分包含{\dk}及相关宏包提供的若干增强设定][必选]
+{
+  \item {\color{awesome}由于{\dk}采用无侵入方式对Awesome-CV内容进行修改，因此该部分设定（包括引入宏包）都要出现在上述Awesome-CV相关定义完毕之后的导言区中，也就是\Verb{\begin{document}}之前！}
+  \item \Verb{\usepackage{dukang}}，首先引入{\dk}宏包，启用中文化及诸多增强功能。
+  \item \Verb{\setbool{dukangParIndent}{true}}，由于Awesome-CV大多数风格都使用了部件化（自定义命令或环境）来实现，没有使用chapter/section等标准结构，这直接导致了在引入ctex宏包进行中文化的时候，需要对每个部件进行单独的设定，比如首行缩进两字符对于有些部件要么不起作用，要么显示错乱，这里提供一个全局开关，会自动根据部件的具体情况有选择的开启首行缩进，以达到风格统一、显示美观的效果。
+  \item \Verb{\setbool{dukangBookmarkLeadingNumber}{true}}，Awesome-CV当前版本并不支持给输出的PDF文件按照文档结构自动添加书签（导航栏），{\dk}提供了这方面的支持，这个全局开关用来指定所添加的书签标题前，是否包含阿拉伯数字的章节编号。
+  \item \Verb{\hypersetup}，该部分用来为生成的PDF文件提供若干属性字段。
+}
+\cventry
+[Awesome-CV文档区设定部分]
+[Awesome-CV]
+[该部分设定出现在文档区，也就是\Verb{\begin{document}和\end{document}之间。}]
+[可选]
+{
+  \item \Verb{\makecvheader[R]}，{\color{awesome}这不是页眉！Awesome-CV没有页眉。}这是首页包括Logo在内的抬头（Header）部分，可以注释掉，首页布局会自动从cvletter环境开始。可用选项用来控制对齐方向，L标识左对齐，C标识居中对齐，R标识右对齐。{\color{awesome}都要大写！}
+  \item \Verb{\makecvfooter}，这个是每页的页脚，分为左中右三个部分，每个部分都可以留空，但{\color{awesome}必须保留大括号\Verb{{}}}
+}
 \end{cventries}
 
-假如不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把导言区的所有内容复制回来，重新简单设定一下，就又可以开始创作了。这也是为什么我推荐用\dkbutton{\textbackslash input\{...\}}把文档正文章节和main.tex主文件分开的原因。
+以上是{\dk}当前版本设定部分的详细说明，需要格外注意的地方都有颜色高亮，右边红色的标签说明该选项来自哪个部分。并且，假如在修改的过程中不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把除了正文以外的所有内容复制回来，重新设定一下，就又可以开始创作了。这也是为什么我推荐用\Verb{\input{...}}把文档正文章节和main.tex主文件分开的原因。
 
 \begin{dkcomment}*[温馨提示]
-  \hspace{2em}无论何时，dukang-doc.tex都是你值得参考的示例文档，文档本身和其内容章节文件（特别是源代码）尽量涵盖到了{\dk}的全部功能，包括设定和功能模块等，随时可以回来查看。\faKissWinkHeart
+  无论何时，dukang-doc.tex都是你值得参考的示例文档，文档本身和其内容章节文件（特别是源代码）尽量涵盖到了{\dk}的全部功能，包括设定和功能模块等，随时可以回来查看。\faKissWinkHeart
 \end{dkcomment}
 
-\cvsubsection{编译使用部分}
+\cvsubsection{使用流程}
 \dk~的编译控制文件（Makefile）提供了适合下面几种场景的编译流程，相信总有一个适合你。首先，对于一般使用来说，需要做的步骤很简单：
 
 \begin{center}
@@ -82,6 +160,10 @@
 \begin{center}
   \dkcodebox{修改main.tex}~\faArrowCircleRight~\dkcodebox{添加内容}~\faArrowCircleRight~\dkcodebox*{make}~\faArrowCircleRight~\dkcodebox*{make cleanall}~\faCheckCircle
 \end{center}
+
+\begin{dkcomment}
+  如果在编译过程中出现问题，强制退出编译过程之后想要再次编译，最好先执行\dkcodebox*{make cleanall}一遍，清理完所有临时文件之后再开始，否则编译很可能会出错无法继续下去。
+\end{dkcomment}
 
 
 \clearpage

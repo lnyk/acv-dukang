@@ -10,9 +10,9 @@
 %-------------------------------------------------------------------------------
 % 基本配置
 %-------------------------------------------------------------------------------
-% 默认为A4纸张，12pt字号
+% 默认为A4纸张，12pt字号，其实这里的字体设置基本没有效果，Awesome-CV每个部件都有自己的定义
 \documentclass[12pt, a4paper, final]{awesome-cv}
-
+%-------------------------------------------------------------------------------
 % 使用geometry定义纸张边距
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 %-------------------------------------------------------------------------------
@@ -23,9 +23,8 @@
 %   awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
 %   awesome-nephritis, awesome-concrete, awesome-darknight
 \colorlet{awesome}{awesome-red}
-% 可启用自定义颜色
+% 如果上面套装的字体颜色不喜欢，可以单独指定
 % \definecolor{awesome}{HTML}{CA63A8}
-% 字体颜色，如果上面套装的字体颜色不喜欢，可以单独指定
 % \definecolor{darktext}{HTML}{414141}
 % \definecolor{text}{HTML}{333333}
 % \definecolor{graytext}{HTML}{5D5D5D}
@@ -46,19 +45,21 @@
 % 文档内容信息部分
 %-------------------------------------------------------------------------------
 %	个人信息
-%	不需要的部分可以注释掉
+%	除了\name必选以外，其余部分不需要的都可以注释掉
 %-------------------------------------------------------------------------------
+% 这个必须留着！
+\name{\LaTeX~Dukang}{手册}
 % 首页的图片Logo
 % 可用选项为circle|rectangle,edge/noedge,left/right
 \photo[rectangle,noedge,left]{./src/resource/dukang-logo}
-\name{\LaTeX~Dukang}{手册}
 \position{%
   \hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}{\enskip\faWineBottle\enskip}\dk
 }
 \address{基于\hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}进行中文化适应及无侵入增强的面向\LaTeX{}新人的快速开始项目}
-
 %-------------------------------------------------------------------------------
-% 以下部分至少有一条要保留
+% 社交媒体信息
+% 至少有一条要保留
+%-------------------------------------------------------------------------------
 % \mobile{(+82) 10-9030-1843}
 \email{me@williamyao.com}
 % \dateofbirth{January 1st, 1970}
@@ -73,13 +74,12 @@
 % \medium{madium-id}
 % \kaggle{kaggle-id}
 % \googlescholar{googlescholar-id}{name-to-display}
-%% \firstname and \lastname will be used
+%% 如果留空，会自动使用\firstname和\lastname
 % \googlescholar{googlescholar-id}{}
 \extrainfo{{\faWineBottle}~衷心感谢\hyperref{https://github.com/posquit0}{}{}{Byungjin Park}等童鞋的开源奉献}
-
 \quote{“执着而不计成本，不为索取只为陶醉”——~Carl Zeiss}
 %-------------------------------------------------------------------------------
-% 信件环境基本信息
+% cvletter环境基本信息
 % 所有内容都是必选，一个也不能少
 %-------------------------------------------------------------------------------
 % 收件方

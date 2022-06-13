@@ -350,6 +350,10 @@
 %-------------------------------------------------------------------------------
 % 重新定义字体颜色和风格
 % 1.56em为中文环境的标准行距，或者设置为1.3em也较为合适
+\renewcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\renewcommand*{\entrylocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\renewcommand*{\entrypositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+\renewcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
 \renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.56em}\bodyfontlight\color{text} #1}}
 % 修改cventry参数及顺序，简化使用方式
 \DeclareDocumentCommand{\cventry}{ O{} O{} O{} O{} m }{%
