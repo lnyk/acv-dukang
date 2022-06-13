@@ -66,7 +66,6 @@
 % 不能使用\usepackage命令，可以使用tcolorbox内置的\tcbuselibrary命令
 % 或者\PassOptionsToPackage{option1,option2}{package}
 % 调用对应的库
-% \RequirePackage{listings}
 \tcbuselibrary{skins, listings, xparse, breakable, minted}
 %-------------------------------------------------------------------------------
 % tcolorbox的全局设定
@@ -139,9 +138,9 @@
 \newcommand{\random}{\rand\arabic{dukangRandom}}
 %-------------------------------------------------------------------------------
 % 脚注
-\usepackage[perpage,symbol*]{footmisc}
+\RequirePackage[perpage,symbol*]{footmisc}
 % 修改脚注数字为圆圈数字
-\usepackage{pifont}
+\RequirePackage{pifont}
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 % 修改脚注字体
 \renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
@@ -149,7 +148,7 @@
 % figure设置
 %-------------------------------------------------------------------------------
 % 引入figure包用于支持dkresource命令
-\usepackage{caption}
+\RequirePackage{caption}
 % 定义新的标签格式，#1为标签名（图），#2为分隔符（：），#3为标签内容
 \DeclareCaptionFormat{colordotcap}{\makebox[\textwidth][c]{\#~#3~\#}}
 \captionsetup[figure]{%
@@ -352,17 +351,18 @@
 % 重新定义字体颜色和风格
 % 1.56em为中文环境的标准行距，或者设置为1.3em也较为合适
 \renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.56em}\bodyfontlight\color{text} #1}}
-% 重新定义cventry的表示顺序，更符合使用习惯
-\renewcommand*{\cventry}[5]{%
-  \vspace{-2.0mm}
+% 修改cventry参数及顺序，简化使用方式
+\DeclareDocumentCommand{\cventry}{ O{} O{} O{} O{} m }{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#3#4}
-      {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\}
-      {\entrytitlestyle{#1} & \entrylocationstyle{#2} \\
-      \entrypositionstyle{#3} & \entrydatestyle{#4} \\}
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+    \ifempty{#3#4}{%
+      \entrytitlestyle{#1} & \entrylocationstyle{#2} \\
+    }{%
+      \entrytitlestyle{#1} & \entrylocationstyle{#2} \\
+      \entrypositionstyle{#3} & \entrydatestyle{#4} \\
+    }
+    \multicolumn{2}{L{\textwidth}}{\begin{cvitems}\descriptionstyle{#5}\end{cvitems}}
   \end{tabular*}%
 }
 % -------------------------------------------------------------------------------

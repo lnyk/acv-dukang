@@ -9,6 +9,9 @@ LaTeX Dukang 模板项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.13
+-   修改`cventry`参数及顺序，简化使用方式，不再需要显式输入`cvitems`环境
+
 ### 2022.06.09
 -   解决图片`ICC` Color Profile Embedded问题
 

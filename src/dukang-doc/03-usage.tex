@@ -48,7 +48,13 @@
 
 打开main.tex之后，首先会看到导言区一堆设定和备注信息，大多数情况下，阅读这些备注信息就足够掌握如何修改了，这里就挑其中几个比较重要的选项着重说明一下。
 
-待补全
+\begin{cventries}
+\cventry[\Verb{\PassOptionsToPackage{table}{xcolor}}][置顶配置]{
+  \item 激活xcolor宏包的table选项，用于支持tabular环境的颜色配置。
+  \item 由于Awesome-CV也引入了xcolor宏包，为了在无侵入的情况下避免配置冲突，需要在documentclass之前传递参数。
+  \item 所有{\color{awesome}置顶配置}都必须出现在documentclass之前！
+}
+\end{cventries}
 
 假如不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把导言区的所有内容复制回来，重新简单设定一下，就又可以开始创作了。这也是为什么我推荐用\dkbutton{\textbackslash input\{...\}}把文档正文章节和main.tex主文件分开的原因。
 
