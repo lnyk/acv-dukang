@@ -250,13 +250,13 @@
     \stepcounter{dk@counter@subsection}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}.\arabic{dk@counter@subsection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
@@ -313,7 +313,7 @@
   \vspace{-3mm}
   % 增加\par，解决cvparagraph紧接着cvsection，内容会出现在分割线同一行的情况
   \par\paragraphstyle
-}{} % 这里的结尾{}不能省略，否则编译报错
+}{} % 注意这里结尾的{}
 %-------------------------------------------------------------------------------
 % cvsection
 %-------------------------------------------------------------------------------
@@ -340,6 +340,7 @@
 %-------------------------------------------------------------------------------
 % cvsubsection
 %-------------------------------------------------------------------------------
+\renewcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
 \renewcommand{\cvsubsection}[1]{%
   \vspace{0.641\baselineskip}
   % \vspace{\baselineskip}
@@ -543,7 +544,7 @@
 }
 %-------------------------------------------------------------------------------
 % dkcode
-% 代码高亮块，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
+% 代码高亮块，颜色自适应或手动指定
 %
 % 用法：
 %   \begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>

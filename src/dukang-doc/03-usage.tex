@@ -54,7 +54,7 @@
 [基本配置]
 {
   \item 正式引入Awesome-CV文档类。
-  \item 这里的字号设定（12pt）基本没什么卵用，因为几乎每个文档部件都定义了自己的字体风格。
+  \item 这里的字号设定（12pt）基本没什么卵用，因为几乎每个文档组件都定义了自己的字体风格。
 }
 \cventry
 [\Verb{\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}}]
@@ -70,7 +70,7 @@
 {
   \item 可以指定Awesome-CV预制好的几个配色集，包括awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange, awesome-nephritis, awesome-concrete, awesome-darknight
   \item 也可以使用\Verb{\definecolor}指定自己喜欢的颜色，总共有awesome, darktext, text, graytext, lighttext, sectiondivider这几个颜色名称可供定义。
-  \item {\color{awesome}{\dk}提供的所有增强部件都可以根据颜色设定进行风格自适应哦\faKissWinkHeart}
+  \item {\color{awesome}{\dk}提供的所有增强组件都可以根据颜色设定进行风格自适应哦\faKissWinkHeart}
 }
 \cventry
 [\Verb{\setbool{acvSectionColorHighlight}{true}}]
@@ -108,9 +108,7 @@
 }
 \cventry[dukang导言区设定部分][\dk][此部分包含{\dk}及相关宏包提供的若干增强设定][必选]
 {
-  \item {\color{awesome}由于{\dk}采用无侵入方式对Awesome-CV内容进行修改，因此该部分设定（包括引入宏包）都要出现在上述Awesome-CV相关定义完毕之后的导言区中，也就是\Verb{\begin{document}}之前！}
-  \item \Verb{\usepackage{dukang}}，首先引入{\dk}宏包，启用中文化及诸多增强功能。
-  \item \Verb{\setbool{dukangParIndent}{true}}，由于Awesome-CV大多数风格都使用了部件化（自定义命令或环境）来实现，没有使用chapter/section等标准结构，这直接导致了在引入ctex宏包进行中文化的时候，需要对每个部件进行单独的设定，比如首行缩进两字符对于有些部件要么不起作用，要么显示错乱，这里提供一个全局开关，会自动根据部件的具体情况有选择的开启首行缩进，以达到风格统一、显示美观的效果。
+  \item \Verb{\setbool{dukangParIndent}{true}}，由于Awesome-CV大多数风格都使用了组件化（自定义命令或环境）来实现，没有使用chapter/section等标准结构，这直接导致了在引入ctex宏包进行中文化的时候，需要对每个组件进行单独的设定，比如首行缩进两字符对于有些组件要么不起作用，要么显示错乱，这里提供一个全局开关，会自动根据组件的具体情况有选择的开启首行缩进，以达到风格统一、显示美观的效果。
   \item \Verb{\setbool{dukangBookmarkLeadingNumber}{true}}，Awesome-CV当前版本并不支持给输出的PDF文件按照文档结构自动添加书签（导航栏），{\dk}提供了这方面的支持，这个全局开关用来指定所添加的书签标题前，是否包含阿拉伯数字的章节编号。
   \item \Verb{\hypersetup}，该部分用来为生成的PDF文件提供若干属性字段。
 }
@@ -125,7 +123,7 @@
 }
 \end{cventries}
 
-以上是{\dk}当前版本设定部分的详细说明，需要格外注意的地方都有颜色高亮，右边红色的标签说明该选项来自哪个部分。并且，假如在修改的过程中不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把除了正文以外的所有内容复制回来，重新设定一下，就又可以开始创作了。这也是为什么我推荐用\Verb{\input{...}}把文档正文章节和main.tex主文件分开的原因。
+以上是{\dk}当前版本设定部分的详细说明，需要格外注意的地方都有颜色高亮，右边颜色高亮的标签说明该选项来自哪个部分。并且，假如在修改的过程中不小心把main.tex搞乱了也没关系，可以随时打开dukang-doc.tex查看正确的配置，或者干脆把除了正文以外的所有内容复制回来，重新设定一下，就又可以开始创作了。这也是为什么我推荐用\Verb{\input{...}}把文档正文章节和main.tex主文件分开的原因。
 
 \begin{dkcomment}*[温馨提示]
   无论何时，dukang-doc.tex都是你值得参考的示例文档，文档本身和其内容章节文件（特别是源代码）尽量涵盖到了{\dk}的全部功能，包括设定和功能模块等，随时可以回来查看。\faKissWinkHeart
