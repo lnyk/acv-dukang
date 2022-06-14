@@ -1,12 +1,12 @@
 %!TEX encoding = UTF-8 Unicode
-%% Start of file `dukang.sty'.
+%% Start of file `awesome-cv-dukang.cls'.
 
 
 %-------------------------------------------------------------------------------
-% LaTeX Dukang Package File
+% Awesome-CV-Dukang Class File
 %
 % This class has been downloaded from:
-% https://github.com/lnyk/latex-dukang
+% https://github.com/lnyk/awesome-cv-dukang
 %
 % Author:
 % William Yao <me@williamyao.com>
@@ -20,9 +20,16 @@
 %-------------------------------------------------------------------------------
 % 定义开始
 %-------------------------------------------------------------------------------
-\ProvidesPackage{dukang}
-
-
+\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+\ProvidesClass{awesome-cv-dukang}[2022-04-28 Awesome-CV-Dukang]
+% 传递参数到awesome-cv
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{awesome-cv}}
+% 处理参数
+\ProcessOptions\relax
+% 激活xcolor宏包的table选项，用于支持tabular环境的颜色配置
+\PassOptionsToPackage{table}{xcolor}
+% 最后加载awesome-cv文档类
+\LoadClass{awesome-cv}
 %-------------------------------------------------------------------------------
 % 基础依赖部分
 %
@@ -130,12 +137,12 @@
 % 这里定义了\random命令，可以简化\arabic{}的调用
 % 否则，\rand生成的是数值类型，只有调用\arabic才能转换成字符串输出到文档
 %
-% 需要手动创建dukangRandom计数器，否则会存储不成功
-\newcounter{dukangRandom}
-% 指定存储计数器为dukangRandom，lcg宏包的默认计数器为rand
-\RequirePackage[counter=dukangRandom]{lcg}
+% 需要手动创建dk@random计数器，否则会存储不成功
+\newcounter{dk@random}
+% 指定存储计数器为dk@random，lcg宏包的默认计数器为rand
+\RequirePackage[counter=dk@random]{lcg}
 % 创建\random命令，方便直接将随机数输出至文档字符串
-\newcommand{\random}{\rand\arabic{dukangRandom}}
+\newcommand{\random}{\rand\arabic{dk@random}}
 %-------------------------------------------------------------------------------
 % 脚注
 \RequirePackage[perpage,symbol*]{footmisc}
@@ -179,21 +186,31 @@
 %-------------------------------------------------------------------------------
 % 定义首页主标题的书签
 %-------------------------------------------------------------------------------
-\bookmark[named=FirstPage, level=0, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\@firstname\@lastname}
+\newcommand*{\dukangPDFTitle}[1]{%
+  \bookmark[named=FirstPage, level=-1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#1}%
+}
 %-------------------------------------------------------------------------------
 % 以下计数器用于支持PDF书签标题开头的编号
 %-------------------------------------------------------------------------------
 \ifbool{dukangBookmarkLeadingNumber}{%
-  \newcounter{dukangCounterSection}
-  \setcounter{dukangCounterSection}{0}
-  \newcounter{dukangCounterSubSection}
-  \setcounter{dukangCounterSubSection}{0}
+  \newcounter{dk@counter@section}
+  \setcounter{dk@counter@section}{0}
+  \newcounter{dk@counter@subsection}
+  \setcounter{dk@counter@subsection}{0}
 }{}
+%-------------------------------------------------------------------------------
+% 自定义命令
+%
+% 所有自定义命令的具体实现都放在该部分
+%-------------------------------------------------------------------------------
+% dk
+% 定义一个简短的命令用于显示完整名称
+\newcommand{\dk}{\hyperref{https://williamyao.com}{}{}{ACV-Dukang}}
 %-------------------------------------------------------------------------------
 % 利用随机数生成器指定书签标签
 %-------------------------------------------------------------------------------
 % 用法：
-%   \dukangBookmarkSection<[level]>{section_title}
+%   \dk@bookmark@section<[level]>{section_title}
 %
 % 说明：
 %   level
@@ -201,47 +218,47 @@
 %   section_title
 %     section的标题，同时也是书签的文字内容
 %-------------------------------------------------------------------------------
-\newcommand*{\dukangBookmarkSection}[2][1]{%
+\newcommand*{\dk@bookmark@section}[2][1]{%
   % 使用随机数生成器直接对应标签和书签
   % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
   \rand
   \ifbool{dukangBookmarkLeadingNumber}{%
     % 如果指定需要编号，则调用自定义计数器来进行手动编号
     % 对应的计数器在命令外定义
-    \stepcounter{dukangCounterSection}
+    \stepcounter{dk@counter@section}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dukangCounterSection}~~~~#2}%
+    \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
+    \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
 }
 %-------------------------------------------------------------------------------
-\newcommand*{\dukangBookmarkSubSection}[2][2]{%
+\newcommand*{\dk@bookmark@subsection}[2][2]{%
   % 使用随机数生成器直接对应标签和书签
   % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
   \rand
   \ifbool{dukangBookmarkLeadingNumber}{%
     % 如果指定需要编号，则调用自定义计数器来进行手动编号
     % 对应的计数器在命令外定义
-    \stepcounter{dukangCounterSubSection}
+    \stepcounter{dk@counter@subsection}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dukangCounterSection}.\arabic{dukangCounterSubSection}~~~~#2}%
+    \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}.\arabic{dk@counter@subsection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dukangRandom}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
-    \bookmark[dest=\arabic{dukangRandom}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
+    \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
 }
 %-------------------------------------------------------------------------------
@@ -272,7 +289,7 @@
   \setlength{\parindent}{0em}
   \par\addvspace{2.5ex}
   \phantomsection{}
-  \dukangBookmarkSection{#1}
+  \dk@bookmark@section{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
   \par\nobreak\addvspace{0.4ex}
   \ifbool{dukangParIndent}{% if
@@ -306,7 +323,7 @@
   % 重置首行缩进为0，适应单独设置\noindent的情况
   \setlength{\parindent}{0em}
   \phantomsection{}
-  \dukangBookmarkSection{#1}
+  \dk@bookmark@section{#1}
   \color{sectiondivider}\vhrulefill{0.9pt}
   % \par\nobreak\addvspace{0.4ex}
   \ifbool{dukangParIndent}{% if
@@ -328,7 +345,7 @@
   % \vspace{\baselineskip}
   \setlength{\parskip}{0em}
   \setlength{\parindent}{0em}
-  \dukangBookmarkSubSection{#1}
+  \dk@bookmark@subsection{#1}
   \ifbool{dukangParIndent}{% if
     % 设定首行缩进为2em
     \setlength{\parindent}{2em}
@@ -425,16 +442,6 @@
 \renewcommand*{\cvhonor}[3]{%
   \honorpositionstyle{#1} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
-%-------------------------------------------------------------------------------
-% 自定义命令
-%
-% 所有自定义命令的具体实现都放在该部分
-% 自定义环境统一以dk开头，用于区分其他宏包的自定义命令
-%-------------------------------------------------------------------------------
-% dk
-% 定义一个简短的命令用于显示完整名称
-\newcommand{\dk}{\hyperref{https://williamyao.com}{}{}{\LaTeX{}~Dukang}}
-%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------

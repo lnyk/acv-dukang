@@ -1,5 +1,5 @@
-# LateX Dukang Template
-LaTeX Dukang 模板项目
+# Awesome-CV Dukang Project
+Awesome-CV Dukang项目
 
 ## 项目说明
 
@@ -9,6 +9,12 @@ LaTeX Dukang 模板项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.14
+-   更名为`Awesome-CV Dukang`项目，文档类名称`awesome-cv-dukang`
+-   根据LaTeX2e手册建议，由于本项目主要基于其他类或宏包进行修改增强，不能通用于特定环境之外，因此将本项目从`Package`类型变更为`Class`类型
+-   重构部分自定义命令，同时调整文档类引用方式及参数传递方式。
+-   重构PDF标题书签生成命令，放弃使用\@firstname和\@lastname，使用新命令\dkpdftitle在主文档中指定
+
 ### 2022.06.13
 -   修改`cventry`参数及顺序，简化使用方式，不再需要显式输入`cvitems`环境
 -   完成`03-usage`
