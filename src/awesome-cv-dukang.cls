@@ -69,10 +69,6 @@
 %-------------------------------------------------------------------------------
 % tcolorbox
 % 引入tcolorbox的库
-% 由于Awesome-CV宏包已经引入了tcolorbox，因此这里如果想要启用minted库的话，
-% 不能使用\usepackage命令，可以使用tcolorbox内置的\tcbuselibrary命令
-% 或者\PassOptionsToPackage{option1,option2}{package}
-% 调用对应的库
 \tcbuselibrary{skins, listings, xparse, breakable, minted}
 %-------------------------------------------------------------------------------
 % tcolorbox的全局设定
@@ -164,6 +160,10 @@
   % 设置字体，stretch是行距的倍数
   font={normal,sf,stretch=1},
 }
+%-------------------------------------------------------------------------------
+% fancyvrb设置
+\RequirePackage{fancyvrb}
+\DefineShortVerb{\|}
 %-------------------------------------------------------------------------------
 
 
@@ -372,7 +372,7 @@
 \renewcommand*{\entrylocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \renewcommand*{\entrypositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
 \renewcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.56em}\bodyfontlight\color{text} #1}}
+\renewcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1.3em}\bodyfontlight\color{text} #1}}
 % 修改cventry参数及顺序，简化使用方式
 \DeclareDocumentCommand{\cventry}{ O{} O{} O{} O{} m }{%
   \setlength\tabcolsep{0pt}

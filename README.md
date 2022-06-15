@@ -9,6 +9,9 @@ Awesome-CV Dukang项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.15
+-   更新`04-comp`
+
 ### 2022.06.14
 -   更名为`Awesome-CV Dukang`项目，文档类名称`awesome-cv-dukang`
 -   根据LaTeX2e手册建议，由于本项目主要基于其他类或宏包进行修改增强，不能通用于特定环境之外，因此将本项目从`Package`类型变更为`Class`类型
