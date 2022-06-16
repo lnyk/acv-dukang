@@ -116,6 +116,36 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
 
 这些组件都有自己的用法和适合的使用环境，以及一些注意事项，接下来逐一介绍一下它们的细节。
 
+\cvsubsubsection{dkbutton}
+首先介绍这个小按钮，是因为在本文档中它用的最多，几乎随处可见，调用格式为：
+
+|\dkbutton<*>[color]{text}|
+
+包括星号在内共有两个可选参数，其中星号控制两种风格的切换：
+
+\begin{center}
+  \dkbutton{\textbackslash dkbutton\{这里有个小按钮\}} \& \dkbutton*{\textbackslash dkbutton*\{这里有圆形的小按钮\}}
+\end{center}
+
+而|[color]|可选参数默认为自动适应在主文档中指定的Awesome-CV的主配色，如果想要自选配色，可以使用这个参数进行指定，比如：
+
+\begin{center}
+  \dkbutton[blue]{\textbackslash dkbutton[blue]\{蓝色小按钮\}} \& \dkbutton*[green]{\textbackslash dkbutton*[green]\{绿色圆形小按钮\}}
+\end{center}
+
+在使用方面，除了尽量以“Inline”（也就是在正文的行内）的方式使用外几乎没有限制，当然如果想要一个超大的按钮也是可以的，只是推荐把它放在单独一个段落中，比如：
+
+\begin{center}
+  \vspace{1em}
+  \dkbutton*{\parbox[c][5em]{20em}{\centering 一个巨大的圆形按钮}}
+  \vspace{1em}
+\end{center}
+
+需要注意的是，同一行（或段落）中不要使用的太多，不然会影响自动断行，出现超宽或过窄的情况。
+
+\cvsubsubsection{dkresource}
+这个组件的作用是将外部资源（比如另一个PDF文档或PNG图片）引入当前位置，并可手动指定宽度自动缩放。
+
 以上所有组件，基本可以满足所有日常创作，特别是科技类和IT类作品的创作需要，当然我会持续不断完善和扩展{\dk}的功能，后续组件会更加丰富。
 
 

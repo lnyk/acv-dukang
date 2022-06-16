@@ -197,6 +197,8 @@
   \setcounter{dk@counter@section}{0}
   \newcounter{dk@counter@subsection}
   \setcounter{dk@counter@subsection}{0}
+  \newcounter{dk@counter@subsubsection}
+  \setcounter{dk@counter@subsubsection}{0}
 }{}
 %-------------------------------------------------------------------------------
 % 自定义命令
@@ -209,7 +211,7 @@
 %-------------------------------------------------------------------------------
 % 利用随机数生成器指定书签标签
 %-------------------------------------------------------------------------------
-% 用法：
+% 用法（subsection及subsubsection参照此处）：
 %   \dk@bookmark@section<[level]>{section_title}
 %
 % 说明：
@@ -248,6 +250,8 @@
   \rand
   \ifbool{dukangBookmarkLeadingNumber}{%
     % 如果指定需要编号，则调用自定义计数器来进行手动编号
+    % 新开启subsection时，先重置subsubsection计数器
+    \setcounter{dk@counter@subsubsection}{0}
     % 对应的计数器在命令外定义
     \stepcounter{dk@counter@subsection}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
@@ -255,6 +259,28 @@
     \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}.\arabic{dk@counter@subsection}~~~~#2}%
+  }{%
+    % 如果不用编号
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
+  }
+}
+%-------------------------------------------------------------------------------
+\newcommand*{\dk@bookmark@subsubsection}[2][3]{%
+  % 使用随机数生成器直接对应标签和书签
+  % 先调用一次lcg宏包的\rand命令，将生成的随机数保存在定义时的计数器中
+  \rand
+  \ifbool{dukangBookmarkLeadingNumber}{%
+    % 如果指定需要编号，则调用自定义计数器来进行手动编号
+    % 对应的计数器在命令外定义
+    \stepcounter{dk@counter@subsubsection}
+    % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
+    % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
+    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
+    % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
+    \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}.\arabic{dk@counter@subsection}.\arabic{dk@counter@subsubsection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
@@ -349,6 +375,27 @@
   \setlength{\parskip}{0em}
   \setlength{\parindent}{0em}
   \dk@bookmark@subsection{#1}
+  \ifbool{dukangParIndent}{% if
+    % 设定首行缩进为2em
+    \setlength{\parindent}{2em}
+  }{% else
+    \setlength{\parindent}{0em}%
+  }
+  \phantomsection
+  % 用于解决cvparagraph紧接着cvsection
+  % 如果中间没有空行，会没有段落标记，造成编译失败，读不到\end{document}
+  \par
+}
+%-------------------------------------------------------------------------------
+% cvsubsubsection
+%-------------------------------------------------------------------------------
+\newcommand*{\subsubsectionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand{\cvsubsubsection}[1]{%
+  \vspace{0.641\baselineskip}
+  % \vspace{\baselineskip}
+  \setlength{\parskip}{0em}
+  \setlength{\parindent}{0em}
+  \dk@bookmark@subsubsection{#1}
   \ifbool{dukangParIndent}{% if
     % 设定首行缩进为2em
     \setlength{\parindent}{2em}
@@ -457,7 +504,7 @@
 % inline风格的代码小盒子，两种风格可选，颜色自适应或手动指定
 %
 % 用法：
-%   \dkbutton<*>[color]
+%   \dkbutton<*>[color]{text}
 %
 % 说明：
 %   *
