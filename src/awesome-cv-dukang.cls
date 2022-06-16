@@ -224,6 +224,8 @@
   \rand
   \ifbool{dukangBookmarkLeadingNumber}{%
     % 如果指定需要编号，则调用自定义计数器来进行手动编号
+    % 新开启section时，先重置subsection计数器
+    \setcounter{dk@counter@subsection}{0}
     % 对应的计数器在命令外定义
     \stepcounter{dk@counter@section}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
