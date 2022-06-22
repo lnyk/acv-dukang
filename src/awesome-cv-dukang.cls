@@ -160,7 +160,7 @@
   % 使用上面的自定义标签格式
   format=colordotcap,
   % 设置字体，stretch是行距的倍数
-  font={normal,sf,stretch=1},
+  font={small,sf,stretch=1},
 }
 %-------------------------------------------------------------------------------
 % fancyvrb设置
@@ -432,7 +432,7 @@
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       \renewcommand{\arraystretch}{1.5}
-      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.86}}}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} R{0.12\textwidth} L{\IfBooleanTF{#1}{0.88\textwidth}{0.88\textwidth + \tabcolsep}}}
 }{%
       \end{tabular*}
     \end{center}
@@ -615,8 +615,6 @@
     \IfValueT{#1}{%
       \caption{#1}
     }
-    % \ifthenelse{\isempty{#4}}{}{\caption{#4}}
-    % \label{#5}
   \end{figure}
 }
 %-------------------------------------------------------------------------------
