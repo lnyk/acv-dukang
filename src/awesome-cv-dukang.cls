@@ -409,9 +409,34 @@
 }
 % -------------------------------------------------------------------------------
 % cvskills
+%
+% 参数说明：
+%   * 打开颜色支持
 %-------------------------------------------------------------------------------
 \renewcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \renewcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+\DeclareDocumentEnvironment{cvskills}{s}
+{%
+  \vspace{0.641\baselineskip}
+  % 使用spacing包控制单元格内的line之间的距离
+  \begin{spacing}{1}
+    \begin{center}
+      % 判断第一个可选参数是否带*，设置底色和表格内边距
+      \IfBooleanT{#1}{% 如果带*
+        % 从第1行开始，奇数行颜色，偶数行颜色
+        \rowcolors{1}{awesome!10}{awesome!5}
+      }
+      \setlength\tabcolsep{1ex}%
+      \setlength{\extrarowheight}{0pt}
+      % 控制表格的row之间的距离
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.86}}}
+}{%
+      \end{tabular*}
+    \end{center}
+  \end{spacing}
+  \vspace{0.641\baselineskip}
+}
 %-------------------------------------------------------------------------------
 % cventries
 %-------------------------------------------------------------------------------
@@ -492,6 +517,7 @@
 \renewcommand*{\cvhonor}[3]{%
   \honorpositionstyle{#1} & \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
@@ -560,7 +586,7 @@
 %     t: Top（页面顶部）
 %     b: Bottom（页面底部）
 %     p: Page（单独成页）
-%     !: 在决定位置时忽视限制
+%     !: 在判定位置时忽视限制
 %     排版位置的选取与参数里符号的顺序无关，总是以h-t-b-p的优先级顺序决定浮动体位置
 %     限制包括：
 %       浮动体个数：

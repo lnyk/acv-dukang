@@ -9,6 +9,10 @@ Awesome-CV Dukang项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.22
+-   重构`cvskills`环境增加底色支持
+-   更新`04-comp`
+
 ### 2022.06.16
 -   解决`cvsubsection`编号在下一section应当重置的bug
 -   更新`04-comp`
