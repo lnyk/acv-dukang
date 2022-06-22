@@ -1,4 +1,6 @@
-%!TEX encoding = UTF-8 Unicode
+% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% !TeX spellcheck = en_US
 %% Start of file `awesome-cv-dukang.cls'.
 
 

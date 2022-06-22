@@ -59,7 +59,7 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
       \dkbutton{\textbackslash begin\{cvhonors\}<*>[LLR]...\textbackslash end\{cvhonors\}}
     \end{center}
     \item 其中第一个参数星号“*”为底色开关，带星号标识启用奇偶行底色，不带星号为无底色，切换底色会少许改变外边距，组件会自动进行调整。
-    \item 第二个参数“[LLR]”的三个字母表示接下来所有cvhonor组件左中右三部分的对齐方式，L表示左对齐，C标识居中对齐，R表示右对齐，不给出该参数的话，默认为“[LLR]”。
+    \item 第二个参数“LLR”的三个字母表示接下来所有cvhonor组件左中右三部分的对齐方式，L表示左对齐，C标识居中对齐，R表示右对齐，不给出该参数的话，默认为“LLR”。
     \item cvhonor命令分为三个必选参数，可以留空但不能不写，格式为：
     \begin{center}
       \dkbutton{\textbackslash cvhonor\{左\}\{中\}\{右\}}
@@ -86,11 +86,11 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
 \begin{cvhonors}*
   \cvhonor
     {\Verb{\dkbutton}}
-    {inline风格的代码小盒子，可选两种显示风格}
+    {Inline风格的代码小盒子，可选两种显示风格}
     {小按钮}
   \cvhonor
     {\Verb{\dkresource}}
-    {引入外部pdf或图片的命令}
+    {引入外部图片或PDF的命令}
     {外部资源}
   \cvhonor
     {\Verb{\dkcode}}
@@ -106,7 +106,7 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
     {备注框}
   \cvhonor
     {\Verb{\dkcodebox}}
-    {另一种风格的inline代码小盒子，可切换是否显示命令提示符}
+    {另一种风格的Inline代码小盒子，可切换是否显示命令提示符}
     {深色背景}
   \cvhonor
     {\Verb{\dirtree}}
@@ -127,7 +127,7 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
   \dkbutton{\textbackslash dkbutton\{这里有个小按钮\}} \& \dkbutton*{\textbackslash dkbutton*\{这里有圆形的小按钮\}}
 \end{center}
 
-而|[color]|可选参数默认为自动适应在主文档中指定的Awesome-CV的主配色，如果想要自选配色，可以使用这个参数进行指定，比如：
+color默认为自动适应在主文档中指定的Awesome-CV的主配色，如果想要自选配色，可以使用这个参数进行指定，比如：
 
 \begin{center}
   \dkbutton[blue]{\textbackslash dkbutton[blue]\{蓝色小按钮\}} \& \dkbutton*[green]{\textbackslash dkbutton*[green]\{绿色圆形小按钮\}}
@@ -153,27 +153,58 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
 \begin{cvskills}*
   \cvskill
   {caption}
-  {可选参数，资源下方需要显式的名称或标签}
+  {可选参数，资源下方的名称或标签。}
   \cvskill
   {file}
-  {必选参数，需要引入的资源，可以是图片、tex文件或任意$figure$环境支持的文件类型，只需给出路径及名称，无需加扩展名或后缀，相对路径的默认起点为\dkbutton{./src/}}
+  {必选参数，需要引入的资源，可以是图片、PDF文件或其它$figure$环境支持的文件类型，只需给出路径及名称，无需加扩展名或后缀，相对路径的默认起点为\dkbutton{./src/}.}
   \cvskill
   {width\_factor}
-  {可选参数，相对于整个行宽的占比，取值为0-1，默认为0.9倍行宽}
+  {可选参数，相对于整个行宽的占比，取值为0-1，默认为0.9倍行宽。}
   \cvskill
   {htbp!}
-  {可选参数，用来控制资源在页面的浮动显示位置，其中$h$表示当前位置或代码所处的上下文位置，$t$表示Top（页面顶端），$b$表示Bottom（页面底部），$p$表示Page（单独成页），$!$表示在判定位置时忽略限制选项，默认为$htb$}
+  {可选参数，用来控制资源在页面的浮动显示位置，其中$h$表示当前位置或代码所处的上下文位置，$t$表示Top（页面顶端），$b$表示Bottom（页面底部），$p$表示Page（单独成页），$!$表示在判定位置时忽略限制选项，默认为$htb$.}
 \end{cvskills}
 
-\begin{dkcomment}
+使用示例：
+
+|\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.3]|\footnote{resource文件夹的联动编译功能最主要目的也是为了支持dkresource.}
+
+\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.3]
+
+\begin{dkcomment}*[关于浮动体的说明]
   \hspace{2em}$dkresource$实际上是基于{\LaTeX} $figure$环境的简单再封装，让人比较晕的是$htbp!$浮动体控制参数的意义，简单理解的话就是，在生成PDF文件的时候，{\LaTeX}编译器会根据浮动体控制参数来自动判断并确定浮动体在页面中的显示位置，这里的浮动体指的就是$dkresource$所引入的资源，排版位置的选取与参数里符号的顺序并无关系，编译器总是以$h \to t \to b \to p$的顺序来检查参数。
 
   \hspace{2em}|!|的作用是忽略限制，这里的默认限制总共有两条，超出该限制会强制将浮动体拖入下一页再判断，这两条分别是：
 
-  \hspace{2em}个数：除$p$参数（单独成页）外，默认每页不超过3个浮动体，其中顶部$t$不超过2个，底部$b$不超过1个。
-
-  \hspace{2em}空间占比：默认顶部$t$不超过页面高度的70\%，底部$b$不超过30\%
+  \begin{itemize}
+    \item 个数：除$p$参数（单独成页）外，默认每页不超过3个浮动体，其中顶部$t$不超过2个，底部$b$不超过1个。
+    \item 空间占比：默认顶部$t$不超过页面高度的70\%，底部$b$不超过30\%.
+  \end{itemize}
 \end{dkcomment}
+
+\cvsubsubsection{dkcode}
+这个组件通过封装$tcolorbox$宏包，使用$minted$引擎对计算机语言代码进行高亮显示，支持中文并调整行距字体显得更加美观，同时支持组件标题栏风格、代码高亮风格以及主配色的手动指定。用法为：
+
+|\begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>...\end{dkcode}|
+
+其中，各参数的含义为：
+
+\begin{cvskills}*
+  \cvskill
+  {*}
+  {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
+  \cvskill
+  {lang}
+  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等。}
+\end{cvskills}
+
+\cvsubsubsection{dkcodefile}
+
+\cvsubsubsection{dkcomment}
+
+\cvsubsubsection{dkcodebox}
+
+\cvsubsubsection{dirtree}
 
 以上所有组件，基本可以满足所有日常创作，特别是科技类和IT类作品的创作需要，当然我会持续不断完善和扩展{\dk}的功能，后续组件会更加丰富。
 
