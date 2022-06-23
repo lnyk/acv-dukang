@@ -72,6 +72,28 @@
 % \RequirePackage[cache=false, outputdir=src]{minted}
 \RequirePackage[outputdir=src]{minted}
 %-------------------------------------------------------------------------------
+% minted的全局样式设定
+% 以下设定即可以放在导言区，也可以在文档区随用随定义
+%
+% 指定所有语言的全局高亮样式
+%   \usemintedstyle{minted_style}
+%
+% 单独指定语言的全局高亮样式
+%   \usemintedstyle[lang]{minted_style}
+%
+% 单独指定语言的行内代码样式
+%   \newmintinline{lang}{option}
+%   其中option选项可为：
+%     showspaces 将空格显式的打印出来
+%
+% 说明：
+%   lang
+%     Pygments支持超过300种编程语言的语法高亮，具体列表请使用下面命令查看
+%       pygmentize -L lexers
+%   minted_style
+%     可选，minted预定义的高亮样式，默认为tango，可选项请使用下面命令查看
+%       pygmentize -L styles
+%-------------------------------------------------------------------------------
 % tcolorbox
 % 引入tcolorbox的库
 \tcbuselibrary{skins, listings, xparse, breakable, minted}
@@ -92,26 +114,6 @@
   fontupper=\sffamily,
   default minted options={tabsize=2,breaklines,linenos,numbersep=3mm},
 }
-%-------------------------------------------------------------------------------
-% minted的全局样式设定
-% 以下设定即可以放在导言区，也可以在文档区随用随定义
-%
-% 指定所有语言的全局高亮样式
-%   \usemintedstyle{minted_style}
-%
-% 单独指定语言的全局高亮样式
-%   \usemintedstyle[lang]{minted_style}
-%
-% 单独指定语言的行内代码样式
-%   \newmintinline{lang}{option}
-%   其中option选项可为：
-%     showspaces 将空格显式的打印出来
-%
-% 说明：
-%   minted_style
-%     代码高亮样式，可选项为：
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
 %-------------------------------------------------------------------------------
 % tabular
 % 用于支撑tcblisting环境
@@ -178,6 +180,9 @@
 %-------------------------------------------------------------------------------
 \RequirePackage{layouts}
 %-------------------------------------------------------------------------------
+% pgffor
+%
+% 用于支持foreach循环
 \RequirePackage{pgffor}
 
 
@@ -642,15 +647,15 @@
 %   *
 %     不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同
 %   lang
-%     语言名称，例如bash, python3, java, c, go等
+%     Pygments支持超过300种编程语言的语法高亮，具体列表请使用下面命令查看
+%       pygmentize -L lexers
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
 %   color
 %     可选，指定主色调或省略进行自适应，默认为awesome
 %   minted_style
-%     可选，minted预定义的高亮样式，默认为tango，可选项为
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
+%     可选，minted预定义的高亮样式，默认为tango，可选项请使用下面命令查看
+%       pygmentize -L styles
 %
 % 例如：
 %   \begin{dkcode}{python3}
@@ -732,15 +737,15 @@
 %   file
 %     代码块内容的来源文件，必须为内容可读的文本文件
 %   lang
-%     语言名称，例如bash, python3, java, c, go等
+%     Pygments支持超过300种编程语言的语法高亮，具体列表请使用下面命令查看
+%       pygmentize -L lexers
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
 %   color
 %     可选，指定主色调或省略进行自适应，默认为awesome
 %   minted_style
-%     可选，minted预定义的高亮样式，默认为tango，可选项为
-%       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
-%       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
+%     可选，minted预定义的高亮样式，默认为tango，可选项请使用下面命令查看
+%       pygmentize -L styles
 %
 % 例如：
 %   \dkcodefile{src/code.go}{golang}
@@ -812,7 +817,7 @@
 % 备注框，主色调既可以手动指定，也可以基于Awesome-CV的awesome颜色自适应
 %
 % 用法：
-%   \begin{dkcomment}<*><[title]><[fontawesome_name]><[color]>
+%   \begin{dkcomment}<*><[title]><[color]><[fontawesome]>
 %     ...
 %   \end{dkcomment}
 %
@@ -821,21 +826,21 @@
 %     不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
-%   fontawesome_name
-%     可选，FontAwesome的图标代码或名称，默认为\faTheaterMasks
 %   color
 %     可选，指定主色调或省略进行自适应，默认为awesome
+%   fontawesome
+%     可选，FontAwesome的图标代码或名称，默认为\faTheaterMasks
 %
 % 例如：
 %   \begin{dkcomment}
 %   \begin{dkcomment}*[这里是标题]
-%   \begin{dkcomment}[这里是标题][\faTree]
-%   \begin{dkcomment}*[这里是标题][\faTree][blue]
+%   \begin{dkcomment}[这里是标题][blue]
+%   \begin{dkcomment}*[这里是标题][blue][\faTree]
 %
 % 注意：
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTColorBox{dkcomment}{ s o O{\faTheaterMasks} O{awesome} }{
+\DeclareTColorBox{dkcomment}{ s o O{awesome} O{\faTheaterMasks} }{
   breakable,
   drop shadow,
   size=title,
@@ -846,13 +851,13 @@
   arc=1.5mm,
   enhanced jigsaw,
   boxrule=0.5mm,
-  colframe=#4,
-  colback=#4!5,
+  colframe=#3,
+  colback=#3!5,
   coltitle=white,
   coltext=text,
   IfBooleanTF={#1}{%
     IfValueT={#2}{title={#2}},
-    colbacktitle=#4!85,
+    colbacktitle=#3!85,
     attach boxed title to top center={
       yshift=-0.25mm-\tcboxedtitleheight/2,
       yshifttext=2mm-\tcboxedtitleheight/2
@@ -881,7 +886,7 @@
       }
     },
   }{%
-    IfValueT={#2}{title=\TwoSymbolsAndText{#3}{#2}{#3}},
+    IfValueT={#2}{title=\TwoSymbolsAndText{#4}{#2}{#4}},
   }
 }
 %-------------------------------------------------------------------------------

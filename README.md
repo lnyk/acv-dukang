@@ -13,7 +13,9 @@ Awesome-CV Dukang项目
 -   增加`dkmeasure`用于打印长度数值或进行单位转换后打印
 -   修改`cvskills`列宽
 -   重构`dkcode`和`dkcodefile`，将`color`参数调整到`minted_style`之前
+-   重构`dkcomment`，将`color`参数调整到`fontawesome_name`之前
 -   修正`minted`引擎无法切换`tango`以外的`style`的错误，需要打开缓存，已从`minted`包调用参数中去掉`cache=false`并使用`make`联动清理临时文件目录
+-   增加`03-usage`的`本地环境准备`章节
 -   更新`04-comp`
 
 ### 2022.06.22

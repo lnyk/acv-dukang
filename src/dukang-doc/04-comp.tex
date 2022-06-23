@@ -185,13 +185,17 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
 
 |\begin{dkcode}<*>{lang}<[title]><[color]><[minted_style]>...\end{dkcode}|
 
+\begin{dkcomment}*[特别说明]
+  $dkcode$环境以及$dkcodefile$命令默认使用$tcolorbox$的$minted$高质量引擎进行代码渲染，这意味着你需要提前准备好Python和Pygments库，详细安装说明在之前“编译使用详解”章节的“本地环境准备”小节中已经进行了阐述，遇到问题请随时检查本地环境是否满足编译条件。
+\end{dkcomment}
+
 \begin{cvskills}*
   \cvskill
   {*}
   {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
   \cvskill
   {lang}
-  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等。}
+  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等，可选项请运行\dkbutton{pygmentize -L lexers}命令查看。}
   \cvskill
   {title}
   {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
@@ -200,7 +204,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
   {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
   \cvskill
   {minted\_style}
-  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
+  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，$minted$预定义的高亮样式，默认为tango，可选项请运行\dkbutton{pygmentize -L styles}命令查看。}
 \end{cvskills}
 
 使用示例：
@@ -210,8 +214,8 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
   ...
 \end{dkcode}
 
-\begin{dkcode}{latex}[带瘦标题栏蓝色][blue][colorful]
-\begin{dkcode}{latex}[带瘦标题栏蓝色][blue][colorful]
+\begin{dkcode}{latex}[带瘦标题栏蓝色vim风格][blue][vim]
+\begin{dkcode}{latex}[带瘦标题栏蓝色vim风格][blue][vim]
   ...
 \end{dkcode}
 
@@ -223,7 +227,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
 \cvsubsubsection{dkcodefile}
 这个组件的功能和设定与|\dkcode|类似，都是代码高亮块，风格也一样，只不过多了一个必选参数，就是从外部文件中读取内容，比较适合多行代码，或者联动编译\footnote{本文档“编译使用详解”一节，就是在编译时使用dkcodefile直接读取的真实Makefile文件。}。具体用法是：
 
-|\dkcodefile<*>{file}{lang}<[title]><[minted_style]><[color]>|
+|\dkcodefile<*>{file}{lang}<[title]><[color]><[minted_style]>|
 
 \begin{cvskills}*
   \cvskill
@@ -234,16 +238,16 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
   {必选参数，指定外部文件的位置，可以使用相对路径，起点跟$dkresource$的$file$参数一样，都是\dkbutton{./src/}.}
   \cvskill
   {lang}
-  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等。}
+  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等，可选项请运行\dkbutton{pygmentize -L lexers}命令查看。}
   \cvskill
   {title}
   {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
   \cvskill
-  {minted\_style}
-  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
-  \cvskill
   {color}
   {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
+  \cvskill
+  {minted\_style}
+  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，$minted$预定义的高亮样式，默认为tango，可选项请运行\dkbutton{pygmentize -L styles}命令查看。}
 \end{cvskills}
 
 \begin{dkcomment}*[对于初学者来说容易犯的一个错误]
@@ -257,7 +261,7 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
 \cvsubsubsection{dkcomment}
 该组件样式风格与$dkcode$和$dkcodefile$类似，只不过不带代码高亮能力，而是多了一个可以指定标题栏（如果有标题的话）图标的参数，主要用来当作备注栏，用法为：
 
-|\begin{dkcomment}<*><[title]><[fontawesome]><[color]>...\end{dkcomment}|
+|\begin{dkcomment}<*><[title]><[color]><[fontawesome]>...\end{dkcomment}|
 
 \begin{cvskills}*
   \cvskill
@@ -267,11 +271,11 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   {title}
   {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
   \cvskill
-  {fontawesome}
-  {可选参数，$FontAwesome$宏包的图标代码或名称，默认为$\textbackslash faTheaterMasks$ \faTheaterMasks}
-  \cvskill
   {color}
   {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
+  \cvskill
+  {fontawesome}
+  {可选参数，$FontAwesome$宏包的图标代码或名称，默认为$\textbackslash faTheaterMasks$ \faTheaterMasks}
 \end{cvskills}
 
 关于$FontAwesome$宏包以及图标代码，可以访问\dkbutton*{\hyperref{https://fontawesome.com/}{}{}{Font Awesome}}官网，或者如果你的套装里有安装\dkbutton{texdoc}，可以使用命令\dkcodebox*{texdoc fontawesome5}直接打开本地文档查阅。
@@ -286,12 +290,12 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   瘦标题栏风格是不带图标的
 \end{dkcomment}
 
-\begin{dkcomment}[默认标题栏备注框，指定图标和颜色][\faTree][green]
-  |\begin{dkcomment}[默认标题栏备注框，指定图标和颜色][\faTree][green]|\\
+\begin{dkcomment}[默认标题栏备注框，指定颜色和图标][green][\faTree]
+  |\begin{dkcomment}[默认标题栏备注框，指定颜色和图标][green][\faTree]|\\
     ...\\
   |\end{dkcomment}|
 
-  指定图标|\faTree|和颜色|green|
+  指定颜色|green|和图标|\faTree|
 \end{dkcomment}
 
 \begin{dkcomment}
@@ -309,9 +313,11 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   \foreach \x in {3,6,...,39}{%
     \fontsize{\x}{1em}\faTree%
   }]%
-  [\fontsize{42pt}{1em}\faTree]%
   [cyan]%
-  一个发挥想象力的用法
+  [\fontsize{42pt}{1em}\faTree]%
+  一个发挥想象力的用法{\faHeart}
+
+  下面的$foreach$循环控制命令需要用到$pgffor$宏包，{\dk}已经帮你引用好了。
 
   \begin{dkcode}*{latex}[代码在这里][cyan]
     \begin{dkcomment}[%
@@ -321,8 +327,8 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
       \foreach \x in {3,6,...,39}{%
         \fontsize{\x}{1em}\faTree%
       }]%
-      [\fontsize{42pt}{1em}\faTree]%
       [cyan]%
+      [\fontsize{42pt}{1em}\faTree]%
       一个发挥想象力的用法
     \end{dkcomment}
   \end{dkcode}
