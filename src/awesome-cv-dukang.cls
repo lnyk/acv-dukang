@@ -724,7 +724,7 @@
 % 该命令从指定文件中读取内容进行高亮显示，同时提供2种标题风格
 %
 % 用法：
-%   \dkcodefile<*>{file}{lang}<[title]><[minted_style]><[color]>
+%   \dkcodefile<*>{file}{lang}<[title]><[color]><[minted_style]>
 %
 % 说明：
 %   *
@@ -735,39 +735,39 @@
 %     语言名称，例如bash, python3, java, c, go等
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
+%   color
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %   minted_style
 %     可选，minted预定义的高亮样式，默认为tango，可选项为
 %       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
 %       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   color
-%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 例如：
 %   \dkcodefile{src/code.go}{golang}
 %   \dkcodefile*{src/code.go}{golang}[主文件代码]
-%   \dkcodefile{src/code.go}{golang}[主文件代码][tango]
-%   \dkcodefile*{src/code.go}{golang}[主文件代码][tango][blue]
+%   \dkcodefile{src/code.go}{golang}[主文件代码][blue]
+%   \dkcodefile*{src/code.go}{golang}[主文件代码][blue][vim]
 %
 % 注意：
 %   参数的给定是有顺序的，只可从后往前忽略。
 %-------------------------------------------------------------------------------
-\DeclareTCBInputListing{dkcodefile}{ s m m !o !O{tango} !O{awesome} }{
+\DeclareTCBInputListing{dkcodefile}{ s m m !o !O{awesome} !O{tango} }{
   breakable,
   drop shadow,
   listing engine=minted,
   minted language=#3,
-  minted style=#5,
+  minted style=#6,
   listing only,
   left=6mm,
   right=6mm,
   enhanced,
-  colframe=#6,
-  colback=#6!5,
+  colframe=#5,
+  colback=#5!5,
   coltitle=white,
   listing file={#2},
   IfBooleanTF={#1}{%
     IfValueT={#4}{title={#4}},
-    colbacktitle=#6!85,
+    colbacktitle=#5!85,
     attach boxed title to top center={
       yshift=-0.25mm-\tcboxedtitleheight/2,
       yshifttext=2mm-\tcboxedtitleheight/2
@@ -797,7 +797,7 @@
     },
     overlay={
       \begin{tcbclipinterior}
-        \fill[#6!20]
+        \fill[#5!20]
         (frame.south west)
         rectangle
         ([xshift=5mm]frame.north west);
