@@ -189,7 +189,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
 
 其中，各参数的含义为：
 
-\begin{cvskills}*
+\begin{cvskills}
   \cvskill
   {*}
   {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
@@ -202,7 +202,16 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
   \cvskill
   {minted\_style}
   {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
+  \cvskill
+  {color}
+  {可选参数，指定主色调或省略进行自适应，默认为awesome}
 \end{cvskills}
+
+使用示例：
+
+\begin{dkcode}*{latex}[带标题栏默认颜色]
+  \begin{dkcode}*{latex}[带标题栏默认颜色]
+\end{dkcode}
 
 \cvsubsubsection{dkcodefile}
 

@@ -149,6 +149,8 @@
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 % 修改脚注字体
 \renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
+% 设置页脚距离
+\setlength{\footskip}{14.49998pt}
 %-------------------------------------------------------------------------------
 % figure设置
 %-------------------------------------------------------------------------------
@@ -166,6 +168,12 @@
 % fancyvrb设置
 \RequirePackage{fancyvrb}
 \DefineShortVerb{\|}
+%-------------------------------------------------------------------------------
+% layouts设置
+%
+% 用于支持\dkmeasure命令，打印一些测量数值
+%-------------------------------------------------------------------------------
+\RequirePackage{layouts}
 %-------------------------------------------------------------------------------
 
 
@@ -432,7 +440,7 @@
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       \renewcommand{\arraystretch}{1.5}
-      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} R{0.12\textwidth} L{\IfBooleanTF{#1}{0.88\textwidth}{0.88\textwidth + \tabcolsep}}}
+      \begin{tabular*}{\textwidth}{R{0.12\textwidth} L{\IfBooleanTF{#1}{0.83\textwidth}{0.83\textwidth + \tabcolsep}}}
 }{%
       \end{tabular*}
     \end{center}
@@ -649,7 +657,7 @@
 %   \end{dkcode}
 %
 % 注意：
-%   参数的给定是有顺序的，只可从后往前忽略。
+%   参数的给定是有顺序的，只可从后往前省略。
 %-------------------------------------------------------------------------------
 \DeclareTCBListing{dkcode}{ s m !o !O{tango} !O{awesome} }{
   breakable,
@@ -874,11 +882,23 @@
 }
 %-------------------------------------------------------------------------------
 % dkcodebox
+%
 % 短命令行，颜色自适应，类似于dkbutton
 % 分为带*和不带*两个版本，前者有命令提示符和关键字高亮，后者没有
+%
 % 用法：
+%   \dkcodebox<*>{text}
+%
+% 说明：
+%   *
+%     带星号有命令提示符和关键字高亮，不带星号的没有
+%   text
+%     正文文本
+%
+% 例如：
 %   \dkcodebox*{echo 'nice'}
 %   \dkcodebox{Some Text}
+%
 % 注意：
 %   由于使用了动词，该命令不能用在其他环境和命令的参数中，
 %   目前尚未解决该问题，还是推荐使用dkbutton
@@ -894,6 +914,30 @@
     keywordstyle=\color{awesome}\bfseries%
   ]%
   ^#2^%
+}
+%-------------------------------------------------------------------------------
+% dkmeasure
+%
+% 打印测量数值，主要用于构建页面时的长度测量。
+% 分为带*和不带*两个版本，类似于dkbutton
+%
+% 用法：
+%   \dkmeasure*[cm]{\textwidth}
+%   \dkmeasure*{\linewidth}
+%   \dkmeasure[mm]{1em}
+%-------------------------------------------------------------------------------
+\DeclareDocumentCommand{\dkmeasure}{ s O{cm} m }{%
+  \IfBooleanTF{#1}{%
+    \dkbutton*{%
+      {\color{awesome}{\ttfamily\bfseries \Verb{#3} > }}%
+      \printinunitsof{#2}\prntlen{#3}%
+    }%
+  }{%
+    \dkbutton{%
+      {\color{awesome}{\ttfamily\bfseries \Verb{#3} > }}%
+      \printinunitsof{#2}\prntlen{#3}%
+    }%
+  }
 }
 %-------------------------------------------------------------------------------
 
