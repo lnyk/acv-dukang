@@ -109,31 +109,33 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
     {另一种风格的Inline代码小盒子，可切换是否显示命令提示符}
     {深色背景}
   \cvhonor
+    {\Verb{\dkmeasure}}
+    {打印长度数值，主要用于在构建页面时对长度变量进行测量}
+    {开发小工具}
+  \cvhonor
     {\Verb{\dirtree}}
     {显示文件夹树状结构的宏包命令，{\dk}进行了引入，无需再封装}
     {直接使用}
 \end{cvhonors}
 
-这些组件都有自己的用法和适合的使用环境，以及一些注意事项，接下来逐一介绍一下它们的细节。
+这些组件都有自己的用法和适合的使用环境，以及一些注意事项，其中最重要的一条共性原则是：必选参数都使用大括号|{}|指定，可选参数都是方括号|[]|指定，由于{\LaTeXe}没有所谓“命名参数”的概念，因此所有的可选参数必须从右至左省略，举个例子，参数$1,2,3,4$，要想指定参数$3$的内容，必须连同$1,2$一起给出，否则引擎无法判断你到底给出了第几个参数。
 
 \cvsubsubsection{dkbutton}
 首先介绍这个小按钮，是因为在本文档中它用的最多，几乎随处可见，调用格式为：
 
 |\dkbutton<*>[color]{text}|
 
-包括星号在内共有两个可选参数，其中星号控制两种风格的切换：
-
 \begin{center}
   \dkbutton{\textbackslash dkbutton\{这里有个小按钮\}} \& \dkbutton*{\textbackslash dkbutton*\{这里有圆形的小按钮\}}
 \end{center}
 
-color默认为自动适应在主文档中指定的Awesome-CV的主配色，如果想要自选配色，可以使用这个参数进行指定，比如：
+color默认为自动适应在主文档中指定的Awesome-CV的主配色，也可以自行指定，比如：
 
 \begin{center}
   \dkbutton[blue]{\textbackslash dkbutton[blue]\{蓝色小按钮\}} \& \dkbutton*[green]{\textbackslash dkbutton*[green]\{绿色圆形小按钮\}}
 \end{center}
 
-在使用方面，除了尽量以“Inline”（也就是在正文的行内）的方式使用外几乎没有限制，当然如果想要一个超大的按钮也是可以的，只是推荐把它放在单独一个段落中，比如：
+在使用方面，除了尽量以行内方式使用外几乎没有限制，同一行中别用太多就行，否则影响自动断行。当然如果想要一个超大的按钮也是可以的，只是推荐把它放在单独一个段落中，比如：
 
 \begin{center}
   \vspace{1em}
@@ -141,14 +143,10 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
   \vspace{1em}
 \end{center}
 
-需要注意的是，同一行（或段落）中不要使用的太多，不然会影响自动断行，出现超宽或过窄的情况。
-
 \cvsubsubsection{dkresource}
 这个组件的作用是将外部资源（比如另一个PDF文档或PNG图片）引入当前位置居中显示，并可手动指定宽度自动缩放，调用格式为：
 
 |\dkresource<[caption]>{file}<[width_factor]><[htbp!]>|
-
-其中，各参数的含义为：
 
 \begin{cvskills}*
   \cvskill
@@ -167,12 +165,12 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
 
 使用示例：
 
-|\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.3]|\footnote{resource文件夹的联动编译功能最主要目的也是为了支持dkresource.}
+|\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.25]|\footnote{resource文件夹的联动编译功能最主要目的也是为了支持dkresource.}
 
-\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.3]
+\dkresource[这里有个酒坛子]{resource/dukang-logo}[0.25]
 
 \begin{dkcomment}*[关于浮动体的说明]
-  \hspace{2em}$dkresource$实际上是基于{\LaTeX} $figure$环境的简单再封装，让人比较晕的是$htbp!$浮动体控制参数的意义，简单理解的话就是，在生成PDF文件的时候，{\LaTeX}编译器会根据浮动体控制参数来自动判断并确定浮动体在页面中的显示位置，这里的浮动体指的就是$dkresource$所引入的资源，排版位置的选取与参数里符号的顺序并无关系，编译器总是以$h \to t \to b \to p$的顺序来检查参数。
+  \hspace{2em}$dkresource$实际上是基于{\LaTeXe} $figure$环境的简单再封装，让人比较晕的是$htbp!$浮动体控制参数的意义，简单理解的话就是，在生成PDF文件的时候，{\LaTeX}编译器会根据浮动体控制参数来自动判断并确定浮动体在页面中的显示位置，这里的浮动体指的就是$dkresource$所引入的资源，排版位置的选取与参数里符号的顺序并无关系，编译器总是以$h \to t \to b \to p$的顺序来检查参数。
 
   \hspace{2em}|!|的作用是忽略限制，这里的默认限制总共有两条，超出该限制会强制将浮动体拖入下一页再判断，这两条分别是：
 
@@ -187,9 +185,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
 
 |\begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>...\end{dkcode}|
 
-其中，各参数的含义为：
-
-\begin{cvskills}
+\begin{cvskills}*
   \cvskill
   {*}
   {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
@@ -204,20 +200,137 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，如�
   {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
   \cvskill
   {color}
-  {可选参数，指定主色调或省略进行自适应，默认为awesome}
+  {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
 \end{cvskills}
 
 使用示例：
 
 \begin{dkcode}*{latex}[带标题栏默认颜色]
-  \begin{dkcode}*{latex}[带标题栏默认颜色]
+\begin{dkcode}*{latex}[带标题栏默认颜色]
+  ...
+\end{dkcode}
+
+\begin{dkcode}{latex}[带瘦标题栏蓝色][tango][blue]
+\begin{dkcode}{latex}[带瘦标题栏蓝色][tango][blue]
+  ...
+\end{dkcode}
+
+\begin{dkcode}{latex}
+\begin{dkcode}{latex}
+  % 无标题
 \end{dkcode}
 
 \cvsubsubsection{dkcodefile}
+这个组件的功能和设定与|\dkcode|类似，都是代码高亮块，风格也一样，只不过多了一个必选参数，就是从外部文件中读取内容，比较适合多行代码，或者联动编译\footnote{本文档“编译使用详解”一节，就是在编译时使用dkcodefile直接读取的真实Makefile文件。}。具体用法是：
+
+|\dkcodefile<*>{file}{lang}<[title]><[minted_style]><[color]>|
+
+\begin{cvskills}*
+  \cvskill
+  {*}
+  {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
+  \cvskill
+  {file}
+  {必选参数，指定外部文件的位置，可以使用相对路径，起点跟$dkresource$的$file$参数一样，都是\dkbutton{./src/}.}
+  \cvskill
+  {lang}
+  {必选参数，指定$minted$引擎支持的语言名称，例如$bash, python3, java, c, go$等。}
+  \cvskill
+  {title}
+  {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
+  \cvskill
+  {minted\_style}
+  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
+  \cvskill
+  {color}
+  {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
+\end{cvskills}
+
+\begin{dkcomment}*[对于初学者来说容易犯的一个错误]
+dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是命令，只有一行，没有开始和结束标记。
+\end{dkcomment}
+
+具体应用示例在这里就不展示了，感兴趣的话可以参考本文档“编译与使用详解”一节的源码，位置在：
+
+\dkbutton*{./src/dukang-doc/03-usage.tex}
 
 \cvsubsubsection{dkcomment}
+该组件样式风格与$dkcode$和$dkcodefile$类似，只不过不带代码高亮能力，而是多了一个可以指定标题栏（如果有标题的话）图标的参数，主要用来当作备注栏，用法为：
+
+|\begin{dkcomment}<*><[title]><[fontawesome]><[color]>...\end{dkcomment}|
+
+\begin{cvskills}*
+  \cvskill
+  {*}
+  {可选参数，不带星号为普通标题栏，带星号为瘦标题栏，两者只是标题风格不同。}
+  \cvskill
+  {title}
+  {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
+  \cvskill
+  {fontawesome}
+  {可选参数，$FontAwesome$宏包的图标代码或名称，默认为$\textbackslash faTheaterMasks$ \faTheaterMasks}
+  \cvskill
+  {color}
+  {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
+\end{cvskills}
+
+关于$FontAwesome$宏包以及图标代码，可以访问\dkbutton*{\hyperref{https://fontawesome.com/}{}{}{Font Awesome}}官网，或者如果你的套装里有安装\dkbutton{texdoc}，可以使用命令\dkcodebox*{texdoc fontawesome5}直接打开本地文档查阅。
+
+使用示例：
+
+\begin{dkcomment}*[瘦标题栏备注框]
+  |\begin{dkcomment}*[瘦标题栏备注框]|\\
+    ...\\
+  |\end{dkcomment}|
+
+  瘦标题栏风格是不带图标的
+\end{dkcomment}
+
+\begin{dkcomment}[默认标题栏备注框，指定图标和颜色][\faTree][green]
+  |\begin{dkcomment}[默认标题栏备注框，指定图标和颜色][\faTree][green]|\\
+    ...\\
+  |\end{dkcomment}|
+
+  指定图标|\faTree|和颜色|green|
+\end{dkcomment}
+
+\begin{dkcomment}
+  |\begin{dkcomment}|\\
+    ...\\
+  |\end{dkcomment}|
+
+  省略标题参数的话，就没有标题栏
+\end{dkcomment}
+
+\begin{dkcomment}[%
+  \foreach \x in {39,36,...,3}{%
+    \fontsize{\x}{1em}\faTree%
+  }%
+  \foreach \x in {3,6,...,39}{%
+    \fontsize{\x}{1em}\faTree%
+  }]%
+  [\fontsize{42pt}{1em}\faTree]%
+  [cyan]%
+  一个发挥想象力的用法
+
+  \begin{dkcode}*{latex}[代码在这里][tango][cyan]
+    \begin{dkcomment}[%
+      \foreach \x in {39,36,...,3}{%
+        \fontsize{\x}{1em}\faTree%
+      }%
+      \foreach \x in {3,6,...,39}{%
+        \fontsize{\x}{1em}\faTree%
+      }]%
+      [\fontsize{42pt}{1em}\faTree]%
+      [cyan]%
+      一个发挥想象力的用法
+    \end{dkcomment}
+  \end{dkcode}
+\end{dkcomment}
 
 \cvsubsubsection{dkcodebox}
+
+\cvsubsubsection{dkmeasure}
 
 \cvsubsubsection{dirtree}
 
