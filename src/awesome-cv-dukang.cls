@@ -67,7 +67,10 @@
 %     如果开启缓存，有可能会出现undefined control sequence错误
 %     解决办法，要么在重新编译前，删除_minted-*缓存目录，要么关闭缓存
 %     自动删除已添加到Makefile的make clean以及make cleanall命令中，无需手动删除
-\RequirePackage[cache=false, outputdir=src]{minted}
+%     如果关闭缓存，风格指定将出现错误，当前可行的最佳做法依然是打开缓存，
+%     使用make联动清理缓存目录
+% \RequirePackage[cache=false, outputdir=src]{minted}
+\RequirePackage[outputdir=src]{minted}
 %-------------------------------------------------------------------------------
 % tcolorbox
 % 引入tcolorbox的库
@@ -631,7 +634,7 @@
 % 代码高亮块，颜色自适应或手动指定
 %
 % 用法：
-%   \begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>
+%   \begin{dkcode}<*>{lang}<[title]><[color]><[minted_style]>
 %     ...
 %   \end{dkcode}
 %
@@ -642,40 +645,40 @@
 %     语言名称，例如bash, python3, java, c, go等
 %   title
 %     可选，代码块标题栏文字，如果不指定该参数，则自适应隐藏标题栏
+%   color
+%     可选，指定主色调或省略进行自适应，默认为awesome
 %   minted_style
 %     可选，minted预定义的高亮样式，默认为tango，可选项为
 %       algol, friendly, lovelace, pastie, tango, vs, autumn, fruity,
 %       monokai, perldoc, trac, borland, igor, murphy, rrt, vim
-%   color
-%     可选，指定主色调或省略进行自适应，默认为awesome
 %
 % 例如：
 %   \begin{dkcode}{python3}
 %   \begin{dkcode}*{python3}[代码示例]
-%   \begin{dkcode}{python3}[代码示例][tango]
-%   \begin{dkcode}*{python3}[代码示例][tango][blue]
+%   \begin{dkcode}{python3}[代码示例][blue]
+%   \begin{dkcode}*{python3}[代码示例][blue][tango]
 %     ...
 %   \end{dkcode}
 %
 % 注意：
 %   参数的给定是有顺序的，只可从后往前省略。
 %-------------------------------------------------------------------------------
-\DeclareTCBListing{dkcode}{ s m !o !O{tango} !O{awesome} }{
+\DeclareTCBListing{dkcode}{ s m !o !O{awesome} !O{tango} }{
   breakable,
   drop shadow,
   listing engine=minted,
   minted language=#2,
-  minted style=#4,
+  minted style=#5,
   listing only,
   left=6mm,
   right=6mm,
   enhanced,
-  colframe=#5,
-  colback=#5!5,
+  colframe=#4,
+  colback=#4!5,
   coltitle=white,
   IfBooleanTF={#1}{%
     IfValueT={#3}{title={#3}},
-    colbacktitle=#5!85,
+    colbacktitle=#4!85,
     attach boxed title to top center={
       yshift=-0.25mm-\tcboxedtitleheight/2,
       yshifttext=2mm-\tcboxedtitleheight/2
@@ -705,7 +708,7 @@
     },
     overlay={
       \begin{tcbclipinterior}
-        \fill[#5!20]
+        \fill[#4!20]
         (frame.south west)
         rectangle
         ([xshift=5mm]frame.north west);

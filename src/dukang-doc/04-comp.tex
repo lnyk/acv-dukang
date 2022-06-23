@@ -183,7 +183,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
 \cvsubsubsection{dkcode}
 这个组件通过封装$tcolorbox$宏包，使用$minted$引擎对计算机语言代码进行高亮显示，支持中文并调整行距字体显得更加美观，同时支持组件标题栏风格、代码高亮风格以及主配色的手动指定。用法为：
 
-|\begin{dkcode}<*>{lang}<[title]><[minted_style]><[color]>...\end{dkcode}|
+|\begin{dkcode}<*>{lang}<[title]><[color]><[minted_style]>...\end{dkcode}|
 
 \begin{cvskills}*
   \cvskill
@@ -196,11 +196,11 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
   {title}
   {可选参数，代码块的标题栏内容，如果没有该参数，则不显示标题栏，并自动忽略*参数。}
   \cvskill
-  {minted\_style}
-  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
-  \cvskill
   {color}
   {可选参数，指定主色调或省略进行自适应，默认为$awesome$}
+  \cvskill
+  {minted\_style}
+  {可选参数，指定$minted$引擎预定义的高亮显示风格，默认为$tango$，参照你的本地版本，可选项一般为algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt, vim.}
 \end{cvskills}
 
 使用示例：
@@ -210,8 +210,8 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
   ...
 \end{dkcode}
 
-\begin{dkcode}{latex}[带瘦标题栏蓝色][tango][blue]
-\begin{dkcode}{latex}[带瘦标题栏蓝色][tango][blue]
+\begin{dkcode}{latex}[带瘦标题栏蓝色][blue][colorful]
+\begin{dkcode}{latex}[带瘦标题栏蓝色][blue][colorful]
   ...
 \end{dkcode}
 
@@ -313,7 +313,7 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   [cyan]%
   一个发挥想象力的用法
 
-  \begin{dkcode}*{latex}[代码在这里][tango][cyan]
+  \begin{dkcode}*{latex}[代码在这里][cyan]
     \begin{dkcomment}[%
       \foreach \x in {39,36,...,3}{%
         \fontsize{\x}{1em}\faTree%
