@@ -184,6 +184,21 @@
 %
 % 用于支持foreach循环
 \RequirePackage{pgffor}
+%-------------------------------------------------------------------------------
+% 表格环境
+%
+% 用于支持长表格环境
+\RequirePackage{longtable}
+% 支持给p{len}标记的列指定对齐方式
+\RequirePackage{array}
+% 支持landscape模式，把页面横过来
+\RequirePackage{lscape}
+% 支持表格中跨行
+\RequirePackage{multirow}
+% 表格中的反斜线
+\RequirePackage{diagbox}
+%-------------------------------------------------------------------------------
+% \RequirePackage[utf8]{inputenc}
 
 
 %-------------------------------------------------------------------------------
@@ -928,24 +943,30 @@
 % dkmeasure
 %
 % 打印长度数值，主要用于在构建页面时对长度变量进行测量。
-% 分为带*和不带*两个版本，类似于dkbutton
+% 分为带*和不带*两个版本，类似于dkbutton，主要用于调试目的。
 %
 % 用法：
+%   \dkmeasure<*><[unit]>{something}
+%
+% 说明：
+%   *
+%     可选参数，带*显示长度单位，不带*只显示转换结果
+%   unit
+%     长度单位，可以是cm, mm, pt等，默认为cm
+%   something
+%     需要打印的宏或命令，例如\textwidth, \baselineskip, 1em, 20pt等
+%
+% 例如：
 %   \dkmeasure*[cm]{\textwidth}
 %   \dkmeasure*{\linewidth}
 %   \dkmeasure[mm]{1em}
 %-------------------------------------------------------------------------------
 \DeclareDocumentCommand{\dkmeasure}{ s O{cm} m }{%
-  \IfBooleanTF{#1}{%
-    \dkbutton*{%
+  \dkbutton*{%
+    \IfBooleanT{#1}{%
       {\color{awesome}{\ttfamily\bfseries \Verb{#3} > }}%
-      \printinunitsof{#2}\prntlen{#3}%
     }%
-  }{%
-    \dkbutton{%
-      {\color{awesome}{\ttfamily\bfseries \Verb{#3} > }}%
-      \printinunitsof{#2}\prntlen{#3}%
-    }%
+    \printinunitsof{#2}\prntlen{#3}%
   }
 }
 %-------------------------------------------------------------------------------

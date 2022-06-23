@@ -317,26 +317,105 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   [\fontsize{42pt}{1em}\faTree]%
   一个发挥想象力的用法{\faHeart}
 
+  \begin{dkcode}*{latex}[代码在这里][cyan]
+\begin{dkcomment}[%
+  \foreach \x in {39,36,...,3}{%
+    \fontsize{\x}{1em}\faTree%
+  }%
+  \foreach \x in {3,6,...,39}{%
+    \fontsize{\x}{1em}\faTree%
+  }]%
+  [cyan]%
+  [\fontsize{42pt}{1em}\faTree]%
+  一个发挥想象力的用法
+\end{dkcomment}
+  \end{dkcode}
   下面的$foreach$循环控制命令需要用到$pgffor$宏包，{\dk}已经帮你引用好了。
 
-  \begin{dkcode}*{latex}[代码在这里][cyan]
-    \begin{dkcomment}[%
-      \foreach \x in {39,36,...,3}{%
-        \fontsize{\x}{1em}\faTree%
-      }%
-      \foreach \x in {3,6,...,39}{%
-        \fontsize{\x}{1em}\faTree%
-      }]%
-      [cyan]%
-      [\fontsize{42pt}{1em}\faTree]%
-      一个发挥想象力的用法
-    \end{dkcomment}
-  \end{dkcode}
+  行尾的\%表示忽略后面的空格，意思就是告诉{\LaTeX}引擎本行和下面的行是同一行。
 \end{dkcomment}
 
 \cvsubsubsection{dkcodebox}
+这个组件模拟行内的短命令行，类似于dkbutton，但是可选开关有命令提示符，使用星号$*$控制，带星号表示有命令提示符和关键字高亮。用法为：
+
+|\dkcodebox<*>{text}|
+
+例如（开始作死）：
+
+|\dkcodebox{sudo rm -rf /}|~\faArrowCircleRight~\dkcodebox{sudo rm -rf /}
+
+|\dkcodebox*{sudo shutdown 0 -P}|~\faArrowCircleRight~\dkcodebox*{sudo shutdown 0 -P}
 
 \cvsubsubsection{dkmeasure}
+呐，这个组件就比较有意思了，其本质是对$layouts$宏包里面几个命令的简单封装，当你想实际打印检查某个值，或者换算单位时，作为调试使用的话非常方便，比如表格的某个列到底有多宽，当前行距是多少，1em等于多少pt等。用法为：
+
+|\dkmeasure<*><[unit]>{something}|
+
+\begin{cvskills}*
+  \cvskill
+  {*}
+  {可选参数，带*显示被测目标名称，不带*只显示测量或转换结果。}
+  \cvskill
+  {unit}
+  {可选参数，用于指定长度单位，可以是cm, mm, pt等，默认为cm.}
+  \cvskill
+  {something}
+  {必选参数，需要打印的宏或命令，例如\textwidth, \baselineskip, 1em, 20pt等。}
+\end{cvskills}
+
+例如：
+
+|\dkmeasure*[cm]{\textwidth}|~\faArrowCircleRight~\dkmeasure*[cm]{\textwidth}
+
+|\dkmeasure*[mm]{\baselineskip}|~\faArrowCircleRight~\dkmeasure*[mm]{\baselineskip}
+
+|\dkmeasure{1em}|~\faArrowCircleRight~\dkmeasure{1em}
+
+更直观一些的应用场景，比如打印$tcolorbox$环境每个部分的宽度：
+
+\begin{center}
+\begin{minipage}[c]{14cm}
+\begin{tcolorbox}[%
+  fonttitle=\bfseries,
+  colback=awesome!5,%
+  colframe=awesome,%
+  sidebyside,%
+  title=\dkmeasure*{\linewidth}%
+  ]
+  \dkmeasure*{\linewidth}
+\tcblower
+  \dkmeasure*{\linewidth}
+\end{tcolorbox}
+\end{minipage}
+\end{center}
+\vspace{1em}
+
+或者表格每个单元格的尺寸：
+
+\setlength{\tabcolsep}{1ex}
+\begin{longtable}[c]{|p{5cm}<{\centering}|p{6cm}<{\raggedright}|p{5cm}<{\raggedleft}|}
+\hline
+\multicolumn{1}{|c}{第一列} & \multicolumn{1}{|c|}{第二列} & \multicolumn{1}{c|}{第三列}\\
+\hline
+\endfirsthead
+\multicolumn{3}{c}{续表~\thetable\hskip1em 测试尺寸}\\
+\hline
+第一列 & \multicolumn{1}{c|}{第二列} & \multicolumn{1}{r|}{第三列}\\
+\hline
+\endhead
+\multicolumn{2}{r}{续下页}
+\endfoot
+\endlastfoot
+那啥来着？ & 执着而不急成本，不为索取只为陶醉 & \dk\\
+\dkmeasure*{\linewidth} & \dkmeasure*{\linewidth} & \dkmeasure*{\linewidth}\\
+\hline
+\end{longtable}
+
+甚至某句话的宽度：
+
+|\newlength{\x}\settowidth{\x}{再这么熬夜下去就要变成熊猫了！}\dkmeasure{\x}|
+
+\newlength{\x}\settowidth{\x}{再这么熬夜下去就要变成熊猫了！}\dkmeasure{\x}
 
 \cvsubsubsection{dirtree}
 
