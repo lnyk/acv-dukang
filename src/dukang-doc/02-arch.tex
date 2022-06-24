@@ -1,5 +1,5 @@
 \cvsection{结构设计}
-由于{\dk}尽量使用非侵入式的方式与Awesome-CV进行集成，自然也沿用了其简洁方便的结构设计，除了总体编译文件、项目说明文件、项目图标以及文档类本体以外，其他的内容相关文件都放在\dkbutton{src/}中。其中为了更方便的操作，部分文件使用了软链接\footnote{使用make以及软链接，对Windows平台和使用IDE的用户来说可能需要做一些适应性调整，这部分问题目前不在\dk~的代码设计范围之内，也许未来版本会考虑加入跨平台的设计要素。}。
+由于{\dk}尽量使用非侵入式的方式与Awesome-CV进行集成，自然也沿用了其简洁方便的结构设计，除了总体编译文件、项目说明文件、项目图标以及文档类本体以外，其他的内容相关文件都放在\dkbutton{./src/}中。其中为了更方便的操作，部分文件使用了软链接\footnote{使用GNU Make以及软链接，对Windows平台和使用IDE的用户来说可能需要做一些适应性调整，这部分问题目前不在{\dk}的代码设计范围之内，也许未来版本会考虑加入跨平台的设计要素。}。
 
 \begin{dkcomment}*[项目结构说明]
 \dirtree{%
@@ -28,35 +28,36 @@
 
 \begin{cventries}
 \cventry[awesome-cv.cls][文档类]{
-  \item {该文件属于Awesome-CV的文档类文件，{\dk}主要也是通过对该文件进行重定义来达到中文化增强的目的。}
-  \item {由于是无侵入增强，在没有发生重大变化的前提下，应该可以\dkbutton*{\hyperref{https://github.com/posquit0/Awesome-CV}{}{}{下载}}该文件的最新版本后直接覆盖来升级。}
+  \item {该文件属于Awesome-CV的文档类文件，{\dk}主要也是通过对该文件进行重定义来达到中文支持的目的。}
+  \item {由于是无侵入方式，在没有发生重大变化的前提下，应该可以\dkbutton*{\hyperref{https://github.com/posquit0/Awesome-CV}{}{}{下载}}该文件的最新版本后直接覆盖来升级。}
 }
 \cventry[Makefile][编译控制]{
-  \item {控制编译过程、简化项目使用操作的make文件。}
+  \item {控制编译过程、简化项目使用操作的GNU Make文件。}
   \item {在Awesome-CV原有基础上，根据{\dk}所引入的部分新功能进行了增强。}
   \item {\color{awesome}不建议修改此文件，除非你知道自己在做什么。}
 }
 \cventry[src/awesome-cv.cls和src/resource/ctex-fontset-custom.def][软链接]{
-  \item {这两个文件都是Linux平台的相对位置软链接，所以对应的文件位置不能改变。}
+  \item {这两个文件都是Linux平台的相对位置软链接。}
   \item {软链接使用\dkbutton{ln -rs}定义。}
-  \item {在Windows平台上可能会有快捷方式方面的兼容性问题。}
 }
 \cventry[src/ctex-fontset-custom.def][字体定义]{
-  \item {配合ctex的\dkbutton{fontset=custom}设定来使用，可以修改这个文件中的字体设定。}
+  \item {配合ctex宏包的\dkbutton{fontset=custom}选项来使用，可以修改这个文件中的字体设定。}
   \item {根据ctex的字体自定义设置，这里的\dkbutton{custom}对应ctex-fontset-\dkbutton{custom}.def，可以根据需要创建自己的自定义文件。}
 }
 \cventry[src/awesome-cv-dukang.cls][{\dk}主文件]{
-  \item {该文件是\dk~的主文件，在文档的导言区使用\dkbutton{\textbackslash usepackage\{dukang\}}引入。}
-  \item {所有修改以及增强的内容在源代码中都有详细的注释，想要用更直接的方式查看用法的朋友可以直接看该文件。}
+  \item {该文件是{\dk}的文档类主文件，在文档中使用\dkbutton{\textbackslash documentclass}进行引用。}
+  \item {所有修改以及增强的内容在源代码中都有详细的注释，想要更深入底层了解的话可以直接看该文件源码。}
+  \item
+  {之所以没有使用Doc和DocStrip构建Class文件，是因为我不会{\faMailchimp}或者只是单纯的不想把简单问题复杂化，毕竟{\dk}本身没有多少代码，内容也不复杂，况且已经配有详细的文档说明，没必要再生成一套“干货”，又不是通用宏包，不会提交给CTAN{\faMehBlank}}
 }
 \cventry[src/dukang-doc.tex和src/dukang-doc/][{\dk}说明文档]{
-  \item {\dk~说明文档（本文）主文件和存放章节内容文件的目录，同时也尽量包含了一些\dk~的基本用法示例。}
+  \item {{\dk}说明文档（本文）主文件和存放章节内容文件的目录，同时也包含了用法示例。}
   \item {由于受Makefile编译控制，dukang-doc.tex的位置和文件名不要随便更改，但是dukang-doc文件夹中的内容文件都是由\dkbutton{\textbackslash input\{...\}}引入到主文档中，所以只要对应好文件位置，这个文件夹是可以自由修改的。}
-  \item {\color{awesome}但是，由于这两个位置只用于生成\dk~的说明文档（本文），与用户作品无关，所以不建议改动。}
+  \item {\color{awesome}但是，由于这两个位置只用于生成{\dk}的说明文档（本文），与用户作品无关，所以不建议改动。}
 }
 \cventry[src/main.tex和src/tex/][用户作品文件]{
   \item {用户作品的起始模板文件，可以直接从该文件开始进行创作。}
-  \item {文件夹\dkbutton{tex/}与编译过程无关，仅用于存放起始模板文件所引用的内容文件，可以更改，甚至不用也行。}
+  \item {文件夹\dkbutton{./src/tex/}与编译过程无关，仅用于存放起始模板文件所引用的内容文件，可以更改，甚至不用也行。}
   \item {如果作品的篇幅较长，还是建议使用\dkbutton{\textbackslash input\{...\}}的方式，可以保证主文档的内容干净整洁。}
 }
 \cventry[src/resource/][资源文件夹]{
@@ -64,7 +65,7 @@
   \item {Makefile是与外层Makefile联动的编译控制文件，同时提供了部分针对资源目录中不同类型文件的编译命令。}
   \item {profile.png是封面上部显示的图片，在主文档的导言区中使用\dkbutton{\textbackslash photo\{...\}}进行定义。}
   \item {该文件夹被dukang-doc和用户作品共用。}
-  \item {所有以\dkbutton{r-*.tex}形式命名的文件都会被联动编译和控制，本文档封面中\dkbutton{tikz}图的源文件\dkbutton{r-arch.tex}就在这里。}
+  \item {所有以\dkbutton{r-*.tex}形式命名的文件都会被联动编译和控制，本文档封面中Tikz图的源文件\dkbutton{r-arch.tex}就在这里。}
   \item {\color{awesome}不要更改该文件夹的位置，否则联动编译控制将找不到文件。}
 }
 \end{cventries}
