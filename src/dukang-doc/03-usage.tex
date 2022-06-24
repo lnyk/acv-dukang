@@ -1,9 +1,49 @@
 \cvsection{编译使用详解}
+在本章节里，我会用很短的篇幅快速介绍一下与{\dk}运行相关的内容，包括本地环境准备、Makefile及编译、选项设定和使用流程，有些内容比较重要，请尽量顺序阅读。
+
 \cvsubsection{本地环境准备}
 在真正开始使用{\dk}进行创作之前，要先准备好你的本地编译环境。
 
+\begin{dkcomment}*[关于兼容性]
+  我是使用TexLive 2022套件在Ubuntu 20.04平台上对{\dk}进行开发维护和编译测试的，如果你的是Windows操作系统，或其他版本TeX套件，可能会遇到问题，虽然{\dk}的Makefile已经针对Windows系统进行了设计，但对应Windows版本的TexLive套件，以及GNU Make和Python 3可能需要你花些功夫安装调试一番。目前还没有更加详细的测试结果，也衷心希望能够得到你的使用情况反馈。
+\end{dkcomment}
+
+\begin{dkcomment}*[关于字体]
+  ...
+\end{dkcomment}
+
+我的配置为：
+
+\begin{enumerate}
+  \item Ubuntu 20.04
+  \item TexLive 2022
+  \item GNU Make 4.2.1
+  \item Python 3.8.10
+  \item Python Pygments
+\end{enumerate}
+
+如果你用的是Linux操作系统，很有可能已经自带GNU Make和Python了，使用下面的命令查看一下版本号，确保版本别太旧：
+
+\begin{dkcode}*{bash}
+# 这里推荐使用Python3
+pytho3 --version
+
+# 查看GNU Make版本，越高越好
+make --version
+\end{dkcode}
+
+之所以需要Python支持，是因为{\dk}部分组件使用了$minted$引擎调用$Pygments$库进行代码高亮渲染，如果缺少该库，这部分组件将不可用：
+
+\begin{dkcode}*{bash}
+# 查看Pygments版本
+pygmentize -V
+
+# 安装或升级Pygments库
+pip install --upgrade Pygments
+\end{dkcode}
+
 \cvsubsection{Makefile及编译}
-{\dk}使用Makefile\footnote{前半部分的指令都有注释进行说明，make的用法也不在本文的讨论范围之内，感兴趣的朋友可以自行学习。}将几个最常用的{\LaTeX}编译相关操作定义成了对应的控制台命令，用以对编译、输出、清理等过程进行简化处理，以及联动resource文件夹下的Makefile文件。
+{\dk}使用Makefile\footnote{前半部分的指令都有注释进行说明，GNU Make的用法也不在本文的讨论范围之内，感兴趣的朋友可以自行学习。}将几个最常用的{\LaTeX}编译相关操作定义成了对应的控制台命令，用以对编译、输出、清理等过程进行简化处理，以及联动resource文件夹下的Makefile文件。
 
 \dkcodefile*{../Makefile}{makefile}[Makefile]
 

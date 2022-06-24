@@ -3,6 +3,13 @@ NAMEFORMAT = r-*
 TEXFILES = $(wildcard $(NAMEFORMAT).tex)
 CLEANFILES = $(NAMEFORMAT).pdf
 
+# 定义删除时候使用的命令，用于同时支持Windows和Linux
+ifdef SystemRoot
+	RM = del /Q
+else
+	RM = rm -fr
+endif
+
 .PHONY: all
 
 make: all
