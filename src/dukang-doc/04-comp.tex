@@ -61,73 +61,51 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
   {命令}
 \end{cvhonors}
 
-\begin{cventries}
-  \cventry
-  [cvletter \& lettersection]
-  [信件环境]
-  {
-    \item 主要用于首页信件环境的风格定义，也就是看似一封信的显示效果。
-    \item 由于{\Verb{\lettersection}}的显示效果与{\Verb{\cvsection}}类似，且只用在信件环境中，扩展意义不大，所以尽管在Awesome-CV的示例文件中使用了，但{\dk}推荐直接在{\Verb{\cvletter}}中书写正文，或者包含{\Verb{\cvsection}}部分。
-    \item 使用方法可参考\dkbutton{./src/dukang-doc/00-cover.tex}
-  }
-  \cventry
-  [cvparagraph]
-  [段落环境]
-  {
-    \item 这是段落的环境封装，在正文中用的不多，因为{\dk}已经定义好了正文段落的样式，这个cvparagraph环境可以不用，直接书写正文就好。
-  }
-  \cventry
-  [cvsection \& cvsubsection]
-  [章节命令]
-  {
-    \item 两者是Awesome-CV自定义的章节命令，由于没有chapter，所以cvsection就是一级标题，其实对于简历风格的模板来说，这样设计也是合情合理的，只不过用来创作文章或书籍的话，章节层级就要分明一些。
-    \item {\dk}修改了这两个命令的样式，增加了决定是否启用首行缩进的开关，在文档的主文件（main.tex）中可以指定，具体可以参考“dukang导言区设定部分”的备注说明。
-    \item {\dk}为这两个命令增加了PDF书签功能，并可以根据全局开关设置是否显示书签标题前的章节编号。
-  }
-  \cventry
-  [cventries \& cventry]
-  [组件环境]
-  {
-    \item cventries环境包含若干cventry命令，本部分就是使用该组件进行书写。
-    \item {\dk}使用可变参数重新封装了Awesome-CV的原生cventry，现在该组件共包含五个部分，命令格式为：
-    \begin{center}
-      \dkbutton{\textbackslash cventry[第一行左侧][第一行右侧][第二行左侧][第二行右侧]\{正文\}}
-    \end{center}
-    \item 参数中除“正文”以外都可选，但需要按顺序给定，否则无法判断是第几个参数，例如只想显示第二行右侧的文字，需要将前面三个参数都标记出来并留空，有内容的参数后面的空参数可以不标记，例如：
-    \begin{center}
-      \dkbutton{\textbackslash cventry[][][][第二行右侧]\{正文文字\}}
-      或者
-      \dkbutton{\textbackslash cventry[][第一行右侧]\{正文文字\}}
-    \end{center}
-  }
-  \cventry
-  [cvhonors \& cvhonor]
-  [组件环境]
-  {
-    \item cvhonors环境包含若干cvhonor命令，其本质是表格。
-    \item {\dk}重新封装了原生组件，现在cvhonors环境有两个可选参数，格式为：
-    \begin{center}
-      \dkbutton{\textbackslash begin\{cvhonors\}<*>[LLR]...\textbackslash end\{cvhonors\}}
-    \end{center}
-    \item 其中第一个参数星号“*”为底色开关，带星号标识启用奇偶行底色，不带星号为无底色，切换底色会少许改变外边距，组件会自动进行调整。
-    \item 第二个参数“LLR”的三个字母表示接下来所有cvhonor组件左中右三部分的对齐方式，L表示左对齐，C标识居中对齐，R表示右对齐，不给出该参数的话，默认为“LLR”。
-    \item cvhonor命令分为三个必选参数，可以留空但不能不写，格式为：
-    \begin{center}
-      \dkbutton{\textbackslash cvhonor\{左\}\{中\}\{右\}}
-    \end{center}
-  }
-  \cventry
-  [cvskills \& cvskill]
-  [组件环境]
-  {
-    \item cvskills环境包含若干cvskill命令，其本质也是2列的表格。
-    \item 这个组件应用场景不是很多，所以就没有进行全面修改，依然沿用了Awesome-CV原生的使用方法：
-    \begin{center}
-      \dkbutton{\textbackslash begin\{cvskills\}...\textbackslash end\{cvskills\}}
-    \end{center}
-    在环境内部包含若干\dkbutton{\textbackslash cvskill\{左边部分\}\{右边部分\}}
-  }
-\end{cventries}
+\cvsubsubsection{cvletter \& lettersection}
+主要用于首页信件环境的风格定义，也就是看似一封信的显示效果。由于{\Verb{\lettersection}}的显示效果与{\Verb{\cvsection}}类似，且只用在信件环境中，扩展意义不大，所以尽管在Awesome-CV的示例文件中使用了，但{\dk}推荐直接在{\Verb{\cvletter}}中书写正文，或者包含{\Verb{\cvsection}}部分。
+
+使用方法可参考\dkbutton{./src/dukang-doc/00-cover.tex}
+
+\cvsubsubsection{cvparagraph}
+这是段落的环境封装，在正文中用的不多，因为{\dk}已经定义好了正文段落的样式，这个cvparagraph环境可以不用，直接书写正文就好。
+
+\cvsubsubsection{cvsection \& cvsubsection \& cvsubsubsection}
+都是Awesome-CV自定义的章节命令，由于没有chapter，所以cvsection就是一级标题，其实对于简历风格的模板来说，这样设计也是合情合理的，只不过用来创作文章或书籍的话，章节层级就要分明一些。
+
+{\dk}修改了这些命令的样式，增加了决定是否启用首行缩进的开关，在文档的主文件main.tex中可以指定，具体可以参考“dukang导言区设定部分”的备注说明。同时，原生环境并不带PDF书签能力，{\dk}为这几个命令增加了该功能，并可以通过全局开关设置是否显示书签标题前的章节编号。
+
+\cvsubsubsection{cventries \& cventry}
+cventries环境包含若干cventry命令，{\dk}使用可变参数重新封装了Awesome-CV的原生cventry，现在该组件共包含五个部分，命令格式为：
+
+|\cventry[第一行左侧][第一行右侧][第二行左侧][第二行右侧]{正文}|
+
+参数中除“正文”以外都可选，但需要按顺序给定，否则无法判断是第几个参数，例如只想显示第二行右侧的文字，需要将前面三个参数都标记出来并留空，有内容的参数后面的空参数可以不标记，例如：
+
+|\cventry[][][][第二行右侧]{正文文字}|
+
+或者
+
+|\cventry[][第一行右侧]{正文文字}|
+
+\cvsubsubsection{cvhonors \& cvhonor}
+cvhonors环境包含若干cvhonor命令，其本质是表格。{\dk}重新封装了原生组件，现在cvhonors环境有两个可选参数，格式为：
+
+|\begin{cvhonors}<*>[LLR]\cvhonor...\end{cvhonors}|
+
+其中第一个参数星号“*”为底色开关，带星号标识启用奇偶行底色，不带星号为无底色，切换底色会少许改变外边距，组件会自动进行调整。第二个参数“LLR”的三个字母表示接下来所有cvhonor组件左中右三部分的对齐方式，L表示左对齐，C标识居中对齐，R表示右对齐，不给出该参数的话，默认为“LLR”。
+
+cvhonor命令分为三个必选参数，可以留空但不能不写，格式为：
+
+|\cvhonor{左}{中}{右}|
+
+\cvsubsubsection{cvskills \& cvskill}
+cvskills环境包含若干cvskill命令，其本质是两列的表格。这个组件与cvhonors风格基本相同，前者是三列表格，这个环境是两列。具体用法是：
+
+|\begin{cvskills}\cvskill...\end{cvskills}|
+
+cvskill命令分为两个必选参数，可以留空但不能不写，格式为：
+
+|\cvskill{左}{右}|
 
 以上是{\dk}当前版本进行过优化的所有Awesome-CV文档组件，其实其原生组件也大致就这么多了，下一小节我们看一下来自{\dk}的自定义组件。
 
