@@ -90,7 +90,7 @@ pip install --upgrade Pygments
 \dkcodefile*{../Makefile}{makefile}[Makefile]
 
 \begin{dkcomment}
-  以下所有make命令，都必须在项目根目录（就是你能看到\dkbutton{README.md}的地方）下执行。
+  以下所有make命令，都必须在项目根目录（就是你能看到README.md的地方）下执行。
 \end{dkcomment}
 
 \begin{cvhonors}*
@@ -104,7 +104,7 @@ pip install --upgrade Pygments
   {编译输出}
   \cvhonor
   {make doc}
-  {自动编译输出\dk~文档，也就是本文档的输出命令}
+  {自动编译输出{\dk}文档，也就是本文档的输出命令}
   {编译输出}
   \cvhonor
   {make resource}
@@ -142,7 +142,7 @@ pip install --upgrade Pygments
   \item 这里的字号设定（12pt）基本没什么卵用，因为几乎每个文档组件都定义了自己的字体风格。
 }
 \cventry
-[\Verb{\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}}]
+[\Verb{\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=14.5pt}}]
 [基本配置]
 {
   \item 使用geometry宏包定义纸张的页边距以及页脚距离
@@ -188,7 +188,7 @@ pip install --upgrade Pygments
 }
 \cventry[cvletter环境基本信息][Awesome-CV][cvletter环境一般用于定义首页的内容][必选]
 {
-  \item 由于使用了ctex宏包，\Verb{\today}默认为大写中文日期格式。
+  \item 由于使用了$ctex$宏包，\Verb{\today}默认为大写中文日期格式，比如{\today}。
   \item {\color{awesome}该部分的定义一个都不能少！}
 }
 \cventry[dukang导言区设定部分][\dk][此部分包含{\dk}及相关宏包提供的若干增强设定][必选]
@@ -215,7 +215,7 @@ pip install --upgrade Pygments
 \end{dkcomment}
 
 \cvsubsection{使用流程}
-\dk~的编译控制文件（Makefile）提供了适合下面几种场景的编译流程，相信总有一个适合你。首先，对于一般使用来说，需要做的步骤很简单：
+{\dk}的编译控制文件Makefile提供了适合下面几种场景的编译流程，相信总有一个适合你。首先，对于一般使用来说，需要做的步骤很简单：
 
 \begin{center}
   \dkcodebox{修改main.tex}~\faArrowCircleRight~\dkcodebox{添加内容}~\faArrowCircleRight~\dkcodebox*{make}~\faCheckCircle

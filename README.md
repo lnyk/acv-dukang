@@ -14,6 +14,7 @@ Awesome-CV Dukang项目
 -   调整`03-usage`结构，增加`cvsubsubsection`
 -   调整三级标题字体为方正小标宋简体
 -   修正`footskip too small`的bug，在主文档`geometry`中修改`.5cm`为`14.5pt`
+-   完成`03-usage`
 
 ### 2022.06.24
 -   完成`04-comp`
