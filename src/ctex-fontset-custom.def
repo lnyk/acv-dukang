@@ -31,7 +31,7 @@
 \setCJKfamilyfont{zhls}{隶书}
 
 % 方正小标宋简体
-\setCJKfamilyfont{fzxbs}{方正小标宋简体}
+\setCJKfamilyfont{zhfzxbs}{方正小标宋简体}
 
 % 生成字体引用命令
 \NewDocumentCommand\songti{}{\CJKfamily{zhsong}}
@@ -40,4 +40,4 @@
 \NewDocumentCommand\kaishu{}{\CJKfamily{zhkai}}
 \NewDocumentCommand\youyuan{}{\CJKfamily{zhyy}}
 \NewDocumentCommand\lishu{}{\CJKfamily{zhls}}
-\NewDocumentCommand\fzxbs{}{\CJKfamily{fzxbs}}
+\NewDocumentCommand\fzxbs{}{\CJKfamily{zhfzxbs}}

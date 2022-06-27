@@ -312,13 +312,13 @@
     \stepcounter{dk@counter@subsubsection}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\subsubsectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}.\arabic{dk@counter@subsection}.\arabic{dk@counter@subsubsection}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\subsectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\subsubsectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }

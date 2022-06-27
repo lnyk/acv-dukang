@@ -4,14 +4,24 @@
 \cvsubsection{本地环境准备}
 在真正开始使用{\dk}进行创作之前，要先准备好你的本地编译环境。
 
-\begin{dkcomment}*[关于兼容性]
-  我是使用TexLive 2022套件在Ubuntu 20.04平台上对{\dk}进行开发维护和编译测试的，如果你的是Windows操作系统，或其他版本TeX套件，可能会遇到问题，虽然{\dk}的Makefile已经针对Windows系统进行了设计，但对应Windows版本的TexLive套件，以及GNU Make和Python 3可能需要你花些功夫安装调试一番。目前还没有更加详细的测试结果，也衷心希望能够得到你的使用情况反馈。
-\end{dkcomment}
+\cvsubsubsection{关于兼容性}
+我是使用TexLive 2022套件在Ubuntu 20.04平台上对{\dk}进行开发维护和编译测试的，如果你的是Windows操作系统，或其他版本TeX套件，可能会遇到问题，虽然{\dk}的Makefile已经针对Windows系统进行了设计，但对应Windows版本的TexLive套件，以及GNU Make和Python 3可能需要你花些功夫安装调试一番。目前还没有更加详细的测试结果，也衷心希望能够得到你的使用情况反馈。
 
-\begin{dkcomment}*[关于字体]
-  ...
-\end{dkcomment}
+\cvsubsubsection{关于字体}
+由于{\dk}主要使用$ctex$宏包进行中文环境底层支持，字体采用custom方式设置，配置位置在：
 
+\dkbutton{./src/ctex-fontset-custom.def}
+
+采用这种方式的主要原因是$ctex$的字体套装在跨平台显示时效果和质量都会有区别，并且{\dk}额外添加了一些中文常用的字体，完整列表如下：
+
+\begin{cvhonors}*
+  \cvhonor
+  {字体名称}
+  {说明}
+  {短命令}
+\end{cvhonors}
+
+\cvsubsubsection{参考配置}
 我的配置为：
 
 \begin{enumerate}
