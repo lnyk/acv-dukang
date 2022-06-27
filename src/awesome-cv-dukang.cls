@@ -154,8 +154,6 @@
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 % 修改脚注字体
 \renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
-% 设置页脚距离
-\setlength{\footskip}{14.49998pt}
 %-------------------------------------------------------------------------------
 % figure设置
 %-------------------------------------------------------------------------------
@@ -241,7 +239,7 @@
 %-------------------------------------------------------------------------------
 % dk
 % 定义一个简短的命令用于显示完整名称
-\newcommand{\dk}{\hyperref{https://williamyao.com}{}{}{ACV-Dukang}}
+\newcommand{\dk}{\hyperref{https://williamyao.com}{}{}{\sffamily ACV-Dukang}}
 %-------------------------------------------------------------------------------
 % 利用随机数生成器指定书签标签
 %-------------------------------------------------------------------------------
@@ -266,13 +264,13 @@
     \stepcounter{dk@counter@section}
     % 使用\arabic调用计数器，否则读出来的是数值，不是文档字符串输出
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\sectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=#1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{\arabic{dk@counter@section}~~~~#2}%
   }{%
     % 如果不用编号
     % \hypertarget创建的是标签，后面指定的样式对应的是正文中输出的样式
-    \hypertarget{\arabic{dk@random}}{\lettersectionstyle{#2}}
+    \hypertarget{\arabic{dk@random}}{\sectionstyle{#2}}
     % \bookmark创建的是对应标签的书签，后面指定的样式是PDF阅读器中书签目录中对应书签的样式
     \bookmark[dest=\arabic{dk@random}, level=1, view={FitH \calc{\paperheight-\topmargin-10pt}}]{#2}
   }
@@ -379,6 +377,7 @@
 %-------------------------------------------------------------------------------
 % cvsection
 %-------------------------------------------------------------------------------
+\renewcommand*{\sectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\fzxbs\color{text}\@sectioncolor #1}}
 \renewcommand{\cvsection}[1]{%
   \vspace{\acvSectionTopSkip}
   \setlength{\parskip}{0em}
@@ -402,7 +401,7 @@
 %-------------------------------------------------------------------------------
 % cvsubsection
 %-------------------------------------------------------------------------------
-\renewcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\renewcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\fzxbs\color{text}\@sectioncolor #1}}
 \renewcommand{\cvsubsection}[1]{%
   \vspace{0.641\baselineskip}
   % \vspace{\baselineskip}
@@ -423,7 +422,7 @@
 %-------------------------------------------------------------------------------
 % cvsubsubsection
 %-------------------------------------------------------------------------------
-\newcommand*{\subsubsectionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\subsubsectionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\fzxbs\color{text}\@sectioncolor #1}}
 \newcommand{\cvsubsubsection}[1]{%
   \vspace{0.641\baselineskip}
   % \vspace{\baselineskip}
