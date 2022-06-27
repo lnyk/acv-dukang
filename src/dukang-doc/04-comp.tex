@@ -10,6 +10,57 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
 
 下面我们逐一列出这些经过修改和增强之后的Awesome-CV原生组件。
 
+\begin{cvhonors}*
+  \cvhonor
+  {cvletter}
+  {信件环境，主要用于首页的信封效果}
+  {环境}
+  \cvhonor
+  {lettersection}
+  {包含在cvletter环境中的段落元素}
+  {命令}
+  \cvhonor
+  {cvparagraph}
+  {正文段落，{\dk}调整了正文格式，该组件基本没必要再用了}
+  {环境}
+  \cvhonor
+  {cvsection}
+  {章节定义，对应一级标题}
+  {命令}
+  \cvhonor
+  {cvsubsection}
+  {章节命令，对应二级标题}
+  {命令}
+  \cvhonor
+  {cvsubsubsection}
+  {章节命令，对应三级标题}
+  {命令}
+  \cvhonor
+  {cventries}
+  {带主副标题的列表环境}
+  {环境}
+  \cvhonor
+  {cventry}
+  {包含在cventries环境中的列表元素}
+  {命令}
+  \cvhonor
+  {cvhonors}
+  {带风格定义的三列列表环境}
+  {环境}
+  \cvhonor
+  {cvhonor}
+  {包含在cvhonors环境中的列表行}
+  {命令}
+  \cvhonor
+  {cvskills}
+  {带风格定义的两列列表环境}
+  {环境}
+  \cvhonor
+  {cvskill}
+  {包含在cvskills环境中的列表行}
+  {命令}
+\end{cvhonors}
+
 \begin{cventries}
   \cventry
   [cvletter \& lettersection]
@@ -85,35 +136,35 @@ Awesome-CV没有使用{\LaTeX}传统的chapter/section组织结构，而是完�
 
 \begin{cvhonors}*
   \cvhonor
-    {\Verb{\dkbutton}}
+    {dkbutton}
     {Inline风格的代码小盒子，可选两种显示风格}
     {小按钮}
   \cvhonor
-    {\Verb{\dkresource}}
+    {dkresource}
     {引入外部图片或PDF的命令}
     {外部资源}
   \cvhonor
-    {\Verb{\dkcode}}
+    {dkcode}
     {可以对大段代码进行高亮显示的环境，可选两种显示风格}
     {代码高亮}
   \cvhonor
-    {\Verb{\dkcodefile}}
+    {dkcodefile}
     {读取外部文件并将内容进行代码高亮显示的环境，可选两种显示风格}
     {代码高亮}
   \cvhonor
-    {\Verb{\dkcomment}}
+    {dkcomment}
     {可完全自定义显示的备注框，同样有两种显示风格可选}
     {备注框}
   \cvhonor
-    {\Verb{\dkcodebox}}
+    {dkcodebox}
     {另一种风格的Inline代码小盒子，可切换是否显示命令提示符}
     {深色背景}
   \cvhonor
-    {\Verb{\dkmeasure}}
+    {dkmeasure}
     {打印长度数值，主要用于在构建页面时对长度变量进行测量}
     {开发小工具}
   \cvhonor
-    {\Verb{\dirtree}}
+    {dirtree}
     {显示文件夹树状结构的宏包命令，{\dk}进行了引入，无需再封装}
     {直接使用}
 \end{cvhonors}
