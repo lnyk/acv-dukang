@@ -99,9 +99,9 @@ cvhonor命令分为三个必选参数，可以留空但不能不写，格式为�
 |\cvhonor{左}{中}{右}|
 
 \cvsubsubsection{cvskills \& cvskill}
-cvskills环境包含若干cvskill命令，其本质是两列的表格。这个组件与cvhonors风格基本相同，前者是三列表格，这个环境是两列。具体用法是：
+cvskills环境包含若干cvskill命令，其本质是两列的表格。这个组件与cvhonors风格基本相同，前者是三列表格，这个环境是两列，参数默认为“RL”，即第一列右对齐，第二列左对齐，具体用法是：
 
-|\begin{cvskills}\cvskill...\end{cvskills}|
+|\begin{cvskills}<*>[RL]\cvskill...\end{cvskills}|
 
 cvskill命令分为两个必选参数，可以留空但不能不写，格式为：
 
@@ -116,38 +116,38 @@ cvskill命令分为两个必选参数，可以留空但不能不写，格式为�
   \cvhonor
     {dkbutton}
     {Inline风格的代码小盒子，可选两种显示风格}
-    {小按钮}
+    {命令}
   \cvhonor
     {dkresource}
     {引入外部图片或PDF的命令}
-    {外部资源}
+    {命令}
   \cvhonor
     {dkcode}
     {可以对大段代码进行高亮显示的环境，可选两种显示风格}
-    {代码高亮}
+    {环境}
   \cvhonor
     {dkcodefile}
     {读取外部文件并将内容进行代码高亮显示的环境，可选两种显示风格}
-    {代码高亮}
+    {命令}
   \cvhonor
     {dkcomment}
     {可完全自定义显示的备注框，同样有两种显示风格可选}
-    {备注框}
+    {环境}
   \cvhonor
     {dkcodebox}
     {另一种风格的Inline代码小盒子，可切换是否显示命令提示符}
-    {深色背景}
+    {命令}
   \cvhonor
     {dkmeasure}
     {打印长度数值，主要用于在构建页面时对长度变量进行测量}
-    {开发小工具}
+    {命令}
   \cvhonor
     {dirtree}
-    {显示文件夹树状结构的宏包命令，{\dk}进行了引入，无需再封装}
-    {直接使用}
+    {显示文件夹树状结构的宏包命令，{\dk}引入未封装，直接使用}
+    {命令}
 \end{cvhonors}
 
-这些组件都有自己的用法和适合的使用环境，以及一些注意事项，其中最重要的一条共性原则是：必选参数都使用大括号|{}|指定，可选参数都是方括号|[]|指定，由于{\LaTeXe}没有所谓“命名参数”的概念，因此所有的可选参数必须从右至左省略，举个例子，参数$1,2,3,4$，要想指定参数$3$的内容，必须连同$1,2$一起给出，否则引擎无法判断你到底给出了第几个参数。
+这些组件都有自己的用法和适合的使用环境，以及一些注意事项，其中最重要的一条共性原则是：必选参数都使用大括号|{}|指定，可选参数都是方括号|[]|指定，由于{\LaTeX}没有所谓“命名参数”的概念，因此所有的可选参数必须从右至左省略，举个例子，参数$1,2,3,4$，要想指定参数$3$的内容，必须连同$1,2$一起给出，否则引擎无法判断你到底给出了第几个参数。
 
 \cvsubsubsection{dkbutton}
 首先介绍这个小按钮，是因为在本文档中它用的最多，几乎随处可见，调用格式为：
@@ -199,7 +199,7 @@ color默认为自动适应在主文档中指定的Awesome-CV的主配色，也�
 \dkresource[这里有个酒坛子]{resource/dukang-logo}[0.25]
 
 \begin{dkcomment}*[关于浮动体的说明]
-  \hspace{2em}$dkresource$实际上是基于{\LaTeXe} $figure$环境的简单再封装，让人比较晕的是$htbp!$浮动体控制参数的意义，简单理解的话就是，在生成PDF文件的时候，{\LaTeX}编译器会根据浮动体控制参数来自动判断并确定浮动体在页面中的显示位置，这里的浮动体指的就是$dkresource$所引入的资源，排版位置的选取与参数里符号的顺序并无关系，编译器总是以$h \to t \to b \to p$的顺序来检查参数。
+  \hspace{2em}$dkresource$实际上是基于{\LaTeX} $figure$环境的简单再封装，让人比较晕的是$htbp!$浮动体控制参数的意义，简单理解的话就是，在生成PDF文件的时候，{\LaTeX}编译器会根据浮动体控制参数来自动判断并确定浮动体在页面中的显示位置，这里的浮动体指的就是$dkresource$所引入的资源，排版位置的选取与参数里符号的顺序并无关系，编译器总是以$h \to t \to b \to p$的顺序来检查参数。
 
   \hspace{2em}|!|的作用是忽略限制，这里的默认限制总共有两条，超出该限制会强制将浮动体拖入下一页再判断，这两条分别是：
 
@@ -359,7 +359,7 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
   一个发挥想象力的用法
 \end{dkcomment}
   \end{dkcode}
-  下面的$foreach$循环控制命令需要用到$pgffor$宏包，{\dk}已经帮你引用好了。
+  上面的$foreach$循环控制命令需要用到$pgffor$宏包，{\dk}已经帮你引用好了。
 
   行尾的\%表示忽略后面的空格，意思就是告诉{\LaTeX}引擎本行和下面的行是同一行。
 \end{dkcomment}
@@ -378,18 +378,18 @@ dkcode是环境，有开始标记|\begin|和结束标记|\end|，dkcodefile是�
 \cvsubsubsection{dkmeasure}
 呐，这个组件就比较有意思了，其本质是对$layouts$宏包里面几个命令的简单封装，当你想实际打印检查某个值，或者换算单位时，作为调试使用的话非常方便，比如表格的某个列到底有多宽，当前行距是多少，1em等于多少pt等。用法为：
 
-|\dkmeasure<*><[unit]>{something}|
+|\dkmeasure<*><[unit]>{macro}|
 
 \begin{cvskills}*
-  \cvskill
+  \cvskill%
   {*}
   {可选参数，带*显示被测目标名称，不带*只显示测量或转换结果。}
-  \cvskill
+  \cvskill%
   {unit}
   {可选参数，用于指定长度单位，可以是cm, mm, pt等，默认为cm.}
-  \cvskill
-  {something}
-  {必选参数，需要打印的宏或命令，例如\textwidth, \baselineskip, 1em, 20pt等。}
+  \cvskill%
+  {macro}
+  {必选参数，需要打印的宏或命令，例如\textbackslash textwidth, \textbackslash baselineskip, 1em, 20pt等。}
 \end{cvskills}
 
 例如：

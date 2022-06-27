@@ -448,7 +448,11 @@
 %-------------------------------------------------------------------------------
 \renewcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \renewcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
-\DeclareDocumentEnvironment{cvskills}{s}
+% 定义宏，解析4个参数，使用IfBoolenTF解析*
+\def\dk@parse@cvskillalignment#1#2#3{%
+  \begin{tabular*}{\textwidth}{#2{0.12\textwidth} #3{\IfBooleanTF{#1}{0.83\textwidth}{0.83\textwidth + \tabcolsep}}}
+}
+\DeclareDocumentEnvironment{cvskills}{ s O{RL} }
 {%
   \vspace{0.641\baselineskip}
   % 使用spacing包控制单元格内的line之间的距离
@@ -463,7 +467,7 @@
       \setlength{\extrarowheight}{0pt}
       % 控制表格的row之间的距离
       \renewcommand{\arraystretch}{1.5}
-      \begin{tabular*}{\textwidth}{R{0.12\textwidth} L{\IfBooleanTF{#1}{0.83\textwidth}{0.83\textwidth + \tabcolsep}}}
+      \dk@parse@cvskillalignment #1#2
 }{%
       \end{tabular*}
     \end{center}
@@ -517,7 +521,7 @@
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} #2{3cm} #3{\textwidth - \IfBooleanTF{#1}{7.0cm}{6.0cm}} #4{3cm}}
 }
 % 使用xparse重定义cvhonor环境，支持可选默认值参数用来指定3个部分的对齐方式
-\DeclareDocumentEnvironment{cvhonors}{s O{LLR}}
+\DeclareDocumentEnvironment{cvhonors}{ s O{LLR} }
 {%
   \vspace{0.641\baselineskip}
   % 使用spacing包控制单元格内的line之间的距离
