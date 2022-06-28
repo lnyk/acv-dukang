@@ -23,7 +23,7 @@
 % 定义开始
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}[2021-11-15]
-\ProvidesClass{awesome-cv-dukang}[2022-04-28 Awesome-CV-Dukang]
+\ProvidesClass{acv-dukang}[2022-04-28 Awesome-CV-Dukang]
 % 传递参数到awesome-cv
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{awesome-cv}}
 % 处理参数

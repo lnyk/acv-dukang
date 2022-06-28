@@ -1,55 +1,61 @@
-%!TEX TS-program = xelatex
-%!TEX encoding = UTF-8 Unicode
+% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% !TeX spellcheck = en_US
 
 %-------------------------------------------------------------------------------
 % 基本配置
 %-------------------------------------------------------------------------------
-% 默认为A4纸张，12pt字号
-\documentclass[12pt, a4paper, final]{awesome-cv}
-
+% 默认为A4纸张，12pt字号，其实这里的字体设置基本没有效果，Awesome-CV每个部件都有自己的定义
+\documentclass[12pt, a4paper, final]{acv-dukang}
+%-------------------------------------------------------------------------------
 % 使用geometry定义纸张边距
-\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
-
-% 高亮颜色配置
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=14.5pt}
+%-------------------------------------------------------------------------------
+% Aweosme-CV导言区设定部分
+%-------------------------------------------------------------------------------
+% 颜色配置，从下列套装中选择喜欢的配色
 % Awesome Colors:
 %   awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
 %   awesome-nephritis, awesome-concrete, awesome-darknight
 \colorlet{awesome}{awesome-red}
-% 下面部分可启用自定义颜色
+% 如果上面套装的字体颜色不喜欢，可以单独指定
 % \definecolor{awesome}{HTML}{CA63A8}
-
-% Colors for text
-% Uncomment if you would like to specify your own color
 % \definecolor{darktext}{HTML}{414141}
 % \definecolor{text}{HTML}{333333}
 % \definecolor{graytext}{HTML}{5D5D5D}
 % \definecolor{lighttext}{HTML}{999999}
 % \definecolor{sectiondivider}{HTML}{5D5D5D}
-
+%-------------------------------------------------------------------------------
 % 全局开关变量定义
 % 是否使用高亮颜色配置来突出section标题
 \setbool{acvSectionColorHighlight}{true}
-
+%-------------------------------------------------------------------------------
 % Header中社交媒体行的分隔符
 % 目前指定为管道符 |
 \renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+%-------------------------------------------------------------------------------
 
 
+%-------------------------------------------------------------------------------
+% 文档内容信息部分
 %-------------------------------------------------------------------------------
 %	个人信息
-%	不需要的部分可以注释掉
+%	除了\name和\dukangPDFTitle必选以外，其余部分不需要的都可以注释掉
 %-------------------------------------------------------------------------------
-% 首页的图片Logo，默认为./src/resource/profile<.png>
+% 这个必须留着！
+\name{ACV-Dukang}{手册}
+\dukangPDFTitle{Awesome-CV-Dukang手册}
+% 首页的图片Logo
 % 可用选项为circle|rectangle,edge/noedge,left/right
-\photo[circle,noedge,left]{./src/resource/profile}
-\name{\LaTeX~Dukang}{手册}
+\photo[rectangle,noedge,left]{./src/resource/dukang-logo}
 \position{%
   \hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}{\enskip\faWineBottle\enskip}\dk
 }
 \address{基于\hyperref{https://github.com/posquit0/Awesome-CV}{}{}{Awesome-CV}进行中文化适应及无侵入增强的面向\LaTeX{}新人的快速开始项目}
-
 %-------------------------------------------------------------------------------
-% 以下部分至少有一条要保留
+% 社交媒体信息
+% 至少有一条要保留
+%-------------------------------------------------------------------------------
 % \mobile{(+82) 10-9030-1843}
 \email{me@williamyao.com}
 % \dateofbirth{January 1st, 1970}
@@ -64,38 +70,33 @@
 % \medium{madium-id}
 % \kaggle{kaggle-id}
 % \googlescholar{googlescholar-id}{name-to-display}
-%% \firstname and \lastname will be used
+%% 如果留空，会自动使用\firstname和\lastname
 % \googlescholar{googlescholar-id}{}
 \extrainfo{{\faWineBottle}~衷心感谢\hyperref{https://github.com/posquit0}{}{}{Byungjin Park}等童鞋的开源奉献}
-
 \quote{“执着而不计成本，不为索取只为陶醉”——~Carl Zeiss}
-
-
 %-------------------------------------------------------------------------------
-%	信件环境基本信息
-%	所有内容必须不能缺少
+% cvletter环境基本信息
+% 所有内容都是必选，一个也不能少
 %-------------------------------------------------------------------------------
 % 收件方
 \recipient
-  {亲爱的\dk 使用者}
-  {\hskip2em 本文档旨在用具体的示例全面介绍和展示\dk 宏包的使用、配置和附加功能，包括针对Awesome-CV模板进行的所有中文化处理和修改，并尽力以入门者的角度进行详细说明，希望通过阅读本文，能与诸君分享更多知识和收获。}
+  {偶然到访或是兴趣所致的你}
+  {{\LaTeX}, awesome-cv, {\dk}, template\\github, opensource}
 % 信件日期
 \letterdate{\today}
 % 信件标题
-\lettertitle{关于快速开始}
+\lettertitle{{\dk}}
 % 信件称谓
-\letteropening{如果迫不及待的想要使用\dk 进行创作，请直接按照下图查找并阅读项目文件吧\faKissWinkHeart}
+\letteropening{亲爱的朋友：}
 % 信件结尾词
-\letterclosing{怎么样，难道还意犹未尽吗？}
+\letterclosing{{\dk}项目Logo来自互联网，如果冒犯请随时联系我纠正。生活不易，何以解忧？\faKissWinkHeart}
 % 信件结尾词附言
-\letterenclosure[亲爱的使用者]{继续发挥想像吧！}
+\letterenclosure[最后]{对你的关注，再次表示由衷的感谢！}
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
-% dukang导言区设定
-%-------------------------------------------------------------------------------
-% 引入dukang宏包
-\usepackage{dukang}
+% dukang导言区设定部分
 %-------------------------------------------------------------------------------
 % 打开该开关会启用某些正文内容的首行缩进
 \setbool{dukangParIndent}{true}
@@ -104,7 +105,7 @@
 %-------------------------------------------------------------------------------
 % 定义编译之后的PDF相关属性
 \hypersetup{%
-  pdftitle={\LaTeX~Dukang~手册},
+  pdftitle={Awesome-CV-Dukang手册},
   pdfauthor={William Yao},
   pdfcreator={William Yao},
   pdfsubject={引用Awesome-CV模板，继承并加强},
@@ -116,26 +117,28 @@
 %-------------------------------------------------------------------------------
 \begin{document}
 %-------------------------------------------------------------------------------
-% dukang文档区设定
+% Awesome-CV文档区设定部分
 %-------------------------------------------------------------------------------
-% 首页的抬头
-% 可选
+% 文档开头的抬头部分，可以注释掉
 % 可用对齐选项为C: 居中，L: 左对齐，R: 右对齐
 \makecvheader[R]
 %-------------------------------------------------------------------------------
 % 每页的页脚定义，分为左中右三个部分，分别对应每个{}
 % 各部分都可留空，但不能删掉{}
 \makecvfooter
-  {\hyperref{http://williamyao.com}{}{}{\LaTeX Dukang}}% 左边部分
+  {\hyperref{http://williamyao.com}{}{}{\dk}}% 左边部分
   {\faWineBottle}% 中间部分
   {\thepage}% 右边部分
+%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
 % 正文内容部分
 % 独立引用每个文件，或者直接书写正文
 %-------------------------------------------------------------------------------
-\input{tex/01-cover.tex}
-\input{tex/02-intro.tex}
+\input{main/00-cover.tex}
+% \input{main/01-intro.tex}
+%-------------------------------------------------------------------------------
+
 
 \end{document}

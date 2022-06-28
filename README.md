@@ -9,6 +9,10 @@ Awesome-CV Dukang项目
 ## 项目主要内容
 
 ## 提交变更信息
+### 2022.06.28
+-   修改项目名称为`acv-dukang`
+-   完善`main`起始信息
+
 ### 2022.06.27
 -   修正`cvsubsubsection`字体风格配置，调整字体大小为10pt
 -   调整`03-usage`结构，增加`cvsubsubsection`
