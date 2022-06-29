@@ -34,6 +34,11 @@ resource:
 
 all: main doc
 
+dist: doc
+	mkdir -p doc
+	cp $(BASE_DIR)/dukang-doc.pdf doc/
+	make cleanall
+
 clean:
 	@for d in $(CLEANDIRS); \
 	do \
