@@ -13,7 +13,11 @@ Awesome-CV-Dukang项目，简称ACV-Dukang，是基于[Awesome-CV](https://githu
 -   增加GNU Make控制流程，联动编译外部资源
 -   面向LaTeX入门使用者提供完整的配套文档和源码注释，共同学习进步
 
-完整文档及使用示例请查阅[src/dukang-doc.pdf](doc/dukang-doc.pdf)或者[lnyk.github.io/acv-dukang/dukang-doc.pdf](https://lnyk.github.io/acv-dukang/dukang-doc.pdf)
+完整文档及使用示例请查阅项目文档，以下文档均同步最新内容：
+
+-   本地 / [src/dukang-doc.pdf](doc/dukang-doc.pdf)
+-   Github Pages / [lnyk.github.io/acv-dukang/dukang-doc.pdf](https://lnyk.github.io/acv-dukang/dukang-doc.pdf)
+-   Gitee Raw / [gitee.com/lnyk/acv-dukang/raw/master/doc/dukang-doc.pdf](https://gitee.com/lnyk/acv-dukang/raw/master/doc/dukang-doc.pdf)
 
 ## 关于编译环境及兼容性
 ACV-Dukang项目使用TexLive 2022套件在Ubuntu 20.04平台上进行开发维护和编译测试，使用GNU Make控制编译过程。
