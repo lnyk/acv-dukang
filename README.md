@@ -1,5 +1,5 @@
 # Awesome-CV Dukang Project
-<img src="https://lnyk.github.io/acv-dukang/dukang-logo.png" width="400px" height="400px" align="center" />
+<img src="https://lnyk.github.io/acv-dukang/dukang-logo.png" width="200px" height="200px" align="center" />
 
 ## 项目简介
 Awesome-CV-Dukang项目，简称ACV-Dukang，是基于[Awesome-CV](https://github.com/posquit0/Awesome-CV)模板，进行中文化改造、额外提供许多新功能扩展，并面向入门使用者打包构建的快速开始项目。
