@@ -57,10 +57,10 @@
 % 至少有一条要保留
 %-------------------------------------------------------------------------------
 % \mobile{(+82) 10-9030-1843}
-\email{me@williamyao.com}
+\email{your@mailbox.com}
 % \dateofbirth{January 1st, 1970}
-\homepage{WilliamYao.com}
-\github{lnyk}
+\homepage{yoursite.com}
+% \github{lnyk}
 % \linkedin{posquit0}
 % \gitlab{gitlab-id}
 % \stackoverflow{SO-id}{SO-name}
@@ -72,26 +72,26 @@
 % \googlescholar{googlescholar-id}{name-to-display}
 %% 如果留空，会自动使用\firstname和\lastname
 % \googlescholar{googlescholar-id}{}
-\extrainfo{{\faWineBottle}~衷心感谢\hyperref{https://github.com/posquit0}{}{}{Byungjin Park}等童鞋的开源奉献}
-\quote{“执着而不计成本，不为索取只为陶醉”——~Carl Zeiss}
+\extrainfo{Extra Information}
+\quote{Quotes}
 %-------------------------------------------------------------------------------
 % cvletter环境基本信息
 % 所有内容都是必选，一个也不能少
 %-------------------------------------------------------------------------------
 % 收件方
 \recipient
-  {偶然到访或是兴趣所致的你}
-  {{\LaTeX}, awesome-cv, {\dk}, template\\github, opensource}
+  {Recipient Line 1}
+  {Recipient Line 2}
 % 信件日期
 \letterdate{\today}
 % 信件标题
-\lettertitle{{\dk}}
+\lettertitle{Title}
 % 信件称谓
-\letteropening{亲爱的朋友：}
+\letteropening{Opening}
 % 信件结尾词
-\letterclosing{{\dk}项目Logo来自互联网，如果冒犯请随时联系我纠正。生活不易，何以解忧？\faKissWinkHeart}
+\letterclosing{Closing}
 % 信件结尾词附言
-\letterenclosure[最后]{对你的关注，再次表示由衷的感谢！}
+\letterenclosure[Enclosure]{Some text}
 %-------------------------------------------------------------------------------
 
 
@@ -105,11 +105,11 @@
 %-------------------------------------------------------------------------------
 % 定义编译之后的PDF相关属性
 \hypersetup{%
-  pdftitle={Awesome-CV-Dukang手册},
+  pdftitle={完整标题},
   pdfauthor={William Yao},
   pdfcreator={William Yao},
-  pdfsubject={引用Awesome-CV模板，继承并加强},
-  pdfkeywords={tex,latex,pdf,awesome,cv,resume,book,article,william,yao,dukang}
+  pdfsubject={副标题},
+  pdfkeywords={关键词}
 }
 %-------------------------------------------------------------------------------
 
@@ -126,9 +126,9 @@
 % 每页的页脚定义，分为左中右三个部分，分别对应每个{}
 % 各部分都可留空，但不能删掉{}
 \makecvfooter
-  {\hyperref{http://williamyao.com}{}{}{\dk}}% 左边部分
-  {\faWineBottle}% 中间部分
-  {\thepage}% 右边部分
+  {页脚左边}% 左边部分
+  {页脚中间}% 中间部分
+  {页脚右边}% 右边部分
 %-------------------------------------------------------------------------------
 
 
@@ -137,7 +137,7 @@
 % 独立引用每个文件，或者直接书写正文
 %-------------------------------------------------------------------------------
 \input{main/00-cover.tex}
-% \input{main/01-intro.tex}
+\input{main/01-intro.tex}
 %-------------------------------------------------------------------------------
 
 
