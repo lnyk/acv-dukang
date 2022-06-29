@@ -13,13 +13,13 @@
 .3 \faFileCode~ctex-fontset-custom.def\DTcomment{ctex的自定义字体文件}.
 .3 \faFileCode~acv-dukang.cls\DTcomment{\dk~的主文件}.
 .3 \faFileCode~dukang-doc.tex\DTcomment{本文档的主文件}.
+.3 \faFolder~dukang-doc\DTcomment{存放本文档的章节内容文件}.
 .3 \faFileCode~main.tex\DTcomment{从此文件入手开始创作}.
 .3 \faFolder~main\DTcomment{存放main.tex引用的正文内容}.
-.3 \faFolder~dukang-doc\DTcomment{存放本文档的章节内容文件}.
 .3 \faFolder~resource\DTcomment{存放图形、表格、外部pdf或tex等资源文件}.
 .4 \faLink~ctex-fontset-custom.def\DTcomment{ctex自定义字体文件的软链接}.
 .4 \faFileCode~Makefile\DTcomment{对应resource文件夹的make文件}.
-.4 \faFileImage~profile.png\DTcomment{文档首页头信息中引用的图片文件}.
+.4 \faFileImage~logo.png\DTcomment{文档首页头信息中引用的图片文件}.
 .4 \faFileCode~r-*.tex\DTcomment{所有以\dkbutton{r-*.tex}形式命名的文件都会支持联动编译控制}.
 }
 \end{dkcomment}
@@ -51,17 +51,17 @@
 \cventry[src/dukang-doc.tex和src/dukang-doc/][{\dk}说明文档]{
   \item {{\dk}说明文档（本文）主文件和存放章节内容文件的目录，同时也包含了用法示例。}
   \item {由于受Makefile编译控制，dukang-doc.tex的位置和文件名不要随便更改，但是dukang-doc文件夹中的内容文件都是由\dkbutton{\textbackslash input\{...\}}引入到主文档中，所以只要对应好文件位置，这个文件夹是可以自由修改的。}
-  \item {\color{awesome}但是，由于这两个位置只用于生成{\dk}的说明文档（本文），与用户作品无关，所以不建议改动。}
+  \item {\color{awesome}由于上述文件只用于生成{\dk}的说明文档（本文），与用户作品无关，所以不建议改动。}
 }
-\cventry[src/main.tex和src/tex/][用户作品文件]{
+\cventry[src/main.tex和src/main/][用户作品文件]{
   \item {用户作品的起始模板文件，可以直接从该文件开始进行创作。}
-  \item {文件夹\dkbutton{./src/tex/}与编译过程无关，仅用于存放起始模板文件所引用的内容文件，可以更改，甚至不用也行。}
+  \item {文件夹\dkbutton{./src/main/}与编译过程无关，仅用于存放起始模板文件所引用的内容文件，可以更改，甚至不用也行。}
   \item {如果作品的篇幅较长，还是建议使用\dkbutton{\textbackslash input\{...\}}的方式，可以保证主文档的内容干净整洁。}
 }
 \cventry[src/resource/][资源文件夹]{
   \item {用来统一存放图形、表格、外部pdf或tex等资源文件，并支持部分文件的联动编译。}
   \item {Makefile是与外层Makefile联动的编译控制文件，同时提供了部分针对资源目录中不同类型文件的编译命令。}
-  \item {profile.png是封面上部显示的图片，在主文档的导言区中使用\dkbutton{\textbackslash photo\{...\}}进行定义。}
+  \item {logo.png是封面上部显示的图片，在主文档的导言区中使用\dkbutton{\textbackslash photo\{...\}}进行定义。}
   \item {该文件夹被dukang-doc和用户作品共用。}
   \item {所有以\dkbutton{r-*.tex}形式命名的文件都会被联动编译和控制，本文档封面中Tikz图的源文件\dkbutton{r-arch.tex}就在这里。}
   \item {\color{awesome}不要更改该文件夹的位置，否则联动编译控制将找不到文件。}
