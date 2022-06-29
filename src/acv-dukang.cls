@@ -1,22 +1,25 @@
 % !TeX encoding = UTF-8
 % !TeX program = xelatex
 % !TeX spellcheck = en_US
-%% Start of file `awesome-cv-dukang.cls'.
 
-
-%-------------------------------------------------------------------------------
-% Awesome-CV-Dukang Class File
+%% acv-dukang.cls
+%% Copyright 2022 William Yao <lnyk@me.com>
 %
-% This class has been downloaded from:
-% https://github.com/lnyk/awesome-cv-dukang
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
 %
-% Author:
-% William Yao <me@williamyao.com>
-% https://www.williamyao.com
+% This work has the LPPL maintenance status `maintained'.
 %
-% Class license:
-% LPPL v1.3c (http://www.latex-project.org/lppl)
-%-------------------------------------------------------------------------------
+% The Current Maintainer of this work is William Yao <lnyk@me.com>
+%
+% This work consists of the files acv-dukang.cls and dukang-doc.tex
+% and content files dukang-doc/* and associated project files such as
+% Makefiles.
 
 
 %-------------------------------------------------------------------------------

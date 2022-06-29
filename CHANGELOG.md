@@ -6,6 +6,7 @@ Awesome-CV Dukang项目
 -   完善项目配套文件，准备开启`gh`分支
 -   增加`make dist`命令到`Makefile`，用于支持文档输出及项目发布
 -   完善`main`启动模板
+-   增加`License Statement`
 
 ### 2022.06.28
 -   修改项目名称为`acv-dukang`
