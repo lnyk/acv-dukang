@@ -13,6 +13,14 @@ Awesome-CV-Dukang项目，简称ACV-Dukang，是基于[Awesome-CV](https://githu
 -   增加GNU Make控制流程，联动编译外部资源
 -   面向LaTeX入门使用者提供完整的配套文档和源码注释，共同学习进步
 
+|首页|内容页|
+|:-:|:-:|
+|![首页](https://lnyk.github.io/acv-dukang/acv-dukang_1.png)|![内容页](https://lnyk.github.io/acv-dukang/acv-dukang_2.png)|
+
+|结构设计|可定制组件|
+|:-:|:-:|
+|![结构设计](https://lnyk.github.io/acv-dukang/acv-dukang_3.png)|![可定制组件](https://lnyk.github.io/acv-dukang/acv-dukang_4.png)|
+
 完整文档及使用示例请查阅项目文档，以下文档均同步最新内容：
 
 -   本地 / [src/dukang-doc.pdf](doc/dukang-doc.pdf)
