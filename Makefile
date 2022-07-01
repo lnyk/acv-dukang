@@ -1,6 +1,6 @@
 # 默认使用xelatex进行编译
 # 由于部分命令使用了minted包，需要打开-shell-escape
-CC = latexmk -xelatex -shell-escape
+CC = latexmk -xelatex -shell-escape -file-line-error -halt-on-error -interaction=nonstopmode -synctex=1
 # 源码根目录
 BASE_DIR = src
 # 项目文档的主文件

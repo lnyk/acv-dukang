@@ -151,12 +151,95 @@
 \newcommand{\random}{\rand\arabic{dk@random}}
 %-------------------------------------------------------------------------------
 % 脚注
-\RequirePackage[perpage,symbol*]{footmisc}
-% 修改脚注数字为圆圈数字
-\RequirePackage{pifont}
-\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
-% 修改脚注字体
+%
+% 以下关于脚注的代码借鉴了ThuThesis模板
+%-------------------------------------------------------------------------------
+% 引入特殊字体
+\ifLuaTeX
+  % ctex 将带圈数字 U+2460–U+24FF 归入字符范围 3（ALchar），这里改回范围 6（JAchar）
+  \ltjdefcharrange{3}{%
+    "2000-"243F, "2500-"27BF, "2900-"29FF, "2B00-"2BFF}
+  \ltjdefcharrange{6}{%
+    "2460-"24FF, "2E80-"2EFF, "3000-"30FF, "3190-"319F, "31F0-"4DBF,
+    "4E00-"9FFF, "F900-"FAFF, "FE10-"FE1F, "FE30-"FE6F, "FF00-"FFEF,
+    "1B000-"1B16F, "1F100-"1F2FF, "20000-"3FFFF, "E0100-"E01EF}
+\else
+  \ifXeTeX
+    \xeCJKDeclareCharClass{CJK}{"2460 -> "2473}
+    \xeCJKDeclareCharClass{CJK}{"2605}
+  \fi
+\fi
+\ifXeTeX
+  \RequirePackage{xeCJKfntef}
+\else
+  \RequirePackage{ulem}
+\fi
+\RequirePackage[perpage,symbol*,hang]{footmisc}
+% 修改脚注字体及大小
 \renewcommand{\footnotesize}{\fontsize{10pt}{\baselineskip}\sffamily\selectfont}
+% 定义编译告警宏
+\newcommand\dk@warning[1]{%
+  \ClassWarning{acv-dukang}{#1}%
+}
+% 定义圆圈数字
+\newcommand\dk@circled[1]{%
+  \ifnum#1 >10\relax
+    \dk@warning{%
+      Too many footnotes in this page.
+      Keep footnote less than 10%
+    }%
+  \fi
+  {\symbol{\the\numexpr#1+"245F\relax}}%
+}
+% 修改脚注数字为圆圈数字
+\renewcommand{\thefootnote}{\dk@circled{\c@footnote}}
+\renewcommand{\thempfootnote}{\dk@circled{\c@mpfootnote}}
+% 调整分割线
+\def\footnoterule{\vskip-3\p@\hrule\@width0.3\textwidth\@height0.4\p@\vskip2.6\p@}
+\footnotemargin=13.5bp
+\long\def\@makefntext#1{%
+  \begingroup
+    % 序号取消上标
+    \def\@makefnmark{\hbox{\normalfont\@thefnmark}}%
+    \ifFN@hangfoot
+      \bgroup
+      \setbox\@tempboxa\hbox{%
+        \ifdim\footnotemargin>\z@
+          \hb@xt@\footnotemargin{\@makefnmark\hss}%
+        \else
+          \@makefnmark
+        \fi
+      }%
+      \leftmargin\wd\@tempboxa
+      \rightmargin\z@
+      \linewidth \columnwidth
+      \advance \linewidth -\leftmargin
+      \parshape \@ne \leftmargin \linewidth
+      % \footnotesize
+      \@setpar{{\@@par}}%
+      \leavevmode
+      \llap{\box\@tempboxa}%
+      \parskip\hangfootparskip\relax
+      \parindent\hangfootparindent\relax
+    \else
+      \parindent1em%
+      \noindent
+      \ifdim\footnotemargin>\z@
+        \hb@xt@ \footnotemargin{\hss\@makefnmark}%
+      \else
+        \ifdim\footnotemargin=\z@
+          \llap{\@makefnmark}%
+        \else
+          \llap{\hb@xt@ -\footnotemargin{\@makefnmark\hss}}%
+        \fi
+      \fi
+    \fi
+    \footnotelayout#1%
+    \ifFN@hangfoot
+      \par\egroup
+    \fi
+  \endgroup
+}
 %-------------------------------------------------------------------------------
 % figure设置
 %-------------------------------------------------------------------------------

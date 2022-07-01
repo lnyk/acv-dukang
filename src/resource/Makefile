@@ -1,3 +1,5 @@
+# 由于部分命令使用了minted包，需要打开-shell-escape
+CC = latexmk -xelatex -shell-escape -file-line-error -halt-on-error -interaction=nonstopmode -synctex=1
 # 所有需要自动编译的.tex文件必须以r-开头
 NAMEFORMAT = r-*
 TEXFILES = $(wildcard $(NAMEFORMAT).tex)
@@ -19,7 +21,7 @@ ifeq ($(TEXFILES),)
 all:
 else
 all:
-	latexmk -xelatex $(TEXFILES)
+	$(CC) $(TEXFILES)
 endif
 
 cleanall:
